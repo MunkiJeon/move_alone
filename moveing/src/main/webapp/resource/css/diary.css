@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.diary {width: 400px;}
+.diary .wrapper{width:400px;border:1px solid #000;margin:auto;padding:10px;display:none;}
+.diary .flex-wrap {display:flex;justify-content: space-between;}
+.diary .wrapper > img {width:400px;height:200px;display: block;}
+.diary .wrapper > h2 {text-align:center;margin: 10px;}
+.diary .wrapper > div > div{text-align: right;width:46px;height: 46px;line-height:20px;padding: 13px;margin:4px;border:1px solid #ccc;}
+.diary .wrapper > #days > div {text-align: center;}
+.diary .wrapper > #days > div:first-child {background: #f00;color:#fff;}
+.diary .wrapper > #days > div:last-child {background: #00f;color:#fff;}
+.diary .wrapper > #dates {display:flex;flex-wrap:wrap;}
+.diary .wrapper > #dates > div:nth-child(7n+1) {color:#f00;}
+.diary .wrapper > #dates > div:nth-child(7n) {color:#00f;}
+.diary .bg{background: red;}
+.diary .unchk{opacity: .3;}

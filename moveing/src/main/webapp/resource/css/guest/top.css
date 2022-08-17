@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+
+*{padding: 0;margin: 0;border: 0;box-sizing: border-box;}
+ul,li{list-style: none;}
+a{color: #333;text-decoration: none;}
+header{position: fixed;top:0;left: 0;width: 100%;}
+header nav{width: 1440px;margin: 0 auto;display: flex;align-items: center;padding: 0 30px;position: relative;}
+header nav .login{display: flex;position:absolute;top:50%;right:30px;transform:translateY(-50%)}
+header nav .list{margin-left:30px;}
+header .logo {height: 100px;line-height: 100px;}
+.mainSection{background: url('./img/main_kv.png') no-repeat center center/140% auto ;height: 100vh;color: white;}
+.mainSection article{max-width: 1440px;padding: 300px 30px;height: 100%;margin: 0 auto;}
+.mainSection p{font-size: 3rem;height: 60px;}
+.mainSection h2{font-size: 3.5rem;font-weight: bold;height: 60px;}
+.mainSection button{margin-top: 60px;display: flex;justify-content: center;align-items: center;height: 70px;width: 300px;border-radius: 10px;background: rgb(61, 81, 255);font-size: 20px;color:#fff;font-weight: bold;}
+.mainCnt {margin: 0 auto; display: flex;flex-flow: column;justify-content: center;align-items: center;padding:50px;font-size: 20px;}
+.mainCnt article {margin-top: 30px;display: flex;justify-content: space-between;align-items: center;width: 500px;}
+.mainCnt article p:nth-child(1){font-size: 30px;font-weight: 700;}
+.mainCnt article p:nth-child(2){font-size: 40px;font-weight: 900;}
+.mainProcess {padding: 50px;}
+.mainProcess h2{text-align: center;font-size: 40px;}
+.mainProcess ul {width: 800px;margin: 0 auto;display: flex;justify-content: space-between;margin-top: 60px;}
+.mainProcess ul li{width: 200px;}
+.mainProcess ul li figure{padding:0 40px;position: relative;}
+.mainProcess ul li:not(.mainProcess ul li:last-child) figure::after{content: ">";display: block;position: absolute;top:40px;right: -9px;}
+.mainProcess ul li img{width: 100%;}
+.mainProcess ul li p {text-align: center;font-size: 18px;font-weight: bold;margin-top: 30px;}
+
+footer{background: rgb(34, 44, 61);padding: 100px 30px;display: flex;justify-content: space-between;}
+footer table a{font-size: 14px; color: #fff;}
+footer table tr:nth-child(1) td{color: white;font-weight: 900;font-size: 22px;}
+footer table tr:nth-child(2) td{color: white;font-weight: 900;padding-top: 10px;font-size: 30px;}
+footer table tr:nth-child(3) td{color: rgba(255, 255, 255, 0.5);font-weight: 900;padding-top: 20px;}
+footer table tr:nth-child(4) td{color: rgba(255, 255, 255, 0.5);font-weight: 900;padding-top: 10px;}  

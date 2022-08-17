@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.managerWrap h3{padding: 20px;}
+.managerWrap .chk{display: flex;padding:20px;background: #ddd;}
+.managerWrap .chkItem:nth-child(1){line-height: 35px;height: 35px;margin-right: 100px;}
+.managerWrap .chkItem:nth-child(2){height: 35px;margin-right: 20px;position: relative;}
+.managerWrap .chkItem:nth-child(2)::after{content: "~";display: block;position: absolute;top:0px;right: -16px;}
+.managerWrap .chkItem > *{padding: 4px;border:1px solid #eee;}
+.managerWrap .inquire .btnBox{display: flex;justify-content: center;}
+.managerWrap .inquire .btnBox button{width: 200px;height: 60px;text-align: center;line-height: 60px;}
+.managerWrap .inquire .btnBox button:nth-child(1){margin-right: 15px;}
+.managerWrap .result {margin-top: 20px;border: 1px solid #eee;}
+.managerWrap .result table {width: 100%;}
+.managerWrap .result table tr:nth-child(1) {text-align: center;background-color: #ddd;}
+.managerWrap .result table td{border: 1px solid #eee;padding:10px;}
+.managerWrap .resultMoney {display: flex;justify-content: space-between;border: 0;padding:20px;}
+.managerWrap .sales {padding:30px;width: 100%;}
+.managerWrap .sales td {padding: 30px;}

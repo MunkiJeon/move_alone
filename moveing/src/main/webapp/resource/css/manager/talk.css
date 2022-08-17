@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.managerWrap .talk{width: 600px;border: 1px solid #eee;height: calc( 100vh - 100px );}
+.managerWrap .talk .list{display: flex;justify-content: center;padding: 30px;}
+.managerWrap .talk .list button:nth-child(1){margin-right: 30px;}
+.managerWrap .talk .state{display: flex;justify-content: space-around;padding:30px;}
+.managerWrap .talk .line{height: 10px;background: #eee;}
+.managerWrap .talk .talkWrap .userlist{overflow: auto;padding:30px;}
+.managerWrap .talk .talkWrap td{padding: 10px;}

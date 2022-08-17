@@ -1,0 +1,61 @@
+package com.map.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+public class ChatBotDAO {
+	Connection con;
+	PreparedStatement ptmt;
+	ResultSet rs;
+	String sql;
+	
+	public ChatBotDAO() {
+		try {
+			InitialContext init = new InitialContext();
+			DataSource ds = (DataSource)init.lookup("java:comp/env/qwer");
+			con = ds.getConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public ArrayList<ChatBotDTO> list() {
+		ArrayList<ChatBotDTO> res = new ArrayList<ChatBotDTO>();
+		
+		sql = "select * from chatbot";
+		try {
+			ptmt = con.prepareStatement(sql);
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				ChatBotDTO dto = new ChatBotDTO();
+				dto.setNo(rs.getInt("no"));
+				dto.setAnswer(rs.getString("answer"));
+				dto.setQuestions(rs.getString("questions"));
+				dto.setType(rs.getString("type"));
+				res.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return res;
+	}
+	
+
+	public void close() {
+		if(rs!=null)try {rs.close();} catch (SQLException e) {}
+		if(ptmt!=null)try {ptmt.close();} catch (SQLException e) {}
+		if(con!=null)try {con.close();} catch (SQLException e) {}
+	}
+}

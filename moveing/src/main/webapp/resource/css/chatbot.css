@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.bg{background: red;}
+.chat{border-radius:50%;position: fixed;bottom:30px;right:30px;width: 60px;height: 60px;border-radius: 50%;}
+.chat img{width: 100%;}
+.chat_ui{position: fixed;bottom:0px;right: -400px;background: red;width: 400px;height: 600px;padding: 30px;}
+.chat_ui .chat_window{height: 400px;background: white;overflow-y: auto; padding:20px;}
+.chat_ui .chat_window .user{margin-top:20px;margin-right:auto;margin-left:60px;background: rgba(61, 81, 255,.6);border-radius:10px;padding:10px; }
+.chat_ui .chat_window .manager{margin-top:20px;width:250px;;background: rgb(61, 81, 255);border-radius:10px; padding:10px;}
+.chat_ui .chat_close {position: absolute;top:20px;right:20px;background: green;width: 20px;height: 20px;}
+.chat_ui .chk{cursor: pointer;}

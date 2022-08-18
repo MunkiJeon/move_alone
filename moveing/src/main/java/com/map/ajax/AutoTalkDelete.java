@@ -28,11 +28,12 @@ public class AutoTalkDelete implements AjaxService {
 		ChatBotDAO dao = new ChatBotDAO();
 		JSONObject data = new JSONObject();
 		int cnt = 0;
-		for (String id : noList) {
+		for (String no : noList) {
 			
-			 cnt += new UserDAO().managerDelete(id);
+			 cnt += new ChatBotDAO().managerDelete(no);
 		}
 		
+		dao.close();
 		
 		try {
 		

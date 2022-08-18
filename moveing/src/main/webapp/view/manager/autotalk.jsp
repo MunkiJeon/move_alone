@@ -190,14 +190,14 @@ $(function(){
     
        $("#deleteBtn").click(function(e){
             e.preventDefault();
-            let id = "";
+            let no = "";
             let cnt = 0;
             for(let i=0;i<$(".idchktr").length;i++){
             	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
             		cnt++;
             		if(!$(".idchktr").length-1==i){
-            			id += $(".idchktr").eq(i).find(".dataChk").val()+","
-            		}else{id += $(".idchktr").eq(i).find(".dataChk").val()}
+            			no += $(".idchktr").eq(i).find(".dataChk").val()+","
+            		}else{no += $(".idchktr").eq(i).find(".dataChk").val()}
             	}
             }
             if(cnt==0) return alert("체크해 주세요")
@@ -211,16 +211,16 @@ $(function(){
 
 	            $.ajax({
 	         	
-		         	url:"<c:url value='/ajax/Delete'/>",
+		         	url:"<c:url value='/ajax/AutoTalkDelete'/>",
 		         	type:'POST',
-		 			data:{id:id},
+		 			data:{no:no},
 		 			async:false,
 		 			dataType:'json',
 		 			success:function(data){
 		  				console.log(data.chk);
 		  				if(data[0]=="false"){alert("실패")}
 		  				else{alert("성공");
-		  					location.href="?level="+level;
+		  					location.href="";
 		  				}
 		 				
 		 			},

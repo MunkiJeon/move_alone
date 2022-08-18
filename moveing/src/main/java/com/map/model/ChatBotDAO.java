@@ -110,7 +110,23 @@ public class ChatBotDAO {
 		}
 		   return 0;
 	}
-	
+
+	public int managerDelete(String no) {
+		
+		try {
+			sql = "delete from chatbot where no = ?";
+			
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1,no);
+			
+			return ptmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return 0;
+	}
 	
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}

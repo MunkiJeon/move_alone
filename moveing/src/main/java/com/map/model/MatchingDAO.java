@@ -93,10 +93,8 @@ public class MatchingDAO {
 		return res;
 	}
 	
-	public ArrayList<MatchingDTO> oneUserForStaff(String id) {
 	public ArrayList<MatchingDTO> oneUserForGuest(String id,int req_state ) {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
-		sql = "select * from matching where driver_ID = ?";
 		sql = "select * from matching where user_ID = ? and req_state = ?";
 		try {
 			ptmt = con.prepareStatement(sql);
@@ -132,10 +130,8 @@ public class MatchingDAO {
 		return res;
 	}
 	
-	public ArrayList<MatchingDTO> oneUserForGuest(String id) {
 	public ArrayList<MatchingDTO> workList(String id,int req_state) {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
-		sql = "select * from matching where user_ID = ?";
 		sql = "select * from matching where driver_ID = ? AND req_state = ?";
 		try {
 			ptmt = con.prepareStatement(sql);

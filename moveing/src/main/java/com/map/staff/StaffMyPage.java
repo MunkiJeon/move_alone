@@ -22,7 +22,6 @@ public class StaffMyPage implements StaffService {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");	
 		UserDTO dto = new UserDAO().oneUser(id);
-		ArrayList<MatchingDTO> dto2 = new MatchingDAO().oneUserForStaff(id);
 		ArrayList<MatchingDTO> dto2 = new MatchingDAO().workList(id,0);
 		ArrayList<MatchingDTO> dto3 = new MatchingDAO().afterWork(id,1);
 		int res = 0;

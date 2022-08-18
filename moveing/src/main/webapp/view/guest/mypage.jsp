@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+
 <style>
 *{
 	margin:0px;
@@ -177,6 +178,27 @@ $(function () {
 					<tr>
 						<td><div style="border: 1px solid black;"></div></td>
 						<td><div style="border: 1px solid black;"></div></td>
+						<td colspan="6">
+						<div>
+							<div style="border: 1px solid black;"><img src="<c:url value="/resource/image/"/>${dto3.pic}" alt=""></div>
+							<div style="border: 1px solid black;"><table>
+								<tr>
+									<td>이름</td>
+								</tr>
+								
+								<tr>
+									<td><input type="text" value="${dto3.name }"></td>
+								</tr>
+								<tr>
+									<td>전화번호</td>
+								</tr>
+								<tr>
+									<td><input type="text" value="${dto3.tel }"></td>
+								</tr>
+							</table></div>
+						</div>
+						</td>
+						
 					</tr>
 			</table>
 		</td>

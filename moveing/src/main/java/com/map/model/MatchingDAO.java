@@ -94,11 +94,14 @@ public class MatchingDAO {
 	}
 	
 	public ArrayList<MatchingDTO> oneUserForStaff(String id) {
+	public ArrayList<MatchingDTO> oneUserForGuest(String id,int req_state ) {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
 		sql = "select * from matching where driver_ID = ?";
+		sql = "select * from matching where user_ID = ? and req_state = ?";
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, id);
+			ptmt.setInt(2, req_state);
 			rs = ptmt.executeQuery();
 			while(rs.next()) {
 				MatchingDTO dto = new MatchingDTO();
@@ -130,11 +133,57 @@ public class MatchingDAO {
 	}
 	
 	public ArrayList<MatchingDTO> oneUserForGuest(String id) {
+	public ArrayList<MatchingDTO> workList(String id,int req_state) {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
 		sql = "select * from matching where user_ID = ?";
+		sql = "select * from matching where driver_ID = ? AND req_state = ?";
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, id);
+			ptmt.setInt(2, req_state);
+			
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				MatchingDTO dto = new MatchingDTO();
+				
+				dto = new MatchingDTO();
+				dto.setRes_num(rs.getInt("res_num"));
+				dto.setUser_ID(rs.getString("user_ID"));
+				dto.setDriver_ID(rs.getString("driver_ID"));
+				dto.setReservat_date(rs.getDate("reservat_date"));
+				dto.setStart_point(rs.getString("start_point"));
+				dto.setStart_op(rs.getString("start_op"));
+				dto.setEnd_point(rs.getString("end_point"));
+				dto.setEnd_op(rs.getString("end_op"));
+				dto.setLuggage_list(rs.getString("luggage_list"));
+				dto.setBox(rs.getInt("box"));
+				dto.setRequests(rs.getString("requests"));
+				dto.setReq_state(rs.getInt("req_state"));
+				dto.setReq_date(rs.getDate("req_date"));
+				dto.setCost(rs.getInt("cost"));
+				res.add(dto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return res;
+	}
+	
+	
+	
+	
+	
+	
+	public ArrayList<MatchingDTO> afterWork(String id,int req_state) {
+		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
+		sql = "select * from matching where driver_ID = ? and req_state = ?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, id);
+			ptmt.setInt(2, req_state);
 			rs = ptmt.executeQuery();
 			while(rs.next()) {
 				MatchingDTO dto = new MatchingDTO();

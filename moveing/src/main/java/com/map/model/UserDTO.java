@@ -8,6 +8,7 @@ public class UserDTO {
 	String name;
 	String email;
 	String tel;
+	String pic;
 	Date join_date;
 	int state;
 	int level;
@@ -60,6 +61,12 @@ public class UserDTO {
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 	
 }

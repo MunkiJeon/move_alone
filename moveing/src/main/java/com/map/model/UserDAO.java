@@ -58,6 +58,7 @@ public class UserDAO {
 				dto.setEmail(rs.getString("email"));
 				dto.setJoin_date(rs.getDate("join_date"));
 				dto.setTel(rs.getString("name"));
+				dto.setTel(rs.getString("tel"));
 				dto.setState(rs.getInt("state"));
 				dto.setLevel(rs.getInt("level"));
 			}
@@ -71,6 +72,33 @@ public class UserDAO {
 		return dto;
 	}
 	
+	public UserDTO oneStaff(String id) {
+		UserDTO dto = null;
+		sql = "select * from user where id = ?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, id);
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				dto = new UserDTO();
+				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setJoin_date(rs.getDate("join_date"));
+				dto.setTel(rs.getString("tel"));
+				dto.setPic(rs.getString("pic"));
+				dto.setState(rs.getInt("state"));
+				dto.setLevel(rs.getInt("level"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return dto;
+	}
 	
 	public ArrayList<UserDTO> allUser() {
 		ArrayList<UserDTO> res = new ArrayList<UserDTO>();

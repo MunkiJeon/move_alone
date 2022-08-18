@@ -70,8 +70,48 @@ public class ChatBotDAO {
 		
 		return 0;
 	}
-	
+	public ChatBotDTO oneAnswer(String no) {
+		ChatBotDTO dto = null;
+		sql = "select * from chatbot where no = ?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, no);
+			rs = ptmt.executeQuery();
+			if(rs.next()) {
+				dto = new ChatBotDTO();
+				dto.setNo(rs.getInt("no"));
+				dto.setType(rs.getString("type"));
+				dto.setQuestions(rs.getString("questions"));
+				dto.setAnswer(rs.getString("answer"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return dto;
+	}
 
+	public int modify(ChatBotDTO dto) {
+		   try {
+			sql = "update chatbot set type = ? ,  questions = ? , answer = ? where no = ?";
+		
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.type);
+			ptmt.setString(2, dto.getQuestions());
+			ptmt.setString(3, dto.getAnswer());
+			ptmt.setInt(4, dto.getNo());
+			return ptmt.executeUpdate();
+		   } catch (Exception e) {
+			   e.printStackTrace();
+		}finally {
+			close();
+		}
+		   return 0;
+	}
+	
+	
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}
 		if(ptmt!=null)try {ptmt.close();} catch (SQLException e) {}

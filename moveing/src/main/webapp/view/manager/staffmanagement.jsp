@@ -132,6 +132,7 @@
         $(".popupbg").click(function(){
             $(this).fadeOut(500);
             $(".stepsign").stop().animate({bottom:"-100vh"},500)
+            $(".delete").stop().animate({bottom:"-100vh"},500)
             add=false;
             modify=false;
         })
@@ -188,9 +189,26 @@
 	    	})  
 	            
 	        if(modify){    
-		        $(".stepsign").submit(function(e){
+		        $(".deletebtn").submit(function(e){
+		        	
 	                e.preventDefault();
-			
+	                console.log(id+","+$("#pw").val()+","+$("#name").val()+","+$("#email").val()+","+$("#tel").val())
+	                $.ajax({
+	    	         	url:"<c:url value='/ajax/ModifyReg'/>",
+	    	         	type:'POST',
+	    	 			data:{id:id,pw:$("#pw").val(),name:$("#name").val(),email:$("#email").val(),tel:$("#tel").val(),level:level},
+	    	 			async:false,
+	    	 			dataType:'json',
+	    	 			success:function(data){
+			  				console.log(data.chk);
+			  				if(data[0]=="false"){alert("실패")}
+			  				else{alert("성공");
+			  					location.href="?level="+level;
+			  				}
+	    	 				
+	    	 			},
+	    	 			error:function(e){console.log(e)}
+	    	    	})  
 		            	
 		        })
 	        }
@@ -204,33 +222,40 @@
         
         
         
-           $(".delete").click(function(e){
+           $("#deleteBtn").click(function(e){
 	            e.preventDefault();
 	            let id = "";
+	            let cnt = 0;
 	            for(let i=0;i<$(".idchktr").length;i++){
 	            	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
 	            		cnt++;
-	            		id += $(".idchktr").eq(i).find(".dataChk").val()+","
+	            		if(!$(".idchktr").length-1==i){
+	            			id += $(".idchktr").eq(i).find(".dataChk").val()+","
+	            		}else{id += $(".idchktr").eq(i).find(".dataChk").val()}
 	            	}
 	            }
-  
-		        $(".stepsign").submit(function(e){
+	            if(cnt==0) return alert("체크해 주세요")
+  				
+            	$(".popupbg").fadeIn(500);
+            	$(".delete").stop().animate({bottom:"50%"},500);
+            	
+            	
+		        $(".deletebtn").click(function(e){
 	                e.preventDefault();
 
 		            $.ajax({
 		         	
-			         	url:"<c:url value='/ajax/Modify'/>",
+			         	url:"<c:url value='/ajax/Delete'/>",
 			         	type:'POST',
 			 			data:{id:id},
 			 			async:false,
 			 			dataType:'json',
 			 			success:function(data){
-			 				
-			 				$("#id").val(decodeURIComponent(data.id));
-			 				$("#pw").val(decodeURIComponent(data.pw));
-			 				$("#name").val(decodeURIComponent(data.name));
-			 				$("#email").val(decodeURIComponent(data.email));
-			 				$("#tel").val(decodeURIComponent(data.tel));
+			  				console.log(data.chk);
+			  				if(data[0]=="false"){alert("실패")}
+			  				else{alert("성공");
+			  					location.href="?level="+level;
+			  				}
 			 				
 			 			},
 			 			error:function(e){console.log(e)}

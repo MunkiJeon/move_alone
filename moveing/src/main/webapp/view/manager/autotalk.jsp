@@ -5,30 +5,33 @@
 <link rel="stylesheet" href="<c:url value='/resource'/>/css/manager/staffmanagement.css">
 <style>
 .stepsign{position: fixed;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;width: 600px;background: white;padding: 30px;border-radius: 15px;}
-.popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}</style>
+.popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
+.managerWrap .btnList {display: flex;justify-content: center;}
+.managerWrap .btnList .button {margin-right: 15px;}
+.managerWrap .btnList .button:last-child {margin-right: 0;}
+</style>
 <div class="popupbg"></div>
 <div class="managerWrap">
 	<h2>${title } 관리</h2>
+     <div class="btnList" align="center">
+         <button id="addBtn" class="popupbtn">추가</button>
+         <button id="editBtn" class="popupbtnModify">수정</button>
+         <button id="deleteBtn">삭제</button>
+     </div>
     <table  border="" width="100%">
-        <tr>
-            <td colspan="5" align="center">
-                <button id="addBtn" class="popupbtn">추가</button>
-                <button id="editBtn" class="popupbtnModify">수정</button>
-                <button id="deleteBtn">삭제</button>
-            </td>
-        </tr>
+        
         <tr align="center">
             <td><input type="checkbox" id="allCheck"></td>
-            <td>이름</td>
-            <td>아이디</td>
-            <td>입사일</td>
+            <td>종류</td>
+            <td>문의</td>
+            <td>답변</td>
         </tr>
 		<c:forEach items="${mainData }" var="dto">
 	        <tr class="idchktr" align="center"> <!-- 모양  -->
 	            <td><input type="checkbox" class="dataChk" value="${dto.no }"></td>
-	            <td>${dto.name }</td>
-	            <td>${dto.id }</td>
-	            <td>${dto.join_date }</td>
+	            <td>${dto.type }</td>
+	            <td>${dto.questions }</td>
+	            <td>${dto.answer }</td>
 	        </tr>
 		</c:forEach>        
     </table>
@@ -42,24 +45,16 @@
     <form>
 	    <table>
 	        <tr>
-	            <td>아이디</td>
-	            <td><input type="text" id="id"/></td>
+	            <td>종류</td>
+	            <td><input type="text" id="type"/></td>
 	        </tr>
 	        <tr>
-	            <td>비번</td>
-	            <td><input type="text" id="pw"/></td>
+	            <td>문의</td>
+	            <td><input type="text" id="questions"/></td>
 	        </tr>
 	        <tr>
-	            <td>전화번호</td>
-	            <td><input type="text" id="tel"/></td>
-	        </tr>
-	        <tr>
-	            <td>이름</td>
-	            <td><input type="text" id="name"/></td>
-	        </tr>
-	        <tr>
-	            <td>이메일</td>
-	            <td><input type="text" id="email"/></td>
+	            <td>답변</td>
+	            <td><input type="text" id="answer"/></td>
 	        </tr>
 	        <tr>
 	            <td colspan="2"><button type="submit">등록</button></td>
@@ -70,7 +65,6 @@
 
 <script>
 	$(function(){
-		let level = "${level}";
 		let add = false;
 		let modify = false;
         $(".popupbtn").click(function(e){
@@ -80,19 +74,17 @@
             $(".stepsign").stop().animate({bottom:"50%"},500)
             
             
-			$("#id").val("");
-			$("#pw").val("");
-			$("#name").val("");
-			$("#email").val("");
-			$("#tel").val("");
+			$("#type").val("");
+			$("#questions").val("");
+			$("#answer").val("");
 			add = true;
             if(add){
 	            $(".stepsign").submit(function(e){
 	                e.preventDefault();
 					$.ajax({
-			          	url:"<c:url value='/ajax/Add'/>",
+			          	url:"<c:url value='/ajax/AutoTalkAdd'/>",
 			          	type:'POST',
-			  			data:{id:$("#id").val(),pw:$("#pw").val(),name:$("#name").val(),email:$("#email").val(),tel:$("#tel").val(),level:level},
+			  			data:{type:$("#type").val(),questions:$("#questions").val(),answer:$("#answer").val()},
 			  			async:false,
 			  			//dataType:'json',
 			  			success:function(data){
@@ -141,7 +133,7 @@
 			
             $.ajax({
          	
-	         	url:"<c:url value='/ajax/Modify'/>",
+	         	url:"<c:url value='/ajax/AutoTalkModify'/>",
 	         	type:'POST',
 	 			data:{id:id},
 	 			async:false,
@@ -161,7 +153,25 @@
 	        if(modify){    
 		        $(".stepsign").submit(function(e){
 	                e.preventDefault();
-			
+	                $.ajax({
+	                 	
+	    	         	url:"<c:url value='/ajax/AutoTalkModify'/>",
+	    	         	type:'POST',
+	    	 			data:{id:id,pw:$("#pw").val(),name:$("#name").val(),
+		 				email:$("#email").val(),
+		 				tel:$("#tel").val()},
+	    	 			async:false,
+	    	 			dataType:'json',
+	    	 			success:function(data){
+			  				console.log(data.chk);
+			  				if(data[0]=="false"){alert("실패")}
+			  				else{alert("성공");
+			  					location.href="?level="+level;
+			  				}
+	    	 				
+	    	 			},
+	    	 			error:function(e){console.log(e)}
+	    	    	})  
 		            	
 		        })
 	        }

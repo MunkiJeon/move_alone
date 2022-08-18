@@ -133,7 +133,6 @@ public class UserDAO {
 
 	public int insert(UserDTO dto){
 		sql = "insert into user (id, pw, name,email,join_date,tel,state,level ) values(?,?,?,?,sysdate(),?,0,?)";
-		sql = "insert into user (id, pw, name,email,join_date,tel,state,level ) values(?,?,?,?,sysdate(),?,0,2)";
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, dto.getId());
@@ -155,13 +154,14 @@ public class UserDAO {
 		return 0;
 	}
 	public int update(UserDTO dto){
-		sql = "update user set pw = ? ,name = ? ,email = ? where id = ?";
+		sql = "update user set pw = ? ,name = ? ,email = ?, tel = ? where id = ?";
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, dto.getPw());
 			ptmt.setString(2, dto.getName());
 			ptmt.setString(3, dto.getEmail());
-			ptmt.setString(4, dto.getId());
+			ptmt.setString(4, dto.getTel());
+			ptmt.setString(5, dto.getId());
 			
 			return ptmt.executeUpdate();
 		} catch (SQLException e1) {
@@ -176,13 +176,14 @@ public class UserDAO {
 	
 	public  int modify(UserDTO dto) {
 		   try {
-			sql = "update user set pw = ? ,  email = ? , tel = ? where id = ?";
+			sql = "update user set pw = ? ,  email = ? , tel = ?, name = ? where id = ?";
 		
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, dto.pw);
 			ptmt.setString(2, dto.email);
 			ptmt.setString(3, dto.tel);
-			ptmt.setString(4, dto.id);
+			ptmt.setString(4, dto.name);
+			ptmt.setString(5, dto.id);
 			return ptmt.executeUpdate();
 		   } catch (Exception e) {
 			   e.printStackTrace();
@@ -202,6 +203,22 @@ public class UserDAO {
 			System.out.println(dto.id+"------------------");
 			ptmt.setString(2, dto.pw);
 			System.out.println(dto.pw+"------------------");
+			
+			return ptmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return 0;
+	}
+	public int managerDelete(String id) {
+		
+		try {
+			sql = "delete from user where id = ?";
+			
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1,id);
 			
 			return ptmt.executeUpdate();
 		} catch (Exception e) {

@@ -57,7 +57,7 @@ public class CalculateDAO {
 	
 	public ArrayList<CalculateDTO> monthList(String start,String end) {
 		ArrayList<CalculateDTO> list = new ArrayList<CalculateDTO>();
-		sql = "select * from calculate where c_date > ? and c_date < ?";
+		sql = "select * from calculate where c_date >= ? and c_date <= ?";
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1,start);

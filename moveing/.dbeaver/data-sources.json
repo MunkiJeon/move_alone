@@ -1,0 +1,33 @@
+{
+	"folders": {},
+	"connections": {
+		"mariaDB-182ab85ad45-16ea2d519266dd14": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "move_db",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "move_db",
+				"url": "jdbc:mariadb://mk0709.iptime.org:3434/move_db",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

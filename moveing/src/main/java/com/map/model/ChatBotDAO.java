@@ -52,6 +52,25 @@ public class ChatBotDAO {
 		return res;
 	}
 	
+	public int insert(ChatBotDTO dto) {
+		
+		sql = "insert into chatbot(type,questions,answer) values(?,?,?)";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.getType());
+			ptmt.setString(2, dto.getQuestions());
+			ptmt.setString(3, dto.getAnswer());
+			return ptmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return 0;
+	}
+	
 
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}

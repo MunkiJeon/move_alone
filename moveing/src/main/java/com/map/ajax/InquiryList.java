@@ -25,7 +25,7 @@ public class InquiryList implements AjaxService {
 		
 		
 		JSONArray data = new JSONArray();
-		
+		System.out.println("testsetset");
 		
 		for (InquiryDTO dto : list) {
 			JSONObject realdata = new JSONObject();

@@ -56,7 +56,7 @@
             	
             	url:"<c:url value='/ajax/CalcDay'/>",
             	type:'POST',
-    			data:{start:$("#start").val(),end:$("#end").val()},
+    			data:{start:$("#start").val(),end:$("#end").val(),param:"${param.res}"},
     			async:false,
     			dataType:'json',
     			success:function(data){

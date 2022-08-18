@@ -26,12 +26,12 @@ public class CalcDay implements AjaxService {
 		String end = request.getParameter("end");
 		
 		ArrayList<CalculateDTO> list = new CalculateDAO().monthList(start, end);
-		System.out.println(request.getParameter("param")+"--------------======");
-		System.out.println(request.getParameter("start")+"--------------======");
-		System.out.println(request.getParameter("end")+"--------------======");
+		System.out.println(request.getParameter("param")+"--");
+		System.out.println(request.getParameter("start")+"--");
+		System.out.println(request.getParameter("end")+"--");
 		JSONArray data = new JSONArray();
 		for (CalculateDTO dto : list) {
-			if(dto.getCal_type().equals(request.getAttribute("param")))
+			if(dto.getCal_type().equals(request.getParameter("param")))
 			data.add( URLEncoder.encode(dto.getPo_name())+","+URLEncoder.encode(dto.getQuantity()+"")+","+URLEncoder.encode(dto.getUnit_price()+"")+","+URLEncoder.encode(dto.getPrice()+"")+","+URLEncoder.encode(dto.getCal_type()));			
 		}
 		

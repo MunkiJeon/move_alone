@@ -24,7 +24,6 @@ public class GuestMyPage implements GuestService {
 		ArrayList<MatchingDTO> dto2 = new MatchingDAO().oneUserForGuest(id,0);
 		String stf;
 		UserDTO dto = new UserDAO().oneUser(id);
-		ArrayList<MatchingDTO> dto2 = new MatchingDAO().oneUserForGuest(id);
 		
 		
 		

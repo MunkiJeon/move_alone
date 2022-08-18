@@ -32,6 +32,24 @@ public class EstimateDAO {
 			System.out.println("------------ID:"+user_id);
 		}else if(pagenum.equals("3")) {//2페이지에서 3페이지 넘어갈때
 			System.out.println("------------ID:"+user_id);
+	public void addEstimate(String pagenum,String user_id, String datetime) {
+		sql = "select * from estimate where id=? and DateTime=? ";
+		System.out.println("addEstiate들어옴"+pagenum+"// ID:"+user_id+"// date:"+datetime);
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1,user_id);
+			ptmt.setString(2,datetime);
+			rs = ptmt.executeQuery();
+			
+			if(pagenum.equals("2")) {//1페이지에서 2페이지 넘어갈때
+				System.out.println(pagenum+"// ID:"+user_id+"// date:"+datetime);
+//				sql = "insert into = estimate()";
+			}else if(pagenum.equals("3")) {//2페이지에서 3페이지 넘어갈때
+				System.out.println(pagenum+"// ID:"+user_id+"// date:"+datetime);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 //		sql = "insert into estiate()";
@@ -49,6 +67,8 @@ public class EstimateDAO {
 //		update member set birth = '1995-11-18'
 //		where name = '송지은';
 //		*/
+		
+		
 	}
 
 	public void close() {

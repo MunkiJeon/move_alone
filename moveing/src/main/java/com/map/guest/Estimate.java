@@ -42,6 +42,7 @@ public class Estimate implements GuestService {
 						request.getParameter("st_addr3"),//층수
 						request.getParameter("st_addr4"),//개수
 						
+						request.getParameter("st_addr4"),//방개수
 				};
 				
 				String end_point = request.getParameter("en_zip")
@@ -64,6 +65,7 @@ public class Estimate implements GuestService {
 			}
 			System.out.println(pageNum +"번째 입력 값:"+test); 
 			data.addEstiate(pageNum, user_id);
+			data.addEstimate(pageNum, user_id,sel_date);
 		}
 		
 		request.setAttribute("mainUrl","guest/estimate"+pageNum+".jsp");

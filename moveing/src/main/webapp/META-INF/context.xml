@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource
-		name="qwer"
-		auth='Container'
-		type='javax.sql.DataSource'
-		driverClassName='org.mariadb.jdbc.Driver'
-		url='jdbc:mariadb://mk0709.iptime.org:3434/move_db'
-		username='move_user'
-		password='0709'
-	/>
+<Resource 
+	name="qwer"
+	URIEncoding="UTF-8"
+	auth="Container"
+	type="javax.sql.DataSource"
+	username="move_user"
+	password="0709"
+	driverClassName="org.mariadb.jdbc.Driver"
+	url='jdbc:mariadb://mk0709.iptime.org:3434/move_db'
+	maxActive="5000"
+	relaxedQueryChars="[,]"
+	maxIdle="5000"/>
 </Context>
+

@@ -57,7 +57,7 @@ public class UserDAO {
 				dto.setName(rs.getString("name"));
 				dto.setEmail(rs.getString("email"));
 				dto.setJoin_date(rs.getDate("join_date"));
-				dto.setTel(rs.getString("name"));
+				dto.setTel(rs.getString("tel"));
 				dto.setState(rs.getInt("state"));
 				dto.setLevel(rs.getInt("level"));
 			}
@@ -133,7 +133,6 @@ public class UserDAO {
 
 	public int insert(UserDTO dto){
 		sql = "insert into user (id, pw, name,email,join_date,tel,state,level ) values(?,?,?,?,sysdate(),?,0,?)";
-		sql = "insert into user (id, pw, name,email,join_date,tel,state,level ) values(?,?,?,?,sysdate(),?,0,2)";
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, dto.getId());

@@ -1,23 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-.singup{margin:0 auto;}
-.formW{margin-top: 150px;}
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
-<style type="text/css">
-	/* 5 */
-	.custom-btn {
-	  background: #000;
+<style>
+
+  .custom-btn  {
 	  color: #fff;
 	  line-height: 42px;
 	  padding: 0;
 	  border: none;
 	  font-size: 15px;
 	  cursor:pointer;
+	  background-color: #40699A;
 	}
 	
+	  #id_check  {
+	  color: #fff;
+	  padding: 0;
+	  border: none;
+	  width : 70px;
+	  height: 30px;
+	  cursor:pointer;
+	  background-color: #40699A;
+	  
+	}
+	
+
 	.formW{
 
 	margin-top: 150px;
@@ -25,8 +32,17 @@
 	
 }
 
+td {
+
+margin: 5px;
+	
+}
+
 	input {
 		border: 1px #979797 solid; 
+		height: 30px;
+		margin: 5px;
+		
 	}
 	
 	#singup{
@@ -49,46 +65,7 @@
 
 	
 </style>
-<form action="SignUpReg" class="formW" method="post">
-   <table class="singup">
-      <tr><td align="center"><h2 >정보입력</h2></td></tr>
-      <tr>
-         <td align="center">아이디</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="pid" placeholder="아이디를 입력하세요"/></td>
-      </tr>
-      <tr>
-         <td align="center">비밀번호</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="password" name="pw" placeholder="영문,숫자,특수문자를 포함한 8자 이상의 문자"/></td>
-      </tr>
-      <tr>
-         <td align="center">이름</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="pname" placeholder="이름을 입력하세요"/></td>
-      </tr>
-      <tr>
-         <td align="center">전화번호</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="number" placeholder="01012345678"/></td>
-      </tr>
-      <tr>
-         <td align="center">이메일</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="mail" placeholder="id@example.com" /></td>
-      </tr>
-      <tr>
-         <td align="center"><input type="submit" value="회원가입"></td>
-      </tr>
-      <tr>
-         <td><h2>이미 회원이신가요?</h2><a href="Login">로그인하기</a></td>
-      </tr>
-   </table>
+
 
 <script type="text/javascript">
 
@@ -201,11 +178,27 @@
 			return;
 		}
 		
-		var tempPw = $('input[name="password"]').val();
+		var tempPw = $('input[name="pw"]').val();
 		if(tempPw.search(reg) == -1){
 			alert("비밀번호는 3~10자의 영문, 숫자만 가능합니다");
 			return;
 		} 
+		
+		var reg2 = /^[가-힣]*$/;
+		
+		var tempName = $('input[name="pname"]').val();
+		if(tempName.search(reg2) == -1){
+			alert("이름은 한글 입력만 가능합니다.");
+			return;
+		}
+		
+		var reg3 =  /^[0-9]*$/;
+		
+		var tempNum = $('input[name="number"]').val();
+		if(tempNum.search(reg3) == -1){
+			alert("전화번호는 숫자만 입력해주세요.");
+			return;
+		}
 		
 		document.f.submit();
 	}
@@ -224,7 +217,7 @@
 		<tr>
 			<td><b>아이디</b></td>
 			<td><input type="text" name="pid" style="width: 150px" maxlength="10" placeholder="3~10자의 영문, 숫자"> 
-			<input type="button" id="id_check" value="중복체크" style="height: 22px;">
+			<input type="button" id="id_check" value="중복체크">
 				<span id="id_message" style="font-size: 13px"></span></td>
 		</tr>
 		
@@ -258,9 +251,6 @@
 				class="custom-btn" onClick="gotoRegisterProc()"
 				style="width: 100%; height: 50px"></td>
 		</tr>
-		
-		<tr>
-			<td><h2>이미 회원이신가요?</h2> <a href="Login">로그인하기</a></td></tr>
 
 	</table>
 </form>

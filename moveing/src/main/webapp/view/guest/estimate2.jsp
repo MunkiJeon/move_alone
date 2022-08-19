@@ -297,7 +297,7 @@
     </section>
 
      
-    <section class="product">
+    <section class="product"><!-- 쇼핑 합쳐지면 빠이짜이찌엔 -->
         <div class="line"></div>
         <h2 class="productTitle">침실/거실가구</h2>
         <table class="productTable">
@@ -327,9 +327,9 @@
                 </p>
             </div>
         </div>
-        <input type="hidden" name="item1">
-        <input type="hidden" name="item2">
-        <input type="hidden" name="item3">
+        <input type="hidden" name="item1" id="item1">
+        <input type="hidden" name="item2" id="item2">
+        <input type="hidden" name="item3" id="item3">
         <input type="hidden" name="box">
         
        	<button type="submit" class="detailNext">다음</button>

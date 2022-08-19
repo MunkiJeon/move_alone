@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+
 <style>
 *{
 	margin:0px;
@@ -8,20 +9,20 @@
  }
  .menuI{
  	left:0px;
- 	
+ 	top:150px;
  	width:100px;
- 	height:600px;
+ 	height:300px;
  	background:#40699A;
  	position:fixed;
- 	z-index: 1;
+ 	z-index: 3;
  	border: 1px solid black;
  }
  
  .box{
  	left:0px;
- 	top:110px;
+ 	top:150px;
  	width:100px;
- 	height: 400px;
+ 	height: 270px;
  	background:#40699A;
  	position:fixed;
  	z-index: 2;
@@ -32,6 +33,7 @@
  	display:inline-block;
  	margin-top: 5px;
  	cursor:pointer;
+ 	
  }
   .header{
  	
@@ -103,8 +105,6 @@ $(function () {
 		<label class="menuI2" id ="w1">내 정보</label>
 		<label class="menuI2" id ="w2">기사정보</label>
 		<label class="menuI2" id ="w3">내역</label>
-		
-		
 	</div>
 </div>
 
@@ -175,8 +175,27 @@ $(function () {
 					<td><h2>기사정보</h2></td>
 				</tr>
 					<tr>
-						<td><div style="border: 1px solid black;"></div></td>
-						<td><div style="border: 1px solid black;"></div></td>
+						<td colspan="6">
+						<div>
+							<div style="border: 1px solid black;"><img src="<c:url value="/resource/image/"/>${dto3.pic}" alt=""></div>
+							<div style="border: 1px solid black;"><table>
+								<tr>
+									<td>이름</td>
+								</tr>
+								
+								<tr>
+									<td><input type="text" value="${dto3.name }"></td>
+								</tr>
+								<tr>
+									<td>전화번호</td>
+								</tr>
+								<tr>
+									<td><input type="text" value="${dto3.tel }"></td>
+								</tr>
+							</table></div>
+						</div>
+						</td>
+						
 					</tr>
 			</table>
 		</td>

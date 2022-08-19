@@ -6,12 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-
 
 public class UserDAO {
 	Connection con;
@@ -19,26 +15,14 @@ public class UserDAO {
 	ResultSet rs;
 	String sql;
 	
-	private static UserDAO instance;
-
-	public static UserDAO getInstance() {
-		if (instance == null) {
-			instance = new UserDAO();
-		}
-		return instance;
-	}
-	
 	public UserDAO() {
 		try {
 			InitialContext init = new InitialContext();
-			Context initContext = new InitialContext();
-			Context envContext = (Context) initContext.lookup("java:comp/env"); 
-			DataSource ds = (DataSource) envContext.lookup("qwer");
-			con = ds.getConnection(); 
+			DataSource ds = (DataSource)init.lookup("java:comp/env/qwer");
+			con = ds.getConnection();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("생성자에서 conn :" + con);
 		}
 		
 	}
@@ -50,7 +34,7 @@ public class UserDAO {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, id);
 			rs = ptmt.executeQuery();
-		if(rs.next()) {
+			while(rs.next()) {
 				dto = new UserDTO();
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
@@ -61,8 +45,7 @@ public class UserDAO {
 				dto.setState(rs.getInt("state"));
 				dto.setLevel(rs.getInt("level"));
 			}
-		} catch (Exception e) {
-			System.out.println("getMemberById() 실행중 에러");
+		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			close();
@@ -71,6 +54,33 @@ public class UserDAO {
 		return dto;
 	}
 	
+	public UserDTO oneStaff(String id) {
+		UserDTO dto = null;
+		sql = "select * from user where id = ?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, id);
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				dto = new UserDTO();
+				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setJoin_date(rs.getDate("join_date"));
+				dto.setTel(rs.getString("tel"));
+				dto.setPic(rs.getString("pic"));
+				dto.setState(rs.getInt("state"));
+				dto.setLevel(rs.getInt("level"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return dto;
+	}
 	
 	public ArrayList<UserDTO> allUser() {
 		ArrayList<UserDTO> res = new ArrayList<UserDTO>();
@@ -87,7 +97,7 @@ public class UserDAO {
 				dto.setName(rs.getString("name"));
 				dto.setEmail(rs.getString("email"));
 				dto.setJoin_date(rs.getDate("join_date"));
-				dto.setTel(rs.getString("name"));
+				dto.setTel(rs.getString("tel"));
 				dto.setState(rs.getInt("state"));
 				dto.setLevel(rs.getInt("level"));
 				

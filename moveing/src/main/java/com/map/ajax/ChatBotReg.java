@@ -11,44 +11,39 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.map.model.CalculateDAO;
-import com.map.model.CalculateDTO;
-import com.map.model.ChatBotDAO;
-import com.map.model.ChatBotDTO;
+import com.map.model.InquiryDAO;
+import com.map.model.InquiryDTO;
 import com.map.model.UserDAO;
 import com.map.model.UserDTO;
 
-public class AutoTalkAdd implements AjaxService {
+public class ChatBotReg implements AjaxService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-		}
-	
-		ChatBotDTO dto = new ChatBotDTO();
-		dto.setType(request.getParameter("type"));
-		dto.setQuestions(request.getParameter("questions"));
-		dto.setAnswer(request.getParameter("answer"));
+		String id = request.getParameter("id");
 		
-		int cnt = new ChatBotDAO().insert(dto);
+		UserDTO dto = new UserDAO().oneUser(id);
+		
+		InquiryDTO inDto = new InquiryDTO();
+		
+		inDto.setId(id);
+		inDto.setContents(request.getParameter("contents"));
+		inDto.setName(dto.getName());
+		
+		int cnt = new InquiryDAO().insert(inDto);
 		JSONArray data = new JSONArray();
-		System.out.println(cnt);
 		
-		try {
 		if(cnt > 0) {data.add("true"); 
 		System.out.println("성공");}
 		else {data.add("false");
 		System.out.println("실패");}
 		
-		String res = data.toString();
 		
-		response.getWriter().append(res);
-			
-		response.getWriter().append(data.toString());
+		try {
+			response.getWriter().append(data.toJSONString());
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,94 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-.singup{margin:0 auto;}
-.formW{margin-top: 150px;}
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
-<style type="text/css">
-	/* 5 */
-	.custom-btn {
-	  background: #000;
-	  color: #fff;
-	  line-height: 42px;
-	  padding: 0;
-	  border: none;
-	  font-size: 15px;
-	  cursor:pointer;
-	}
-	
-	.formW{
-
-	margin-top: 150px;
-
-	
+<style>
+.custom-btn {
+	color: #fff;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-size: 15px;
+	cursor: pointer;
+	background-color: #40699A;
+	width: 100%; 
+	height: 50px;
 }
 
-	input {
-		border: 1px #979797 solid; 
-	}
-	
-	#singup{
-		margin: auto;
-		margin-top : 100px;
-		text-align: left;
-		width: 800x;
-		border-spacing: 0 10px;
-		
-	}
-	
-	#singup p{
-		margin: 0px;
-	}
-	
-	caption {
-		font-size: 30px;
-		margin-bottom: 50px;
-	}
+#id_check {
+	color: #fff;
+	padding: 0;
+	border: none;
+	width: 70px;
+	height: 30px;
+	cursor: pointer;
+	background-color: #40699A;
+}
 
-	
+.formW {
+	margin-top: 150px;
+}
+
+td {
+	margin: 5px;
+}
+
+input, select  {
+	border: 1px #979797 solid;
+	height: 30px;
+	margin: 5px;
+}
+
+#singup {
+	margin: auto;
+	margin-top: 100px;
+	text-align: left;
+	width: 800x;
+	border-spacing: 0 10px;
+}
+
+#singup p {
+	margin: 0px;
+}
+
+caption {
+	font-size: 30px;
+	margin-bottom: 50px;
+}
+
+#outer {
+	display: flex;
+	justify-content: center;
+}
+
+input{
+   text-align:center;
+}
 </style>
-<form action="SignUpReg" class="formW" method="post">
-   <table class="singup">
-      <tr><td align="center"><h2 >정보입력</h2></td></tr>
-      <tr>
-         <td align="center">아이디</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="pid" placeholder="아이디를 입력하세요"/></td>
-      </tr>
-      <tr>
-         <td align="center">비밀번호</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="password" name="pw" placeholder="영문,숫자,특수문자를 포함한 8자 이상의 문자"/></td>
-      </tr>
-      <tr>
-         <td align="center">이름</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="pname" placeholder="이름을 입력하세요"/></td>
-      </tr>
-      <tr>
-         <td align="center">전화번호</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="number" placeholder="01012345678"/></td>
-      </tr>
-      <tr>
-         <td align="center">이메일</td>
-      </tr>
-      <tr>
-         <td align="center"><input type="text" name="mail" placeholder="id@example.com" /></td>
-      </tr>
-      <tr>
-         <td align="center"><input type="submit" value="회원가입"></td>
-      </tr>
-      <tr>
-         <td><h2>이미 회원이신가요?</h2><a href="Login">로그인하기</a></td>
-      </tr>
-   </table>
+
 
 <script type="text/javascript">
 
@@ -129,7 +105,7 @@
 				});//ajax	
 			} 
 		});
-		
+
 		
 		$('input[name="pid"]').keydown(function(){ //키보드가 한번이라도 눌리면 발생하는 이벤트 처리
 			$('#id_message').css('display', 'none'); // 키가 눌렸을 때 안보이게.
@@ -176,9 +152,9 @@
 			return;
 		}
 		
-		if($('input[name="maile"]').val() == ""){
+		if($('input[name="mail"]').val() == ""){
 			alert("이메일을 입력하세요");		
-			$('input[name="maile"]').focus();
+			$('input[name="mail"]').focus();
 			return;
 		}
 		
@@ -201,14 +177,49 @@
 			return;
 		}
 		
-		var tempPw = $('input[name="password"]').val();
+		var tempPw = $('input[name="pw"]').val();
 		if(tempPw.search(reg) == -1){
 			alert("비밀번호는 3~10자의 영문, 숫자만 가능합니다");
 			return;
 		} 
 		
+		var reg2 = /^[가-힣]*$/;
+		
+		var tempName = $('input[name="pname"]').val();
+		if(tempName.search(reg2) == -1){
+			alert("이름은 한글 입력만 가능합니다.");
+			return;
+		}
+		
+		var reg3 =  /^[0-9]*$/;
+		
+		var tempNum = $('input[name="number"]').val();
+		if(tempNum.search(reg3) == -1){
+			alert("전화번호는 숫자만 입력해주세요.");
+			return;
+		}
+		
 		document.f.submit();
 	}
+	
+/* 	function mail_change(){
+		if(document.join.mail3.options[document.join.mail3.selectedIndex].value == '0'){
+			document.join.mail2.disabled = true;
+			document.join.mail2.value = "";
+			}
+
+		if(document.join.mail3.options[document.join.mail3.selectedIndex].value == '9'){
+			 document.join.mail2.disabled = false;
+			 document.join.mail2.value = "";
+			 document.join.mail2.focus();
+
+		} else{
+
+		 document.join.mail2.disabled = true;
+		 document.join.mail2.value = document.join.mail3.options[document.join.mail3.selectedIndex].value;
+
+		}
+	} */
 </script>
 
  
@@ -216,15 +227,17 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <form name=f action="SignUpReg" class="formW" method="post">
+<div id="outer">
 	<table class="singup" >
 		<caption>
-			SIGN UP
+			나홀로이사 회원가입
 		</caption>
 		
 		<tr>
 			<td><b>아이디</b></td>
-			<td><input type="text" name="pid" style="width: 150px" maxlength="10" placeholder="3~10자의 영문, 숫자"> 
-			<input type="button" id="id_check" value="중복체크" style="height: 22px;">
+			<td><input type="text" name="pid" style="width: 150px" maxlength="10" 
+			placeholder="3~10자의 영문, 숫자"> 
+			<input type="button" id="id_check" value="중복체크">
 				<span id="id_message" style="font-size: 13px"></span></td>
 		</tr>
 		
@@ -240,27 +253,46 @@
 		</tr> 
 		<tr>
 			<td><b>성명</b></td>
-			<td><input type="text" name="pname" style="width: 150px"></td>
+			<td><input type="text" name="pname" style="width: 150px" placeholder="한글 입력만 가능"></td>
 		</tr>
 		<tr>
 			<td valign="top"><b>전화번호</b></td>
-			<td><input type="text" name="number"
+			<td><input type="text" name="number" placeholder="숫자입력만 가능"
 				style="width: 150px"></td>
 		</tr>
-
 		<tr>
 			<td><b>이메일</b></td>
-			<td><input type="text" name="mail" style="width: 150px"/></td>
+			<td><input type="text" name="mail" style="width: 150px"/> </td>
+			</tr>
+			
+			<tr>
+			<td colspan="8"><br> <input type="submit" value="회원가입"
+				class="custom-btn" onClick="gotoRegisterProc()"></td>
+		</tr>
+
+	</table>
+	</div>
+</form>
+	<!-- 	<form name="join">   
+		<div id="outer">   
+		<table>
+		<tr>
+			<td><b>이메일</b></td>
+			<td><input type="text" name="mail" style="width: 100px"/> @ </td>
+			<td><input type="text" name="mail2" value="" disabled style="width: 100px"></td>
+			<td><select name="mail3" onchange="mail_change()">
+			   	<option value="0" >선택하세요</option>
+			   	<option value="9">직접입력</option>
+    			<option value="naver.com">naver.com</option>
+   				<option value="nate.com">nate.com</option>    
+   				</select>
+			</td>
 		</tr>
 
 		<tr>
 			<td colspan="8"><br> <input type="submit" value="회원가입"
-				class="custom-btn" onClick="gotoRegisterProc()"
-				style="width: 100%; height: 50px"></td>
+				class="custom-btn" onClick="gotoRegisterProc()"></td>
 		</tr>
-		
-		<tr>
-			<td><h2>이미 회원이신가요?</h2> <a href="Login">로그인하기</a></td></tr>
-
 	</table>
-</form>
+	</div>
+</form> -->

@@ -13,6 +13,8 @@ import org.json.simple.JSONObject;
 
 import com.map.model.CalculateDAO;
 import com.map.model.CalculateDTO;
+import com.map.model.ChatBotDAO;
+import com.map.model.ChatBotDTO;
 import com.map.model.UserDAO;
 import com.map.model.UserDTO;
 
@@ -22,26 +24,22 @@ public class AutoTalkModify implements AjaxService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 	
-		System.out.println(request.getParameter("id"));
+		
+		System.out.println(request.getParameter("no")+"----------------");
 		
 		
-		UserDTO dto = new UserDAO().oneUser(request.getParameter("id"));
+		ChatBotDTO dto = new ChatBotDAO().oneAnswer(request.getParameter("no"));
 		JSONObject data = new JSONObject();
-		System.out.println(dto.getId());
-		System.out.println(dto.getPw());
-		System.out.println(dto.getName());
-		System.out.println(dto.getEmail());
-		System.out.println(dto.getTel());
+		
 		
 		try {
 		
-		data.put("id",URLEncoder.encode(dto.getId(),"UTF-8"));
-		data.put("pw",URLEncoder.encode(dto.getPw(),"UTF-8"));
-		data.put("name",URLEncoder.encode(dto.getName(),"UTF-8"));
-		data.put("email",URLEncoder.encode(dto.getEmail(),"UTF-8"));
-		data.put("tel",URLEncoder.encode(dto.getTel(),"UTF-8"));
+		data.put("no",dto.getNo());
+		data.put("type",URLEncoder.encode(dto.getType(),"UTF-8"));
+		data.put("questions",URLEncoder.encode(dto.getQuestions(),"UTF-8"));
+		data.put("answer",URLEncoder.encode(dto.getAnswer(),"UTF-8"));
 			
-		String res = data.toString();
+		System.out.println(dto.getNo()+"000");
 		
 		response.getWriter().append(data.toJSONString());
 			

@@ -286,7 +286,7 @@ $(function () {
 								<td>출발지</td>
 								<td>도착지</td>
 								<td>포장박스 수</td>
-								<td>비용</td>
+								
 							</tr>
 							<tr><td colspan="6"><hr></td></tr>
 							<c:forEach items="${dtoS2}" var="dtoaa">
@@ -297,7 +297,7 @@ $(function () {
 								<td>${dtoaa.start_point }</td>
 								<td>${dtoaa.end_point }</td>
 								<td>${dtoaa.box }</td>
-								<td>${dtoaa.cost }</td>
+								
 							</tr>
 								
 							</c:forEach>
@@ -313,26 +313,29 @@ $(function () {
 				</tr>
 				<tr>
 					<td>
-						<table border="">
+						<table border="2">
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>아이디</td>
+								<td>예약날짜</td>
+								<td>출발지</td>
+								<td>도착지</td>
+								<td>포장박스</td>
+								<td>금액</td>
 							</tr>
 							<tr>
-								<td></td>
+								<td colspan="6"><hr></td>
 							</tr>
+							<c:forEach items="${dtoS3}" var="dtoa">
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>${dtoa.driver_ID}</td>
+								<td>${dtoa.reservat_date}</td>
+								<td>${dtoa.start_point}</td>
+								<td>${dtoa.end_point}</td>
+								<td>${dtoa.box}</td>
+								<td>${dtoa.cost}</td>
 							</tr>
+							</c:forEach>
+							<tr><td colspan="6">${re }</td></tr>
 						</table>
 					</td>
 				</tr>

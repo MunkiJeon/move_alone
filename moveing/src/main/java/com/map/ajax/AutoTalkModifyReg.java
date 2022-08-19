@@ -18,36 +18,40 @@ import com.map.model.ChatBotDTO;
 import com.map.model.UserDAO;
 import com.map.model.UserDTO;
 
-public class AutoTalkAdd implements AjaxService {
+public class AutoTalkModifyReg implements AjaxService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-		}
 	
+
 		ChatBotDTO dto = new ChatBotDTO();
-		dto.setType(request.getParameter("type"));
+		dto.setNo(Integer.parseInt(request.getParameter("no")));
 		dto.setQuestions(request.getParameter("questions"));
 		dto.setAnswer(request.getParameter("answer"));
+		dto.setType(request.getParameter("type"));
 		
-		int cnt = new ChatBotDAO().insert(dto);
-		JSONArray data = new JSONArray();
+		
+		JSONObject data = new JSONObject();
+		
+		
+		int cnt = new ChatBotDAO().modify(dto);
+		System.out.println(dto.getNo()+"------------------------------------");
+		System.out.println(dto.getAnswer());
+		System.out.println(dto.getQuestions());
+		System.out.println(dto.getType());
 		System.out.println(cnt);
 		
 		try {
-		if(cnt > 0) {data.add("true"); 
-		System.out.println("성공");}
-		else {data.add("false");
-		System.out.println("실패");}
-		
-		String res = data.toString();
-		
-		response.getWriter().append(res);
+			if(cnt > 0) {data.put("chk","true"); 
+			System.out.println("성공");}
+			else {data.put("chk","false");
+			System.out.println("실패");}
 			
-		response.getWriter().append(data.toString());
+			String res = data.toString();
+		
+			response.getWriter().append(data.toJSONString());
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

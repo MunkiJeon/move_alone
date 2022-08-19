@@ -25,6 +25,11 @@ public class EstimateDAO {
 			e.printStackTrace();
 		}
 	}
+	public int detailToOrderNum(String user_id) {
+		int orderNum = 0;
+			sql = "select user_order from estimate where id = '"+user_id+"'";
+		return orderNum;
+	}
 	public void addEstimate(String pagenum,String user_id, String sel_date,String data) {
 		
 		System.out.println("addEstiate들어옴"+pagenum+"// ID:"+user_id+"// date:"+sel_date);

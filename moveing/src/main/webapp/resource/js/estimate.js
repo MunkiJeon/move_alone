@@ -28,7 +28,7 @@
     })
     
     $(".product .detailNext").click(function(e){
-		
+		//detailNext //test
 		let item1 ="",item2 ="", item3 ="", box =$(".product .productGim .cnt").html();
 		//e.preventDefault();
 		 for(let i =0;i<$(".product .productItem1 .productList").length;i++){
@@ -54,9 +54,9 @@
 			}
 		}
 
-		//console.log(item1);
 		$("#item1").val(item1);
 		console.log(item1);
+		console.log($("#item1").val());
 		$("#item2").val(item2);
 		console.log(item2);
 		$("#item3").val(item3);
@@ -64,10 +64,6 @@
 		$("#box").val(box);
 		console.log(box);
 		
-	      //  console.log($(".product .productItem .item1")[0]);	
-/*     $(".product .productItem .item2").
-      $(".product .productItem .item3").
-      $(".product .productGim .cnt")*/
     })
     
     

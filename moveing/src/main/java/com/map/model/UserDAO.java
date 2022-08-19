@@ -57,7 +57,7 @@ public class UserDAO {
 				dto.setName(rs.getString("name"));
 				dto.setEmail(rs.getString("email"));
 				dto.setJoin_date(rs.getDate("join_date"));
-				dto.setTel(rs.getString("name"));
+				dto.setTel(rs.getString("tel"));
 				dto.setState(rs.getInt("state"));
 				dto.setLevel(rs.getInt("level"));
 			}

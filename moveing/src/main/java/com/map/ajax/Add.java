@@ -34,7 +34,7 @@ public class Add implements AjaxService {
 		dto.setTel(request.getParameter("tel"));
 		dto.setLevel(Integer.parseInt(request.getParameter("level")));
 		
-		int cnt = new UserDAO().insert(dto);
+		int cnt = new UserDAO().managerInsert(dto);
 		JSONArray data = new JSONArray();
 		System.out.println(cnt);
 		

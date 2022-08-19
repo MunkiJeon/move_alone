@@ -16,37 +16,28 @@ import com.map.model.InquiryDTO;
 import com.map.model.UserDAO;
 import com.map.model.UserDTO;
 
-public class ChatBot implements AjaxService {
+public class ChatBotReg implements AjaxService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String id = request.getParameter("id");
-
 		
+		UserDTO dto = new UserDAO().oneUser(id);
 		
+		InquiryDTO inDto = new InquiryDTO();
+		
+		inDto.setId(id);
+		inDto.setContents(request.getParameter("contents"));
+		inDto.setName(dto.getName());
+		
+		int cnt = new InquiryDAO().insert(inDto);
 		JSONArray data = new JSONArray();
 		
-		ArrayList<InquiryDTO> list = new InquiryDAO().idList(id);
-		
-		
-		for (InquiryDTO dto : list) {
-			JSONObject detailData = new JSONObject();
-			String answer = "null";
-			if(dto.getAnswer()!=null) {
-				answer = dto.getAnswer();
-			}
-			try {
-				detailData.put("inquiry",URLEncoder.encode(dto.getContents(),"UTF-8") );
-				detailData.put("answer", URLEncoder.encode(answer,"UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			data.add(detailData);
-			
-		}
-		
+		if(cnt > 0) {data.add("true"); 
+		System.out.println("성공");}
+		else {data.add("false");
+		System.out.println("실패");}
 		
 		
 		try {

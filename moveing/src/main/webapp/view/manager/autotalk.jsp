@@ -64,154 +64,170 @@
 </div>
 
 <script>
-	$(function(){
-		let add = false;
-		let modify = false;
-        $(".popupbtn").click(function(e){
-            e.preventDefault();
+$(function(){
+	let add = false;
+	let modify = false;
+    $(".popupbtn").click(function(e){
+        e.preventDefault();
 
-            $(".popupbg").fadeIn(500);
-            $(".stepsign").stop().animate({bottom:"50%"},500)
-            
-            
-			$("#type").val("");
-			$("#questions").val("");
-			$("#answer").val("");
-			add = true;
-            if(add){
-	            $(".stepsign").submit(function(e){
-	                e.preventDefault();
-					$.ajax({
-			          	url:"<c:url value='/ajax/AutoTalkAdd'/>",
-			          	type:'POST',
-			  			data:{type:$("#type").val(),questions:$("#questions").val(),answer:$("#answer").val()},
-			  			async:false,
-			  			//dataType:'json',
-			  			success:function(data){
-			  				console.log(data.chk);
-			  				if(data[0]=="false"){alert("실패")}
-			  				else{alert("성공");
-			  					location.href="?level="+level;
-			  				}
-			  			},
-			  			error:function(e){console.log(e)}
-		        	}) 
-		            	
-		        })
-            }
-	    })
-        $(".popupbg").click(function(){
-            $(this).fadeOut(500);
-            $(".stepsign").stop().animate({bottom:"-100vh"},500)
-            add=false;
-            modify=false;
-        })
+        $(".popupbg").fadeIn(500);
+        $(".stepsign").stop().animate({bottom:"50%"},500)
         
         
+		$("#type").val("");
+		$("#questions").val("");
+		$("#answer").val("");
+		add = true;
+        if(add){
+            $(".stepsign").submit(function(e){
+                e.preventDefault();
+				$.ajax({
+		          	url:"<c:url value='/ajax/AutoTalkAdd'/>",
+		          	type:'POST',
+		  			data:{type:$("#type").val(),questions:$("#questions").val(),answer:$("#answer").val()},
+		  			async:false,
+		  			//dataType:'json',
+		  			success:function(data){
+		  				console.log(data.chk);
+		  				if(data[0]=="false"){alert("실패")}
+		  				else{alert("성공");
+		  					location.href="";
+		  				}
+		  			},
+		  			error:function(e){console.log(e)}
+	        	}) 
+	            	
+	        })
+        }
+    })
+    $(".popupbg").click(function(){
+        $(this).fadeOut(500);
+        $(".stepsign").stop().animate({bottom:"-100vh"},500)
+        $(".delete").stop().animate({bottom:"-100vh"},500)
+        add=false;
+        modify=false;
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    $(".popupbtnModify").click(function(e){
+        e.preventDefault();
+        let cnt = 0;
+        let no = "";
+        for(let i=0;i<$(".idchktr").length;i++){
+        	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
+        		cnt++;
+        		no = $(".idchktr").eq(i).find(".dataChk").val()
+        	}
+        }
+        if(cnt!=1){
+        	return alert("하나만 체크해 주세요");
+        }
+        
+        modify = true;
+        console.log(no);
+        $(".popupbg").fadeIn(500);
+        $(".stepsign").stop().animate({bottom:"50%"},500)
 
-        
-        $(".popupbtnModify").click(function(e){
+		
+        $.ajax({
+     	
+         	url:"<c:url value='/ajax/AutoTalkModify'/>",
+         	type:'POST',
+ 			data:{no:no},
+ 			async:false,
+ 			dataType:'json',
+ 			success:function(data){
+ 				$("#type").val(decodeURIComponent(data.type));
+ 				$("#questions").val(decodeURIComponent(data.questions));
+ 				$("#answer").val(decodeURIComponent(data.answer));
+ 				
+ 			},
+ 			error:function(e){console.log(e)}
+    	})  
+            
+        if(modify){    
+	        $(".stepsign").submit(function(e){
+	        	
+                e.preventDefault();
+                $.ajax({
+    	         	url:"<c:url value='/ajax/AutoTalkModifyReg'/>",
+    	         	type:'POST',
+    	 			data:{no:no,type:$("#type").val(),questions:$("#questions").val(),answer:$("#answer").val()},
+    	 			async:false,
+    	 			dataType:'json',
+    	 			success:function(data){
+		  				console.log(data.chk);
+		  				if(data[0]=="false"){alert("실패")}
+		  				else{alert("성공");
+		  					location.href="";
+		  				}
+    	 				
+    	 			},
+    	 			error:function(e){console.log(e)}
+    	    	})  
+	            	
+	        })
+        }
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+       $("#deleteBtn").click(function(e){
             e.preventDefault();
+            let no = "";
             let cnt = 0;
-            let id = "";
             for(let i=0;i<$(".idchktr").length;i++){
             	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
             		cnt++;
-            		id = $(".idchktr").eq(i).find(".dataChk").val()
+            		if(!$(".idchktr").length-1==i){
+            			no += $(".idchktr").eq(i).find(".dataChk").val()+","
+            		}else{no += $(".idchktr").eq(i).find(".dataChk").val()}
             	}
             }
-            if(cnt!=1){
-            	return alert("하나만 체크해 주세요");
-            }
-            
-            modify = true;
-            console.log(id);
-            $(".popupbg").fadeIn(500);
-            $(".stepsign").stop().animate({bottom:"50%"},500)
-            $("#id").attr("readonly","readonly");
+            if(cnt==0) return alert("체크해 주세요")
+				
+        	$(".popupbg").fadeIn(500);
+        	$(".delete").stop().animate({bottom:"50%"},500);
+        	
+        	
+	        $(".deletebtn").click(function(e){
+                e.preventDefault();
 
-			
-            $.ajax({
-         	
-	         	url:"<c:url value='/ajax/AutoTalkModify'/>",
-	         	type:'POST',
-	 			data:{id:id},
-	 			async:false,
-	 			dataType:'json',
-	 			success:function(data){
-	 				
-	 				$("#id").val(decodeURIComponent(data.id));
-	 				$("#pw").val(decodeURIComponent(data.pw));
-	 				$("#name").val(decodeURIComponent(data.name));
-	 				$("#email").val(decodeURIComponent(data.email));
-	 				$("#tel").val(decodeURIComponent(data.tel));
-	 				
-	 			},
-	 			error:function(e){console.log(e)}
-	    	})  
-	            
-	        if(modify){    
-		        $(".stepsign").submit(function(e){
-	                e.preventDefault();
-	                $.ajax({
-	                 	
-	    	         	url:"<c:url value='/ajax/AutoTalkModify'/>",
-	    	         	type:'POST',
-	    	 			data:{id:id,pw:$("#pw").val(),name:$("#name").val(),
-		 				email:$("#email").val(),
-		 				tel:$("#tel").val()},
-	    	 			async:false,
-	    	 			dataType:'json',
-	    	 			success:function(data){
-			  				console.log(data.chk);
-			  				if(data[0]=="false"){alert("실패")}
-			  				else{alert("성공");
-			  					location.href="?level="+level;
-			  				}
-	    	 				
-	    	 			},
-	    	 			error:function(e){console.log(e)}
-	    	    	})  
-		            	
-		        })
-	        }
-        })
-        
-        
-        
-	    $(".delete").click(function(e){
-	           e.preventDefault();
-	           let id = "";
-	           for(let i=0;i<$(".idchktr").length;i++){
-	           	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
-	           		cnt++;
-	           		id += $(".idchktr").eq(i).find(".dataChk").val()+","
-	           	}
-	           }
-	
-	        $(".stepsign").submit(function(e){
-	               e.preventDefault();
-	
 	            $.ajax({
 	         	
-		         	url:"<c:url value='/ajax/Modify'/>",
+		         	url:"<c:url value='/ajax/AutoTalkDelete'/>",
 		         	type:'POST',
-		 			data:{id:id},
+		 			data:{no:no},
 		 			async:false,
 		 			dataType:'json',
 		 			success:function(data){
-		 				
-		 				$("#id").val(decodeURIComponent(data.id));
-		 				$("#pw").val(decodeURIComponent(data.pw));
-		 				$("#name").val(decodeURIComponent(data.name));
-		 				$("#email").val(decodeURIComponent(data.email));
-		 				$("#tel").val(decodeURIComponent(data.tel));
+		  				console.log(data.chk);
+		  				if(data[0]=="false"){alert("실패")}
+		  				else{alert("성공");
+		  					location.href="";
+		  				}
 		 				
 		 			},
 		 			error:function(e){console.log(e)}
 		    	})
 	            	
 	        })
-    	 })
-	})
+   	 })
+})
 </script>

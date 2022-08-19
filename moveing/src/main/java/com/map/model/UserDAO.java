@@ -191,7 +191,7 @@ public class UserDAO {
 			close();
 		}
 		   return 0;
-	   }
+	}
 	
 	public int delete(UserDTO dto) {
 		

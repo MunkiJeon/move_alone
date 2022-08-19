@@ -92,6 +92,29 @@ public class ChatBotDAO {
 		
 		return dto;
 	}
+	
+	public ChatBotDTO autoAnswer(String qe) {
+		ChatBotDTO dto = null;
+		sql = "select * from chatbot where questions = ?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, qe);
+			rs = ptmt.executeQuery();
+			if(rs.next()) {
+				dto = new ChatBotDTO();
+				dto.setNo(rs.getInt("no"));
+				dto.setType(rs.getString("type"));
+				dto.setQuestions(rs.getString("questions"));
+				dto.setAnswer(rs.getString("answer"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return dto;
+	}
 
 	public int modify(ChatBotDTO dto) {
 		   try {

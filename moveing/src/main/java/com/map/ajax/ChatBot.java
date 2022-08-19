@@ -22,34 +22,33 @@ public class ChatBot implements AjaxService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String id = request.getParameter("id");
-		String contents = request.getParameter("contents");
+
 		
-		UserDTO dto = new UserDAO().oneUser(id);
 		
-		InquiryDTO iqDto = new InquiryDTO();
-		iqDto.setId(dto.getId());
-		iqDto.setName(dto.getName());
-		iqDto.setContents(contents);
-		int cnt=0;
-		if(!contents.equals("null")) {
-			new InquiryDAO().insert(iqDto);
-		}
 		JSONArray data = new JSONArray();
 		
 		ArrayList<InquiryDTO> list = new InquiryDAO().idList(id);
-		for (InquiryDTO inquiryDTO : list) {
-			
+		
+		
+		for (InquiryDTO dto : list) {
+			JSONObject detailData = new JSONObject();
+			String answer = "null";
+			if(dto.getAnswer()!=null) {
+				answer = dto.getAnswer();
+			}
 			try {
-				data.add(URLEncoder.encode(inquiryDTO.getContents(),"UTF-8"));
-				
-				if(inquiryDTO.getAnswer()!=null) {
-				data.add(URLEncoder.encode(inquiryDTO.getAnswer(),"UTF-8"));
-				}else {data.add("null");}
+				detailData.put("inquiry",URLEncoder.encode(dto.getContents(),"UTF-8") );
+				detailData.put("answer", URLEncoder.encode(answer,"UTF-8"));
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			data.add(detailData);
+			
 		}
+		
+		
+		
 		try {
 			response.getWriter().append(data.toJSONString());
 		} catch (IOException e) {

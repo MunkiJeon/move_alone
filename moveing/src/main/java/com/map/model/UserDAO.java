@@ -153,6 +153,29 @@ public class UserDAO {
 		
 		return 0;
 	}
+	
+	public int managerInsert(UserDTO dto){
+		sql = "insert into user (id, pw, name,email,join_date,tel,state,level ) values(?,?,?,?,sysdate(),?,0,?)";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.getId());
+			ptmt.setString(2, dto.getPw());
+			ptmt.setString(3, dto.getName());
+			ptmt.setString(4, dto.getEmail());
+			ptmt.setString(5, dto.getTel());
+			ptmt.setInt(6, dto.getLevel());
+			
+			return ptmt.executeUpdate();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		
+		return 0;
+	}
 	public int update(UserDTO dto){
 		sql = "update user set pw = ? ,name = ? ,email = ?, tel = ? where id = ?";
 		try {

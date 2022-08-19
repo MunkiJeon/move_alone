@@ -72,5 +72,13 @@
                 </div>
             </div>
         </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#box7">재고 관리</button></h2>
+            <div id="box7" class="accordion-collapse collapse" data-bs-parent="#boxs">
+                <div class="accordion-body">
+                    <a class="accordionList" href="<c:url  value='/manager/'/>ProductList">재고 관리</a>
+                </div>
+            </div>
+        </div>
     </div>
-</div></div>
+</div>

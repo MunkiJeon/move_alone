@@ -27,7 +27,8 @@ public class ProductDao {
 	private ProductDao(){
 		try {
 			Context initContext = new InitialContext();
-			Context envContext = (Context) initContext.lookup("java:comp/env"); // java:comp/env 에 설정 정보가 저장되는건 내가 임의로 수정할 수 없음.
+			Context envContext = (Context) initContext.lookup("java:comp/env"); 
+			// java:comp/env 에 설정 정보가 저장되는건 내가 임의로 수정할 수 없음.
 			DataSource ds = (DataSource) envContext.lookup("qwer");
 			conn = ds.getConnection(); // 설정 정보를 가지고 계정에 접송해서 Connection 
 			System.out.println("생성자에서 conn :" + conn);
@@ -96,9 +97,11 @@ public class ProductDao {
 		
 		try {
 			// 3. SQL 작상 및 분석
-			String sql = "select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4 \r\n"
+			String sql = "select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO,"
+					+ " pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4 \r\n"
 					+ "from scategory scate inner join \r\n"
-					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4\r\n"
+					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, "
+					+ "pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4\r\n"
 					+ "from lcategory lcate inner join product pro\r\n"
 					+ "on lcate.no = pro.lcno where lcate.no=? ) pro\r\n"
 					+ "on scate.no = pro.scno";
@@ -120,10 +123,7 @@ public class ProductDao {
 				pbean.setDiscprice(rs.getInt("discprice"));
 				pbean.setInfo(rs.getString("info"));
 				pbean.setMainImgN(rs.getString("mainImgN"));				
-				pbean.setDetailImgN1(rs.getString("detailImgN1"));
-				pbean.setDetailImgN2(rs.getString("detailImgN2"));
-				pbean.setDetailImgN3(rs.getString("detailImgN3"));
-				pbean.setDetailImgN4(rs.getString("detailImgN4"));
+			
 				
 				list.add(pbean);
 			}
@@ -150,9 +150,11 @@ public class ProductDao {
 		
 		try {
 			// 3. SQL 작상 및 분석
-			String sql = "select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4 \r\n"
+			String sql = "select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE,"
+					+ " pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4 \r\n"
 					+ "from scategory scate inner join \r\n"
-					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4\r\n"
+					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO,"
+					+ " pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4\r\n"
 					+ "from lcategory lcate inner join product pro\r\n"
 					+ "on lcate.no = pro.lcno) pro\r\n"
 					+ "on scate.no = pro.scno where scate.no=?";
@@ -174,10 +176,7 @@ public class ProductDao {
 				pbean.setDiscprice(rs.getInt("discprice"));
 				pbean.setInfo(rs.getString("info"));
 				pbean.setMainImgN(rs.getString("mainImgN"));				
-				pbean.setDetailImgN1(rs.getString("detailImgN1"));
-				pbean.setDetailImgN2(rs.getString("detailImgN2"));
-				pbean.setDetailImgN3(rs.getString("detailImgN3"));
-				pbean.setDetailImgN4(rs.getString("detailImgN4"));
+				
 				
 				list.add(pbean);
 			}
@@ -206,9 +205,11 @@ public class ProductDao {
 		try {
 			// 3. SQL 작상 및 분석
 			String sql = "select * from\r\n"
-					+ "(select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4 \r\n"
+					+ "(select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE,"
+					+ " pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4 \r\n"
 					+ "from scategory scate inner join \r\n"
-					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4\r\n"
+					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE,"
+					+ " pro.INFO, pro.MAINIMGN, pro.DETAILIMGN1, pro.DETAILIMGN2, pro.DETAILIMGN3, pro.DETAILIMGN4\r\n"
 					+ "from lcategory lcate inner join product pro\r\n"
 					+ "on lcate.no = pro.lcno) pro\r\n"
 					+ "on scate.no = pro.scno)\r\n"
@@ -236,10 +237,7 @@ public class ProductDao {
 				pbean.setDiscprice(rs.getInt("discprice"));
 				pbean.setInfo(rs.getString("info"));
 				pbean.setMainImgN(rs.getString("mainImgN"));				
-				pbean.setDetailImgN1(rs.getString("detailImgN1"));
-				pbean.setDetailImgN2(rs.getString("detailImgN2"));
-				pbean.setDetailImgN3(rs.getString("detailImgN3"));
-				pbean.setDetailImgN4(rs.getString("detailImgN4"));
+			
 				
 				list.add(pbean);
 			}
@@ -306,9 +304,11 @@ public class ProductDao {
 
 		try {
 			// 3. SQL 작상 및 분석
-			String sql = "select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN \r\n"
+			String sql = "select pro.NO, pro.LCNAME, scate.name as scname, pro.NAME, pro.ORIPRICE, pro.DISCPRICE,"
+					+ " pro.INFO, pro.MAINIMGN \r\n"
 					+ "from scategory scate inner join \r\n"
-					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE, pro.INFO, pro.MAINIMGN \r\n"
+					+ "(select pro.NO, lcate.NAME as lcname, pro.SCNO, pro.NAME, pro.ORIPRICE, pro.DISCPRICE,"
+					+ " pro.INFO, pro.MAINIMGN \r\n"
 					+ "from lcategory lcate inner join product pro\r\n"
 					+ "on lcate.no = pro.lcno where pro.no=?) pro\r\n"
 					+ "on scate.no = pro.scno";

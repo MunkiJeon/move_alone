@@ -4,19 +4,20 @@ import java.util.Date;
 
 
 public class MatchingDTO {
-	int res_num,cost;
-	String user_ID;
-	String driver_ID;
-	Date reservat_date;
-	String start_point;
-	String start_op;
-	String end_point;
-	String end_op;
-	String luggage_list;
-	int box;
-	String requests;
-	int req_state;
-	Date req_date;
+	int res_num; // 예약번호
+	String user_ID; // 고객아이디
+	String driver_ID; // 기사아이디
+	Date reservat_date; //이사날짜
+	String start_point; //출발주소
+	String start_op; //출발지옵션
+	String end_point; //도착주소
+	String end_op; // 도착옵션
+	String luggage_list; //짐목록
+	String shopping_list; // 쇼핑리스트
+	String requests; //요창사항
+	int req_state; // 매칭상태
+	Date req_date; //예약날짜
+	int cost; // 총가격
 	
 	
 	public int getRes_num() {
@@ -73,18 +74,17 @@ public class MatchingDTO {
 	public void setLuggage_list(String luggage_list) {
 		this.luggage_list = luggage_list;
 	}
-	public int getBox() {
-		return box;
+	public String getShopping_list() {
+		return shopping_list;
 	}
-	public void setBox(int box) {
-		this.box = box;
+	public void setShopping_list(String shopping_list) {
+		this.shopping_list = shopping_list;
 	}
 	public String getRequests() {
 		return requests;
 	}
-
-	public void setRequests(String repuests) {
-		this.requests = repuests;
+	public void setRequests(String requests) {
+		this.requests = requests;
 	}
 	public int getReq_state() {
 		return req_state;
@@ -104,7 +104,6 @@ public class MatchingDTO {
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
-	  
 	
 	
 }

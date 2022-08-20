@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="<c:url value='/resource'/>/css/manager/matching.css">
+<style>
+tr, td {
+	border: 1px #979797 solid;
+}
+</style>
 <div class="managerWrap">
 	<table border="" width="100%">
 		<tr>
@@ -27,20 +32,18 @@
 		<tr align="center">
 			<td><input type="checkbox" id="allCheck"></td>
 			<td>예약번호</td>
-			<td>고객이름</td>
 			<td>고객아이디</td>
-			<td>기사이름</td>
 			<td>기사아이디</td>
 			<td>이사 날짜</td>
-			<td>출발지</td>
+			<td>출발지 주소</td>
 			<td>출발지 옵션</td>
-			<td>도착지</td>
+			<td>도착주소</td>
 			<td>도착지 옵션</td>
 			<td>짐목록</td>
-			<td>요청 박스 갯수</td>
-			<td>요구사항</td>
-			<td>상태</td>
-			<td>작성날자</td>
+			<td>쇼핑리스트</td>
+			<td>요청사항</td>
+			<td>예약날짜</td>
+			<td>총가격</td>
 		</tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
 	<c:if test="${dto.req_state==0}">
@@ -48,18 +51,19 @@
             <td><input type="checkbox" id="allCheck"></td>
             <td>${dto.res_num }</td>
             <td>${dto.user_ID }</td>
-            <td>${dto.user_ID }</td>
-            <td>${dto.driver_ID }</td>
             <td>${dto.driver_ID }</td>
             <td>${dto.reservat_date }</td>
             <td>${dto.start_point }</td>
             <td>${dto.start_op }</td>
             <td>${dto.end_point }</td>
             <td>${dto.end_op }</td>
-            <td>${dto.luggage_list }</td>
-            <td>${dto.box }</td>
-            <td>${dto.req_state }</td>
-            <td><a href="">보기</a></td>
+            <td class="btn1" data-value="${dto.luggage_list }">보기</td>
+            <td>${dto.shopping_list }</td>
+            <td>${dto.requests }</td>
+            <td>${dto.req_date }</td>
+            <td>${dto.cost }</td>
+     
+           <!--  <td><a href="">보기</a></td> -->
         </tr>
       </c:if>
 </c:forEach> 
@@ -70,20 +74,18 @@
 		<tr align="center">
 			<td><input type="checkbox" id="allCheck"></td>
 			<td>예약번호</td>
-			<td>고객이름</td>
 			<td>고객아이디</td>
-			<td>기사이름</td>
 			<td>기사아이디</td>
 			<td>이사 날짜</td>
-			<td>출발지</td>
+			<td>출발지 주소</td>
 			<td>출발지 옵션</td>
-			<td>도착지</td>
+			<td>도착주소</td>
 			<td>도착지 옵션</td>
 			<td>짐목록</td>
-			<td>요청 박스 갯수</td>
-			<td>요구사항</td>
-			<td>상태</td>
-			<td>작성날자</td>
+			<td>쇼핑리스트</td>
+			<td>요청사항</td>
+			<td>예약날짜</td>
+			<td>총가격</td>
 		</tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
 	<c:if test="${dto.req_state==1}">
@@ -91,8 +93,6 @@
             <td><input type="checkbox" id="allCheck"></td>
             <td>${dto.res_num }</td>
             <td>${dto.user_ID }</td>
-            <td>${dto.user_ID }</td>
-            <td>${dto.driver_ID }</td>
             <td>${dto.driver_ID }</td>
             <td>${dto.reservat_date }</td>
             <td>${dto.start_point }</td>
@@ -100,11 +100,22 @@
             <td>${dto.end_point }</td>
             <td>${dto.end_op }</td>
             <td>${dto.luggage_list }</td>
-            <td>${dto.box }</td>
-            <td>${dto.req_state }</td>
-            <td><a href="">보기</a></td>
+            <td>${dto.shopping_list }</td>
+            <td>${dto.requests }</td>
+            <td>${dto.req_date }</td>
+            <td>${dto.cost }</td>
+            <!-- <td><a href="">보기</a></td> -->
         </tr>
       </c:if>
 </c:forEach> 
 	</table>
 </div>
+<div class="btn1detaile"></div>
+
+<script>
+$(function(){
+	$(".btn1").click(function(){
+		
+	})
+})
+</script>

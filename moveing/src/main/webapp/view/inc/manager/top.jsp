@@ -46,10 +46,7 @@
             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#box3">견적 관리</button></h2>
             <div id="box3" class="accordion-collapse collapse" data-bs-parent="#boxs">
                 <div class="accordion-body">
-                    <a class="accordionList" href="Matching">견적 조회</a>
-                    <a class="accordionList" href="Matching">견적 항목 추가</a>
-                    <a class="accordionList" href="Matching">견적 항목 수정</a>
-                    <a class="accordionList" href="Matching">견적 항목 삭제</a>
+                    <a class="accordionList" href="<c:url  value='/manager/'/>Estimate">견적 조회</a>
                 </div>
             </div>
         </div>

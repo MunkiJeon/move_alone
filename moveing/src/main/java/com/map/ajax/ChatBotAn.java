@@ -36,17 +36,7 @@ public class ChatBotAn implements AjaxService {
 				JSONObject data2 = new JSONObject();			
 				data2.put("questions",URLEncoder.encode(dd.getQuestions(),"UTF-8"));
 				data2.put("answer",URLEncoder.encode(dd.getAnswer(),"UTF-8"));
-				if(dd.getType().equals("기사관련")) {
-					System.out.println(dd.getQuestions());
-					data2.put("staffQ", URLEncoder.encode(dd.getQuestions()));
-					data2.put("staffA", URLEncoder.encode(dd.getAnswer()));
-				}
-				if(dd.getType().equals("이사관련")) {
-					System.out.println(dd.getQuestions());
-					data2.put("moveQ", URLEncoder.encode(dd.getQuestions()));
-					data2.put("moveA", URLEncoder.encode(dd.getAnswer()));
-				}
-				
+				data2.put("type",URLEncoder.encode(dd.getType(),"UTF-8"));
 				data.add(data2);
 				
 			} catch (UnsupportedEncodingException e) {

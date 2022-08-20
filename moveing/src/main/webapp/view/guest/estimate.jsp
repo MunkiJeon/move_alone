@@ -40,11 +40,15 @@
 			<div class="calcList">
 				<ul class="calcItem">
 					<li class="option">
-						<h3>운송옵션을 알려주세요.</h3> <label for="option1"> <input
-							type="radio" id="option1" name="option" value="일반"> 일반이사
-					</label> <label for="option2"> <input type="radio" id="option2"
-							name="option" value="포장"> 포장이사
-					</label>
+						<h3>운송옵션을 알려주세요.</h3> 
+						<label for="option1"> 
+							<input type="radio" id="option1" name="option" value="일반"> 
+							일반이사
+						</label>
+						<label for="option2"> 
+							<input type="radio" id="option2" name="option" value="포장"> 
+							포장이사
+						</label>
 					</li>
 					
 					<li>

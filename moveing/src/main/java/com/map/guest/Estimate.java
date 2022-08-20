@@ -66,12 +66,23 @@ public class Estimate implements GuestService {
 				String item1 = request.getParameter("item1");
 				String item2 = request.getParameter("item2");
 				String item3 = request.getParameter("item3");
-				String box = request.getParameter("box"); // 쇼핑에서 받을예정
-				gim_data= item1+"@"+item2+"@"+item3+"@"+box;
+//				String box = request.getParameter("box"); // 쇼핑에서 받을예정
+				gim_data= item1+"@"+item2+"@"+item3;
 				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
 				request.setAttribute("item1Arr",item1.split(","));
-				request.setAttribute("item2Arr",item1);
-				request.setAttribute("item3Arr",item1);
+				request.setAttribute("item2Arr",item2.split(","));
+				request.setAttribute("item3Arr",item3.split(","));
+			}else if(pageNum.equals("4")) {
+				String item1 = request.getParameter("item1");
+				String item2 = request.getParameter("item2");
+				String item3 = request.getParameter("item3");
+				String req = request.getParameter("req"); // 쇼핑에서 받을예정
+				gim_data= item1+"@"+item2+"@"+item3+"@"+req;
+				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
+//				request.setAttribute("item1Arr",item1.split(","));
+//				request.setAttribute("item2Arr",item2.split(","));
+//				request.setAttribute("item3Arr",item3.split(","));
+//				request.setAttribute("item3Arr",req);
 			}
 			System.out.println(pageNum +"번째 입력 값:"+gim_data); 
 			request.setAttribute("gim_data",gim_data);

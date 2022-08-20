@@ -39,6 +39,7 @@ public class Calculate implements ManagerService{
 
 		if(request.getParameter("res")==null) {
 			request.setAttribute("mainUrl", "manager/sales.jsp");
+			request.setAttribute("list", list);			
 		}else if(request.getParameter("res").equals("매출")) {
 			request.setAttribute("clist", plist);
 			request.setAttribute("res", pl);

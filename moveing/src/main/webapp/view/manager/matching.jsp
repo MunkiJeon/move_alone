@@ -22,9 +22,7 @@ tr, td {
 						placeholder="입사일">
 				</div>
 				<button id="searchBtn">검색</button>
-				<button id="addBtn">추가</button>
 				<button id="editBtn">수정</button>
-				<button id="deleteBtn">삭제</button>
 			</td>
 		</tr>
 		<tr>
@@ -132,4 +130,106 @@ $(function(){
             $(".btn1detaile").stop().animate({bottom:"-100vh"},500)
     })
 })
+</script>
+
+<div class="stepsign">
+    <form>
+	    <table>
+	        <tr>
+	            <td>아이디</td>
+	            <td><input type="text" id="id"/></td>
+	        </tr>
+	        <tr>
+	            <td>비번</td>
+	            <td><input type="text" id="pw"/></td>
+	        </tr>
+	        <tr>
+	            <td>전화번호</td>
+	            <td><input type="text" id="tel"/></td>
+	        </tr>
+	        <tr>
+	            <td>이름</td>
+	            <td><input type="text" id="name"/></td>
+	        </tr>
+	        <tr>
+	            <td>이메일</td>
+	            <td><input type="text" id="email"/></td>
+	        </tr>
+	        
+	        <tr>
+	            <td colspan="2"><button type="submit">등록</button></td>
+	        </tr>
+	    </table>
+    </form>
+</div>
+
+<script>
+	$(function(){
+        
+        $(".popupbtnModify").click(function(e){
+            e.preventDefault();
+            let cnt = 0;
+            let id = "";
+            for(let i=0;i<$(".idchktr").length;i++){
+            	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
+            		cnt++;
+            		id = $(".idchktr").eq(i).find(".dataChk").val()
+            	}
+            }
+            if(cnt!=1){
+            	return alert("하나만 체크해 주세요");
+            }
+            
+            modify = true;
+            console.log(id);
+            $(".popupbg").fadeIn(500);
+            $(".stepsign").stop().animate({bottom:"50%"},500)
+            $("#id").attr("readonly","readonly");
+
+			
+            $.ajax({
+         	
+	         	url:"<c:url value='/ajax/Modify'/>",
+	         	type:'POST',
+	 			data:{id:id},
+	 			async:false,
+	 			dataType:'json',
+	 			success:function(data){
+	 				
+	 				$("#id").val(decodeURIComponent(data.id));
+	 				$("#pw").val(decodeURIComponent(data.pw));
+	 				$("#name").val(decodeURIComponent(data.name));
+	 				$("#email").val(decodeURIComponent(data.email));
+	 				$("#tel").val(decodeURIComponent(data.tel));
+	 				
+	 			},
+	 			error:function(e){console.log(e)}
+	    	})  
+	            
+	        $(".deletebtn").submit(function(e){
+	        	
+                e.preventDefault();
+                console.log(id+","+$("#pw").val()+","+$("#name").val()+","+$("#email").val()+","+$("#tel").val())
+                $.ajax({
+    	         	url:"<c:url value='/ajax/ModifyReg'/>",
+    	         	type:'POST',
+    	 			data:{id:id,pw:$("#pw").val(),name:$("#name").val(),email:$("#email").val(),tel:$("#tel").val(),level:level},
+    	 			async:false,
+    	 			dataType:'json',
+    	 			success:function(data){
+		  				console.log(data.chk);
+		  				if(data[0]=="false"){alert("실패")}
+		  				else{alert("성공");
+		  					location.href="?level="+level;
+		  				}
+    	 				
+    	 			},
+    	 			error:function(e){console.log(e)}
+    	    	})  
+	            	
+	        })
+        })
+        
+
+	})
 </script>

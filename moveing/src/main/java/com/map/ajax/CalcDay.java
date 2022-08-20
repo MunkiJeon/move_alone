@@ -30,11 +30,16 @@ public class CalcDay implements AjaxService {
 		System.out.println(request.getParameter("start")+"--");
 		System.out.println(request.getParameter("end")+"--");
 		JSONArray data = new JSONArray();
+		if(!request.getParameter("param").equals("")) {
 		for (CalculateDTO dto : list) {
 			if(dto.getCal_type().equals(request.getParameter("param")))
 			data.add( URLEncoder.encode(dto.getPo_name())+","+URLEncoder.encode(dto.getQuantity()+"")+","+URLEncoder.encode(dto.getUnit_price()+"")+","+URLEncoder.encode(dto.getPrice()+"")+","+URLEncoder.encode(dto.getCal_type()));			
 		}
-		
+		}else {
+			for (CalculateDTO dto : list) {
+				data.add( URLEncoder.encode(dto.getPo_name())+","+URLEncoder.encode(dto.getQuantity()+"")+","+URLEncoder.encode(dto.getUnit_price()+"")+","+URLEncoder.encode(dto.getPrice()+"")+","+URLEncoder.encode(dto.getCal_type()));			
+			}
+		}
 		try {
 			response.getWriter().append(data.toString());
 		} catch (IOException e) {

@@ -229,11 +229,13 @@
 	            for(let i=0;i<$(".idchktr").length;i++){
 	            	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
 	            		cnt++;
-	            		if(!$(".idchktr").length-1==i){
-	            			id += $(".idchktr").eq(i).find(".dataChk").val()+","
-	            		}else{id += $(".idchktr").eq(i).find(".dataChk").val()}
+	            		if($(".idchktr").length-1 == i){
+	            			id += $(".idchktr").eq(i).find(".dataChk").val();
+	            		}else{id += $(".idchktr").eq(i).find(".dataChk").val()+",";}
+            			
 	            	}
 	            }
+          		console.log(id);
 	            if(cnt==0) return alert("체크해 주세요")
   				
             	$(".popupbg").fadeIn(500);

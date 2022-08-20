@@ -6,6 +6,8 @@
 tr, td {
 	border: 1px #979797 solid;
 }
+.btn1detaile{position: fixed;z-index:2;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;width: 600px;background: white;padding: 30px;border-radius: 15px;}
+.popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
 </style>
 <div class="managerWrap">
 	<table border="" width="100%">
@@ -57,9 +59,9 @@ tr, td {
             <td>${dto.start_op }</td>
             <td>${dto.end_point }</td>
             <td>${dto.end_op }</td>
-            <td class="btn1" data-value="${dto.luggage_list }">보기</td>
-            <td>${dto.shopping_list }</td>
-            <td>${dto.requests }</td>
+            <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td>
+            <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
+            <td class="previewbtn1" data-value="${dto.requests }">보기</td>
             <td>${dto.req_date }</td>
             <td>${dto.cost }</td>
      
@@ -110,12 +112,24 @@ tr, td {
 </c:forEach> 
 	</table>
 </div>
-<div class="btn1detaile"></div>
-
+<p class="btn1detaile"></p>
+<div class="popupbg"></div>
 <script>
 $(function(){
-	$(".btn1").click(function(){
-		
+	$(".previewbtn1").click(function(){
+        let arr = $(this).attr("data-value").split(",");
+        console.log(arr[0]);
+        let str ="";
+        for(let i=0;i<arr.length;i++){
+        	str+=arr[i]+"<br/>"
+        }
+        $(".popupbg").fadeIn(500);
+        $(".btn1detaile").stop().animate({bottom:"50%"},500)
+		$(".btn1detaile").html(str)
 	})
+	$(".popupbg").click(function(){
+            $(this).fadeOut(500);
+            $(".btn1detaile").stop().animate({bottom:"-100vh"},500)
+    })
 })
 </script>

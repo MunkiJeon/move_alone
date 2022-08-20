@@ -134,7 +134,7 @@ $(function(){
 						}	
 					}
 					$(".manager.managerList .type").click(function(){
-						$(".manager.managerList .type").css({height:"21px"})
+						$(this).siblings(".type").css({height:"21px"});	
 						$(this).stop().animate({height:"100%"});
 						$(".chat_window").scrollTop = $('.chat_window').offset().top;
 						$(".chat_window").animate({scrollTop:$('.chat_window').offset().top+1000},100);

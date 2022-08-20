@@ -23,7 +23,7 @@ public class Delete implements AjaxService {
 		
 	
 		String[] idList = request.getParameter("id").split(",");
-		
+		System.out.println(request.getParameter("id"));
 		UserDAO dao = new UserDAO();
 		JSONObject data = new JSONObject();
 		int cnt = 0;

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
@@ -15,14 +16,26 @@ public class UserDAO {
 	ResultSet rs;
 	String sql;
 	
+	private static UserDAO instance;
+
+	public static UserDAO getInstance() {
+		if (instance == null) {
+			instance = new UserDAO();
+		}
+		return instance;
+	}
+	
 	public UserDAO() {
 		try {
 			InitialContext init = new InitialContext();
-			DataSource ds = (DataSource)init.lookup("java:comp/env/qwer");
-			con = ds.getConnection();
+			Context initContext = new InitialContext();
+			Context envContext = (Context) initContext.lookup("java:comp/env"); 
+			DataSource ds = (DataSource) envContext.lookup("qwer");
+			con = ds.getConnection(); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("생성자에서 conn :" + con);
 		}
 		
 	}
@@ -34,7 +47,7 @@ public class UserDAO {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, id);
 			rs = ptmt.executeQuery();
-			while(rs.next()) {
+		if(rs.next()) {
 				dto = new UserDTO();
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
@@ -45,7 +58,8 @@ public class UserDAO {
 				dto.setState(rs.getInt("state"));
 				dto.setLevel(rs.getInt("level"));
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
+			System.out.println("getMemberById() 실행중 에러");
 			e.printStackTrace();
 		}finally {
 			close();

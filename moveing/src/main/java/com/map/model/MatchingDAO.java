@@ -269,12 +269,12 @@ public class MatchingDAO {
 		return 0;
 	}
 	public int managerUpdate(MatchingDTO dto){
-		sql = "update matching set start_point = ? , end_point = ? where res_num = ?l ";
+		sql = "update matching set start_point = ? , end_point = ? where res_num = ? ";
 		try {
 			ptmt = con.prepareStatement(sql);
-			ptmt.setInt(1, dto.getRes_num());
-			ptmt.setString(2, dto.getStart_point());
-			ptmt.setString(3, dto.getEnd_point());
+			ptmt.setString(1, dto.getStart_point());
+			ptmt.setString(2, dto.getEnd_point());
+			ptmt.setInt(3, dto.getRes_num());
 			
 			System.out.println(dto.getStart_point());
 			System.out.println(dto.getEnd_point());

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.map.model.EstimateDAO;
+import com.map.model.EstimateDTO;
 import com.map.model.ProductBean;
 import com.map.model.ProductDao;
 
@@ -90,7 +91,19 @@ public class Estimate implements GuestService {
 				ProductDao pdao = ProductDao.getInstance();
 				ArrayList<ProductBean> list = pdao.getAllProduct();
 				request.setAttribute("list", list);
+			}else if(pageNum.equals("Res")) {
+				String item = request.getParameter("item");
+				String price = request.getParameter("price");
+
+				gim_data= item+"@"+price;
+				
+				ArrayList<EstimateDTO> mainData = new EstimateDAO().one(user_id);
+				System.out.println("mainData list >>>" + mainData.size());
+				request.setAttribute("mainData", mainData);
+				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
+				
 			}
+			
 			System.out.println(pageNum +"번째 입력 값:"+gim_data); 
 			request.setAttribute("gim_data",gim_data);
 			data.addEstimate(pageNum, user_id, sel_date,gim_data);

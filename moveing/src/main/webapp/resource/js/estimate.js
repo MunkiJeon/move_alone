@@ -108,7 +108,7 @@
 		
     })
     
-    $(".shopping .test").click(function(e){
+    $(".shopping .detailNext").click(function(e){
 		//detailNext //test
 		//let item ="", price =0, p_num=0; 
 		// item - 디비에 올릴 데이터(종류:수량) price - 합산 가격 p_num - 현재(대/중/소) 수량 받기
@@ -125,7 +125,7 @@
 		let Box_L0 = $(".itam_3 .Box_L").is(":checked") ,Box_M0 = $(".itam_3 .Box_M").is(":checked"), Box_S0 = $(".itam_3 .Box_S").is(":checked");*/
 
 		
-		e.preventDefault();
+		//e.preventDefault();
 		
 		//---------------------4---------------------
 
@@ -142,10 +142,10 @@
 				item += "Box_M:"+numBox_M+"개,";
 				totprice += discprice*numBox_M;
 			}if(Box_S){
-				item += "Box_L:"+numBox_S+"개,";
+				item += "Box_S:"+numBox_S+"개,";
 				totprice += discprice*numBox_S;
 			}if(i<itemNum-1){
-				item += "@"
+				item += ","
 			}
 			
 			/*if($(".itam_"+i+".Box_L").is(":checked")){
@@ -172,6 +172,11 @@
 		console.log(discprice);
 		console.log(totprice);
 		console.log(item);
+		
+		$("#item").val(item);
+		console.log($("#item").val()+"<<<<");
+		$("#price").val(totprice);
+		console.log($("#price").val()+"<<<<");
 		/*$("#item1").val(item1);
 		console.log(item1);
 		console.log($("#item1").val());

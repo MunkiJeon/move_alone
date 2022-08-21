@@ -28,6 +28,47 @@ public class EstimateDAO {
 		}
 	}
 	
+	public ArrayList<EstimateDTO> one(String user_id) {
+		ArrayList<EstimateDTO> res = new ArrayList<EstimateDTO>();
+		sql = "select * from estimate where id=?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1,user_id);
+			rs = ptmt.executeQuery();
+			
+			while(rs.next()) {
+				EstimateDTO dto = new EstimateDTO();
+				
+				dto = new EstimateDTO();
+				dto.setRes_num(rs.getInt("res_num"));
+				dto.setId(rs.getString("id"));
+				dto.setSV_Type(rs.getString("SV_Type"));
+				dto.setSel_date(rs.getDate("sel_date"));
+				dto.setStart_Point(rs.getString("start_Point"));
+				dto.setStart_OP(rs.getString("start_OP"));
+				dto.setEnd_Point(rs.getString("end_Point"));
+				dto.setEnd_OP(rs.getString("end_OP"));
+				dto.setFurniture(rs.getString("Furniture"));
+				dto.setHome_App(rs.getString("Home_App"));
+				dto.setOther(rs.getString("Other"));
+				//
+				dto.setFurniture_Det(rs.getString("Furniture_Det"));
+				dto.setHome_App_Det(rs.getString("Home_App_Det"));
+				dto.setOther_Det(rs.getString("Other_Det"));
+				//
+				dto.setShopping_list(rs.getString("shopping_list"));
+				dto.setRequest(rs.getString("request"));
+				dto.setReq_date(rs.getDate("req_date"));
+				
+				res.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	public ArrayList<EstimateDTO> all(HttpServletRequest request) {
 		ArrayList<EstimateDTO> res = new ArrayList<EstimateDTO>();
 		String searchResnum = request.getParameter("search_resnum"); // 예약번호
@@ -68,15 +109,20 @@ public class EstimateDAO {
 				dto.setId(rs.getString("id"));
 				dto.setSV_Type(rs.getString("SV_Type"));
 				dto.setSel_date(rs.getDate("sel_date"));
-				dto.setStart_Point(rs.getString("start_point"));
-				dto.setStart_OP(rs.getString("start_op"));
-				dto.setEnd_Point(rs.getString("end_point"));
-				dto.setEnd_OP(rs.getString("end_op"));
+				dto.setStart_Point(rs.getString("start_Point"));
+				dto.setStart_OP(rs.getString("start_OP"));
+				dto.setEnd_Point(rs.getString("end_Point"));
+				dto.setEnd_OP(rs.getString("end_OP"));
 				dto.setFurniture(rs.getString("Furniture"));
-				//덜적음
+				dto.setHome_App(rs.getString("Home_App"));
+				dto.setOther(rs.getString("Other"));
 				//
-				dto.setRequest(rs.getString("requests"));
+				dto.setFurniture_Det(rs.getString("Furniture_Det"));
+				dto.setHome_App_Det(rs.getString("Home_App_Det"));
+				dto.setOther_Det(rs.getString("Other_Det"));
+				//
 				dto.setShopping_list(rs.getString("shopping_list"));
+				dto.setRequest(rs.getString("request"));
 				dto.setReq_date(rs.getDate("req_date"));
 				
 				res.add(dto);
@@ -168,8 +214,8 @@ public class EstimateDAO {
 					ptmt.setString(1,arr[0]);
 					ptmt.setString(2,arr[1]);
 
-					ptmt.setString(5,user_id);
-					ptmt.setInt(6,0);
+					ptmt.setString(3,user_id);
+					ptmt.setInt(4,0);
 					rs = ptmt.executeQuery();
 					
 					System.out.println("개인 데이터 넣음"+pagenum+"// ID:"+user_id+"// date:"+sel_date);

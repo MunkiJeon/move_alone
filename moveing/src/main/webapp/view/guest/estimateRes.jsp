@@ -58,7 +58,6 @@
 </script>
 
 
-
 <table id="banner_imageTable">
 	<tr>
 		<td>
@@ -75,60 +74,11 @@
 	</tr>
 </table>
 
-<section class="shopping">
+<section class="product">
 	<form action="Estimate?num=Res" method="post">
-		<ul class="mainList">
-            <li><h2> 추가 선택 항목(쇼핑) </h2></li>
-<c:forEach items="${list }" var="pbean" varStatus="no">
-            <li>
-            	<table id="mainListInside">
-						<tr>
-							<td><img src="<c:url value='/resource/image/'/>${ pbean.mainImgN}" width="300px" height="380px"></td>
-							<td width="300px" class="item">
-								<h3>${ pbean.name}</h3>
-								<p>${ pbean.info}</p>
- 							<%--<p style="text-decoration:line-through;">${ pbean.oriprice}원</> --%>
-								<p class="discprice">${ pbean.discprice}원</p>
-								<p>수량선택</p>
-								<div>
-								<p>
-									<input type="checkbox" name="option${no.index }"/>대
-									<button type="button" class="plus">[ + ]</button>
-									<input type="number" class="numBox_L" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
-								</p>
-								<p>
-									<input type="checkbox" name="option${no.index }"/>중
-									<button type="button" class="plus">[ + ]</button>
-									<input type="number" class="numBox_M" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
-								</p>
-								<p>
-									<input type="checkbox" name="option${no.index }"/>소
-									<button type="button" class="plus">[ + ]</button>
-									<input type="number" class="numBox_S" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
-								</p>
-								</div>
-								
-							</td>
-						</tr>
-				</table>
-            </li>
-</c:forEach>
-			<li>
-				<input type="hidden" name="item1" id="item1">
-				<input type="hidden" name="price" id="price">
-
-		        <button type="button" class="test">테스트</button>
-                <button type="submit" class="detailNext">다음</button>
-                
-			</li>
-        </ul>
 	</form>
 </section>
-<!-- 해야할것?: 각항목별 박스 수량 만틐 곱한 값  -->
-<%-- <table id="mainList">
+<table id="mainList">
 	
 	<c:forEach items="${list }" var="pbean" varStatus="no">
 			<tr>
@@ -139,7 +89,7 @@
 							<td width="300px">
 								<h3>${ pbean.name}</h3>
 								<p>${ pbean.info}</p>
- 							<p style="text-decoration:line-through;">${ pbean.oriprice}원</>
+ 							<%--<p style="text-decoration:line-through;">${ pbean.oriprice}원</> --%>
 								<p>${ pbean.discprice}원</p>
 								<p>수량선택</p>
 								<div>
@@ -170,7 +120,7 @@
 			</tr>			
 	</c:forEach>
 	
-</table> --%>
+</table>
 
 <script>
 	$(function(){

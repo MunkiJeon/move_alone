@@ -66,7 +66,7 @@
 		
     })
     
-    $(".gim_detail .test").click(function(e){
+    $(".gim_detail .detailNext").click(function(e){
 		//detailNext //test
 		let item1 ="",item2 ="", item3 ="", req =$(".gim_detail .calcItem .item_opsReq .req").val();
 		//e.preventDefault();
@@ -108,6 +108,32 @@
 		
     })
     
-    
+    $(".shopping .test").click(function(e){
+		//detailNext //test
+		let item1 ="", req =0;
+		e.preventDefault();
+		
+		//---------------------4---------------------
+
+		 for(let i =0;i<$(".shopping .mainList .item ").length;i++){
+			let=0;
+			if(i<$(".shopping .mainList .item ").length-1){
+				lat=
+				item1 += $(".shopping .mainList .item ").eq(i).find(".item1").val()+",";
+			}else{
+				item1 += $(".shopping .mainList .item ").eq(i).find(".item1").val();
+			}
+		}
+		
+		
+		
+		$("#item1").val(item1);
+		console.log(item1);
+		console.log($("#item1").val());
+		$("#price").val(price);
+		console.log(price);
+		
+		
+    })
     
 })

@@ -94,7 +94,23 @@ public class EstimateDAO {
 					rs = ptmt.executeQuery();
 					
 					System.out.println("개인 데이터 넣음"+pagenum+"// ID:"+user_id+"// date:"+sel_date);
+				}else if(pagenum.equals("Res")) {//4페이지에서 결과 확인페이지 넘어갈때
+					sql = "update estimate set "
+							+ "Furniture_Det =?, Home_App_Det =?, Other_Det =?, request =? "
+							+ "where id =? and state =? ";
+					ptmt = con.prepareStatement(sql);
+					ptmt.setString(1,arr[0]);
+					ptmt.setString(2,arr[1]);
+					ptmt.setString(3,arr[2]);
+					ptmt.setString(4,arr[3]);
+
+					ptmt.setString(5,user_id);
+					ptmt.setInt(6,0);
+					rs = ptmt.executeQuery();
+					
+					System.out.println("개인 데이터 넣음"+pagenum+"// ID:"+user_id+"// date:"+sel_date);
 				}
+				
 				
 			}
 			

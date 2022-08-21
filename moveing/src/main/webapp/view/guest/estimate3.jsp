@@ -17,7 +17,7 @@
 	<c:if test="${itemOP1==0 }">
 						<div class="item_ops1">
 	<c:forEach begin="1" end="${itemOP1 }">
-						<input type="hidden" class="item1" name="item1" value="X">
+						<input type="hidden" class="item1" value="X">
 	</c:forEach>
 						</div>
 	</c:if>
@@ -25,7 +25,7 @@
 						<h4>가구개수 ${itemOP1 }</h4>
 						<div class="item_ops1">
 	<c:forEach begin="1" end="${itemOP1 }">
-						<input type="text" class="item1" name="item1" placeholder="작성 예시 가구: 가로x세로x높이 ">
+						<input type="text" class="item1" placeholder="작성 예시 가구: 가로x세로x높이 ">
 	</c:forEach>
 						</div>	
 	</c:if>					 
@@ -40,7 +40,7 @@
 	<c:if test="${itemOP2==0 }">
 						<div class="item_ops2">
 	<c:forEach begin="1" end="${itemOP2 }">
-						<input type="hidden" class="item2" name="item2" value="X">
+						<input type="hidden" class="item2" value="X">
 	</c:forEach>
 						</div>
 	</c:if>
@@ -48,7 +48,7 @@
 						<h4>가구개수 ${itemOP2 }</h4>
 						<div class="item_ops2">
 	<c:forEach begin="1" end="${itemOP2 }">
-						<input type="text" class="item2" name="item2" placeholder="작성 예시 가구: 가로x세로x높이 ">
+						<input type="text" class="item2" placeholder="작성 예시 가구: 가로x세로x높이 ">
 	</c:forEach>
 						</div>	
 	</c:if>						 
@@ -63,7 +63,7 @@
 	<c:if test="${itemOP3==0 }">
 						<div class="item_ops3">
 	<c:forEach begin="1" end="${itemOP3 }">
-						<input type="hidden" class="item3" name="item3" value="X">
+						<input type="hidden" class="item3"  value="X">
 	</c:forEach>
 						</div>
 	</c:if>
@@ -71,7 +71,7 @@
 						<h4>가구개수 ${itemOP3 }</h4>
 						<div class="item_ops3">
 	<c:forEach begin="1" end="${itemOP3 }">
-						<input type="text" class="item3" name="item3" placeholder="작성 예시 가구: 가로x세로x높이 ">
+						<input type="text" class="item3" placeholder="작성 예시 가구: 가로x세로x높이 ">
 	</c:forEach>
 						</div>	
 	</c:if>					 

@@ -90,7 +90,6 @@ public class Estimate implements GuestService {
 				ProductDao pdao = ProductDao.getInstance();
 				ArrayList<ProductBean> list = pdao.getAllProduct();
 				request.setAttribute("list", list);
-				request.setAttribute("mainUrl", "manager/productList.jsp");
 			}
 			System.out.println(pageNum +"번째 입력 값:"+gim_data); 
 			request.setAttribute("gim_data",gim_data);

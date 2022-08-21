@@ -8,6 +8,7 @@
 .calc .address input{display: block;margin-top: 10px;width: 100%;height: 60px;font-size: 20px;padding:10px 20px;border: 1px solid #ddd;outline-color: rgba(61, 81, 255,0.6);}
 
 .calc .item_ops input{border:1px solid gray; display: block;margin-top: 10px;width: 100%;height: 60px;font-size: 20px;padding:10px 20px;border: 1px solid #ddd;outline-color: rgba(61, 81, 255,0.6);}
+.calc .line {width: calc( 100% - 100px ) ;height: 10px;background: #ddd;margin: 20px auto;} 
 
 .calc .time label{width: 120px;height: 80px;border: 1px solid #ddd;display: inline-block;border-radius: 5px;}
 .calc .time label:nth-of-type(1){margin-right: 18px;}
@@ -38,3 +39,7 @@
 .calc .calcBtn .resultchk p:nth-child(2) {color: rgb(61, 81, 255);font-weight: 900;font-size: 24px;}
 .calc .calcBtn .resultBtn{width: 100%;text-align: center;color: white;padding:20px;background: rgb(61, 81, 255);font-size: 24px;font-weight: 900;border-radius: 5px;display: block;}
 .calc .detailNext{display:block;width: 200px;height: 60px;margin:0 auto;background: rgb(61, 81, 255);color:white;text-align: center;line-height: 60px;font-size:30px;margin-top:50px;border-radius: 10px;}
+
+.shopping .detailNext{display:block;width: 200px;height: 60px;margin:0 auto;background: rgb(61, 81, 255);color:white;text-align: center;line-height: 60px;font-size:30px;margin-top:50px;border-radius: 10px;}
+.shopping .item_ops input{border:1px solid gray; display: block;margin-top: 10px;width: 100%;height: 60px;font-size: 20px;padding:10px 20px;border: 1px solid #ddd;outline-color: rgba(61, 81, 255,0.6);}
+.shopping .line {width: calc( 100% - 100px ) ;height: 10px;background: #ddd;margin: 20px auto;} 

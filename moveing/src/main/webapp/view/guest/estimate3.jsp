@@ -80,7 +80,7 @@
 						<li class="item_ops item_opsReq">
 						<div class="line"></div>
 							<h3>요구사항</h3>
-							<input type="text"  style="height: 300px" class="req" name="req" placeholder="작성 예시 : 가구가 비싼거라 조심히 옮겨 주세요.">
+							<input type="text"  style="height: 300px" class="req" placeholder="작성 예시 : 가구가 비싼거라 조심히 옮겨 주세요.">
 						</li>
                         <li>
 	                        <input type="hidden" name="item1" id="item1">

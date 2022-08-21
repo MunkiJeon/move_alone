@@ -21,7 +21,9 @@ public class InquiryList implements AjaxService {
 
 		try {
 			request.setCharacterEncoding("UTF-8");
-		ArrayList<InquiryDTO> list = new InquiryDAO().atmosphere();
+			
+			
+		ArrayList<InquiryDTO> list = new InquiryDAO().atmosphere(Integer.parseInt(request.getParameter("index")));
 		
 		
 		JSONArray data = new JSONArray();

@@ -9,17 +9,18 @@ tr, td {
 .btn1detaile{position: fixed;z-index:2;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;width: 600px;background: white;padding: 30px;border-radius: 15px;}
 .popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
 </style>
+
+<form action="/moveing/manager/Matching" id="form" name="form" method="post">
 <div class="managerWrap">
 	<table border="" width="100%">
 		<tr>
 			<td colspan="16" align="center">
 
 				<div id="SearchBox">
-					예약번호: <input type="text" id="search_resnum" name="search_resnum"placeholder="예약번호">
-					이름: <input type="text" id="search_title" name="search_name"placeholder="고객 혹은 기사"> 
-					아이디: <input type="text"id="search_id" name="search_id" placeholder="고객 혹은 기사">
-					이사날짜: <input type="date" id="search_date" name="search_date"
-						placeholder="입사일">
+					예약번호: <input type="text" id="search_resnum" name="search_resnum"placeholder="예약번호" maxlength="11" value="<c:out value="${param.search_resnum}"/>" >
+					고객아이디: <input type="text" id="search_title" name="search_name"placeholder="아이디" value="<c:out value="${param.search_name}"/>"> 
+					기사아이디: <input type="text"id="search_id" name="search_id" placeholder="아이디" value="<c:out value="${param.search_id}"/>">
+					이사날짜: <input type="date" id="search_date" name="search_date" placeholder="이사날짜" value="<c:out value="${param.search_date}"/>">
 				</div>
 				<button id="searchBtn">검색</button>
 				<button id="editBtn">수정</button>
@@ -112,7 +113,37 @@ tr, td {
 </div>
 <p class="btn1detaile"></p>
 <div class="popupbg"></div>
-<script>
+<div class="stepsign">
+ <table>
+     <tr>
+         <td>아이디</td>
+         <td><input type="text" id="id"/></td>
+     </tr>
+     <tr>
+         <td>비번</td>
+         <td><input type="text" id="pw"/></td>
+     </tr>
+     <tr>
+         <td>전화번호</td>
+         <td><input type="text" id="tel"/></td>
+     </tr>
+     <tr>
+         <td>이름</td>
+         <td><input type="text" id="name"/></td>
+     </tr>
+     <tr>
+         <td>이메일</td>
+         <td><input type="text" id="email"/></td>
+     </tr>
+     
+     <tr>
+         <td colspan="2"><button type="submit">등록</button></td>
+     </tr>
+ </table>
+</div>
+</form>
+
+<script type="text/javascript">
 $(function(){
 	$(".previewbtn1").click(function(){
         let arr = $(this).attr("data-value").split(",");
@@ -131,37 +162,6 @@ $(function(){
     })
 })
 </script>
-
-<div class="stepsign">
-    <form>
-	    <table>
-	        <tr>
-	            <td>아이디</td>
-	            <td><input type="text" id="id"/></td>
-	        </tr>
-	        <tr>
-	            <td>비번</td>
-	            <td><input type="text" id="pw"/></td>
-	        </tr>
-	        <tr>
-	            <td>전화번호</td>
-	            <td><input type="text" id="tel"/></td>
-	        </tr>
-	        <tr>
-	            <td>이름</td>
-	            <td><input type="text" id="name"/></td>
-	        </tr>
-	        <tr>
-	            <td>이메일</td>
-	            <td><input type="text" id="email"/></td>
-	        </tr>
-	        
-	        <tr>
-	            <td colspan="2"><button type="submit">등록</button></td>
-	        </tr>
-	    </table>
-    </form>
-</div>
 
 <script>
 	$(function(){
@@ -228,6 +228,11 @@ $(function(){
     	    	})  
 	            	
 	        })
+        })
+
+        <%-- 검색하기 --%>
+        $("#searchBtn").click(function(e){
+        	$('#form').submit();
         })
         
 

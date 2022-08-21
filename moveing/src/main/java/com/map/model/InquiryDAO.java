@@ -97,12 +97,13 @@ public class InquiryDAO {
 		
 		return res;
 	}
-	public ArrayList<InquiryDTO> atmosphere() {
+	public ArrayList<InquiryDTO> atmosphere(int level) {
 		ArrayList<InquiryDTO> res = new ArrayList<InquiryDTO>();
 		
-		sql = "select * from inquiry";
+		sql = "select * from inquiry where level = ?";
 		try {
 			ptmt = con.prepareStatement(sql);
+			ptmt.setInt(1, level);
 			rs = ptmt.executeQuery();
 			while(rs.next()) {
 				InquiryDTO dto = new InquiryDTO();
@@ -152,13 +153,14 @@ public class InquiryDAO {
 	
 	public int insert(InquiryDTO dto) {
 		
-		sql = "insert into inquiry(id,name,contents,time) values(?,?,?,sysdate())";
+		sql = "insert into inquiry(id,name,contents,time,level) values(?,?,?,sysdate())";
 
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, dto.getId());
 			ptmt.setString(2, dto.getName());
 			ptmt.setString(3, dto.getContents());
+			ptmt.setInt(4, dto.getLevel());
 			
 			int res = ptmt.executeUpdate();
 			return res;

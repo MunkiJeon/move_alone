@@ -134,7 +134,9 @@
 <script type="text/javascript" src="../ggg/jquery-3.6.0.js"></script>
 <script src="<c:url value="/ggg/"/>jquery-ui.min.js"></script>
 <script type="text/javascript">
+
 $(function () {
+	
 	let index = 0;
 	$(".tableM .section").hide();
 	$(".tableM .section").eq(index).show();
@@ -190,8 +192,36 @@ $(function () {
 		})
 	})
 	
+	$(".selected").click(function() {
+	let info = $(this).val();
+	let info2 = $(this);
+	
+	//info2.parent(".btn")[0].remove();
+		$.ajax({
+			url:'<c:url value="/ajax/AjaxSelected"/>',
+			type:"POST",
+			data:{ino:info},
+			async:false,
+			dataType:'json',
+			success:function(data){
+				
+				console.log(data.cnt)
+				if(data.cnt==1){
+					$(".btn"+info2.attr("data-index")).remove();
+					console.log(data.cnt)
+					alert("선택완료");
+				}
+				
+			},
+			error:function(e){
+				console.log(e)
+			}
+		})
+	})
 	
 })
+
+
 </script>
 
 <!-- <input type="checkbox" id="w1" class="in">
@@ -212,7 +242,8 @@ $(function () {
 		<div class="box">
 			<label class="menuI2" id ="w1">내 정보</label>
 			<label class="menuI2" id ="w2">매칭정보</label>
-			<label class="menuI2" id ="w3">매출</label>
+			<label class="menuI2" id ="w3">매칭현황</label>
+			<label class="menuI2" id ="w4">매출</label>
 		</div>
 </div>
 
@@ -221,10 +252,10 @@ $(function () {
 <table class="tableM">
 
 <tr>
-<td></td></tr>
+	<td></td>
+</tr>
 	<tr>
 		<td>
-			
 			<table class="section">
 				<tr>
 					<td>
@@ -274,12 +305,13 @@ $(function () {
 			</table>
 			<table class="section">
 				<tr>
-					<td><h2>매칭정보</h2></td>
+					<td><h2>매칭목록</h2></td>
 				</tr>
 				
 				<tr>
 					<td>
 						<table border="2">
+						
 							<tr>
 								<td>아이디</td>
 								<td>예약날짜</td>
@@ -289,23 +321,64 @@ $(function () {
 								
 							</tr>
 							<tr><td colspan="6"><hr></td></tr>
-							<c:forEach items="${dtoS2}" var="dtoaa">
+						
+								<c:forEach items="${dto4}" var="dtoaa" varStatus="no">
+									
+								<tr class="btn${no.index}">
+									<td>${dtoaa.user_ID}</td>
+									<td>${dtoaa.reservat_date }</td>
+									<td>${dtoaa.start_point }</td>
+									<td>${dtoaa.end_point }</td>
+									<td>${dtoaa.shopping_list }</td>
+									<td><button class="selected" data-index="${no.index}" value="${dtoaa.res_num }">선택</button></td>
+								</tr>
+								</c:forEach>
 								
-							<tr>
-								<td>${dtoaa.user_ID}</td>
-								<td>${dtoaa.reservat_date }</td>
-								<td>${dtoaa.start_point }</td>
-								<td>${dtoaa.end_point }</td>
-								<td>${dtoaa.box }</td>
-								
-							</tr>
-								
-							</c:forEach>
+						
 						</table>
 					</td>
 				</tr>
 			</table>
 			<table class="section">
+				<tr>
+					<td  class="oo">
+						<h1>매출</h1>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border="2">
+							
+							<tr>
+								<td>아이디</td>
+								<td>예약날짜</td>
+								<td>출발지</td>
+								<td>도착지</td>
+								<td>포장박스</td>
+								<td>금액</td>
+							</tr>
+							<tr>
+								<td colspan="6"><hr></td>
+							</tr>
+							
+							
+							<c:forEach items="${dtoS3}" var="dtoa">
+							<tr>
+								<td>${dtoa.driver_ID}</td>
+								<td>${dtoa.reservat_date}</td>
+								<td>${dtoa.start_point}</td>
+								<td>${dtoa.end_point}</td>
+								<td>${dtoa.shopping_list}</td>
+								<td>${dtoa.cost}</td>
+							</tr>
+							
+							
+							</c:forEach>
+						</table>
+					</td>
+				</tr>
+			</table>			
+	<table class="section">
 				<tr>
 					<td  class="oo">
 						<h1>매출</h1>
@@ -325,13 +398,13 @@ $(function () {
 							<tr>
 								<td colspan="6"><hr></td>
 							</tr>
-							<c:forEach items="${dtoS3}" var="dtoa">
+							<c:forEach items="${dtoS2}" var="dtoa">
 							<tr>
-								<td>${dtoa.driver_ID}</td>
+								<td>${dtoa.user_ID}</td>
 								<td>${dtoa.reservat_date}</td>
 								<td>${dtoa.start_point}</td>
 								<td>${dtoa.end_point}</td>
-								<td>${dtoa.box}</td>
+								<td>${dtoa.shopping_list}</td>
 								<td>${dtoa.cost}</td>
 							</tr>
 							</c:forEach>
@@ -339,8 +412,9 @@ $(function () {
 						</table>
 					</td>
 				</tr>
-			</table>			
+			</table>		
 		</td>
 	</tr>
 </table>
+
 <div class="mar2"><jsp:include page="../inc/staff/bottom.jsp"/></div>

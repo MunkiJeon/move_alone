@@ -8,8 +8,16 @@ public class InquiryDTO {
 	String contents;
 	Date time;
 	String answer;
+	int level;
 	int no;
 	
+	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public int getNo() {
 		return no;
 	}

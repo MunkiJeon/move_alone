@@ -25,12 +25,15 @@
 $(function(){
 	let index = 1;
 	talkAjax(index);
-	
+	$(".managerWrap .talk .list button").click(function(){
+		talkAjax($(this).index()+1);
+		console.log($(this).index());
+	})
 	function talkAjax(index){
 		$.ajax({
 			url:'<c:url value="/ajax/InquiryList"/>',
 			type:'POST',
-			data:{idnex:index},
+			data:{index:index},
 			async:false,
 			dataType:'json',	//지정하지 않으면 문자열로 처리
 			success:function(data){

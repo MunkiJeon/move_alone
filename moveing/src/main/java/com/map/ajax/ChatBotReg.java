@@ -30,6 +30,7 @@ public class ChatBotReg implements AjaxService {
 		inDto.setId(id);
 		inDto.setContents(request.getParameter("contents"));
 		inDto.setName(dto.getName());
+		inDto.setLevel(dto.getLevel());
 		
 		int cnt = new InquiryDAO().insert(inDto);
 		JSONArray data = new JSONArray();

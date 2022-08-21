@@ -10,22 +10,37 @@
  .menuI{
  	left:0px;
  	top:150px;
- 	width:100px;
+ 	width:200px;
  	height:300px;
- 	background:#40699A;
+ 	/*  background:#40699A;  */
  	position:fixed;
  	z-index: 3;
- 	border: 1px solid black;
+ 	/* border: 1px solid red; */
+ 	display: flex;
  }
  
  .box{
  	left:0px;
  	top:150px;
  	width:100px;
- 	height: 270px;
- 	background:#40699A;
- 	position:fixed;
- 	z-index: 2;
+ 	height:292px;
+ 	 background:#40699A; 
+ 	
+ 	/* border:1px solid blue; */
+ 	
+ }
+ .box2{
+ 	top:120px;
+ 	left:90px;
+ 	width:30px;
+ 	height:40px;
+ 	border: 1px solid black; 
+ 	background:#40699A; 
+ 	border-radius:20%;
+ 	position: absolute;
+ 	text-align: right;
+ 	line-height: 35px;
+ 	cursor:pointer;
  }
  .menuI2{
  	width: 95px;
@@ -58,7 +73,9 @@
  	margin-left: 100px;
  	height: 100px;
  }
-
+.menuI>.box2 input[type=checkbox]{
+	display: none;
+}
 </style>
 <script type="text/javascript" src="../ggg/jquery-3.6.0.js"></script>
 <script src="<c:url value="/ggg/"/>jquery-ui.min.js"></script>
@@ -106,6 +123,10 @@ $(function () {
 		<label class="menuI2" id ="w2">기사정보</label>
 		<label class="menuI2" id ="w3">내역</label>
 	</div>
+	
+	<label for="bo"class="box2">
+	▶<input type="checkbox" id="bo">
+	</label>
 </div>
 
 <div class="mar"><jsp:include page="../inc/guest/top.jsp"/></div>
@@ -174,11 +195,19 @@ $(function () {
 				<tr>
 					<td><h2>기사정보</h2></td>
 				</tr>
+				<c:forEach items="${dto4 }" var="dtoo">
+				<tr>
+				<td>주문일자 ${dtoo.req_date}</td>
+				<td>예약번호 ${dtoo.res_num }</td>
+				</tr>
+				</c:forEach>
 					<tr>
 						<td colspan="6">
 						<div>
 							<div style="border: 1px solid black;"><img src="<c:url value="/resource/image/"/>${dto3.pic}" alt=""></div>
-							<div style="border: 1px solid black;"><table>
+							
+							<div style="border: 1px solid black;">
+							<table>
 								<tr>
 									<td>이름</td>
 								</tr>
@@ -195,7 +224,6 @@ $(function () {
 							</table></div>
 						</div>
 						</td>
-						
 					</tr>
 			</table>
 		</td>
@@ -226,7 +254,7 @@ $(function () {
 								<td>${dtoa.reservat_date }</td>
 								<td>${dtoa.start_point }</td>
 								<td>${dtoa.end_point }</td>
-								<td>${dtoa.box }</td>
+								<td>${dtoa.shopping_list }</td>
 								<td>${dtoa.cost }</td>
 							</tr>
 							

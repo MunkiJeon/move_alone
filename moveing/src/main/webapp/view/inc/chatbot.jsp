@@ -98,9 +98,10 @@ $(function(){
 		if(contents==null) return;
 		 */
 	//})
-	
+		/* 합치기 용 */
+	let classCnt = 0;
 	$(".bts").click(function () {
-		
+		classCnt++;
 		$.ajax({
 				url:'<c:url value='/ajax/ChatBotAn'/>',
 				type:'POST',
@@ -108,7 +109,7 @@ $(function(){
 				async:false,
 				dataType:'json',
 				success:function(data){
-					$(".chat_window").append("<div class='manager managerList' ></div>")
+					$(".chat_window").append("<div class='manager managerList"+classCnt+"' ></div>")
 					let str = "";
 					let arr = [];
 					let el = [];
@@ -121,27 +122,29 @@ $(function(){
 					let typeArr = [...set];
 					
 					for(let i=0;i<typeArr.length;i++){
-						$(".manager.managerList").append("<div class='type' data-type='"+typeArr[i]+"' >"+typeArr[i]+"</div>");
+						$(".manager.managerList"+classCnt).append("<div class='type' data-type='"+typeArr[i]+"' >"+typeArr[i]+"</div>");
 						
 					}
 					for(let i=0;i<data.length;i++){
 						
 						for(let j=0; j<typeArr.length;j++){
-							if($(".manager.managerList .type").eq(j).attr("data-type") == decodeURIComponent(data[i].type)){
-								$(".manager.managerList .type").eq(j).append("<div class='typeList' data-value='"+
+							if($(".manager.managerList"+classCnt+" .type").eq(j).attr("data-type") == decodeURIComponent(data[i].type)){
+								$(".manager.managerList"+classCnt+" .type").eq(j).append("<div class='typeList' data-value='"+
 										decodeURIComponent(data[i].answer)+"'>"+decodeURIComponent(data[i].questions))+"</div>";								
+								console.log(decodeURIComponent(data[i].questions));
 							}
 						}	
 					}
-					$(".manager.managerList .type").click(function(){
+					$(".manager.managerList"+classCnt+" .type").click(function(){
 						$(this).siblings(".type").css({height:"21px"});	
 						$(this).stop().animate({height:"100%"});
 						$(".chat_window").scrollTop = $('.chat_window').offset().top;
 						$(".chat_window").animate({scrollTop:$('.chat_window').offset().top+1000},100);
 					})
 					console.log(typeArr);
-					
-					$(".manager.managerList .type .typeList").click(function(){
+
+					$(".manager.managerList"+classCnt+" .type").css({height: "21px",overflow: "hidden"})
+					$(".manager.managerList"+classCnt+" .type .typeList").click(function(){
 						
 						$(".chat_window").append("<p class='user'>"+$(this).attr("data-value")+"</p>");
 					});

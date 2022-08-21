@@ -38,7 +38,9 @@ public class LoginReg implements LoginService {
 					request.setAttribute("pl", pl);
 					request.setAttribute("ma", ma);
 					request.setAttribute("config", "manager");
-					request.setAttribute("mainUrl", "manager/sales.jsp");
+					request.setAttribute("mainUrl", "inc/alert.jsp");
+					request.setAttribute("goUrl", "manager/Calculate");
+					
 					break;
 				case 1:
 					request.setAttribute("config", "staff");

@@ -18,25 +18,30 @@ import com.map.model.MatchingDTO;
 import com.map.model.UserDAO;
 import com.map.model.UserDTO;
 
-public class MatchingModify implements AjaxService {
+public class MatchingModifyReg implements AjaxService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-	
+		
+
+		MatchingDTO dto = new MatchingDTO();
+		dto.setRes_num(Integer.parseInt(request.getParameter("id")));
+		dto.setStart_point(request.getParameter("start_point"));
+		dto.setEnd_point(request.getParameter("end_point"));
+		
+		
 		System.out.println(request.getParameter("id"));
 		
-		
-		MatchingDTO dto = new MatchingDAO().res_num(Integer.parseInt(request.getParameter("id")) );
+		int cnt = new MatchingDAO().managerUpdate(dto);
 		JSONObject data = new JSONObject();
 
 		try {
-		
-		data.put("res_num",dto.getRes_num());
-//		data.put("reservat_date",dto.getReservat_date());
-		data.put("start_point",URLEncoder.encode(dto.getStart_point(),"UTF-8"));
-		data.put("end_point",URLEncoder.encode(dto.getEnd_point(),"UTF-8"));
-			
+
+			if(cnt > 0) {data.put("chk","true"); 
+			System.out.println("성공");}
+			else {data.put("chk","false");
+			System.out.println("실패");}	
 		
 		response.getWriter().append(data.toJSONString());
 			

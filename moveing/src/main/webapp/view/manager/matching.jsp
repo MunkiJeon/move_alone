@@ -6,7 +6,7 @@
 tr, td {
 	border: 1px #979797 solid;
 }
-.btn1detaile{position: fixed;z-index:2;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;width: 600px;background: white;padding: 30px;border-radius: 15px;}
+.stepsign{position: fixed;z-index:2;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;width: 600px;background: white;padding: 30px;border-radius: 15px;}
 .popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
 </style>
 
@@ -31,7 +31,7 @@ tr, td {
 				bgcolor="lime">현재 매칭중</td>
 		</tr>
 		<tr align="center">
-			<td><input type="checkbox" id="allCheck"></td>
+			<td><input class="dataChk" type="checkbox" id="allCheck"></td>
 			<td>예약번호</td>
 			<td>고객아이디</td>
 			<td>기사아이디</td>
@@ -48,8 +48,8 @@ tr, td {
 		</tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
 	<c:if test="${dto.req_state==0}">
-        <tr align="center"> <!-- 모양  -->
-            <td><input type="checkbox" id="allCheck"></td>
+        <tr align="center" class="idchktr" > <!-- 모양  -->
+            <td><input type="checkbox" id="allCheck${no.index }" class="dataChk" value="${dto.res_num }"></td>
             <td>${dto.res_num }</td>
             <td>${dto.user_ID }</td>
             <td>${dto.driver_ID }</td>
@@ -111,33 +111,28 @@ tr, td {
 </c:forEach> 
 	</table>
 </div>
-<p class="btn1detaile"></p>
 <div class="popupbg"></div>
 <div class="stepsign">
  <table>
      <tr>
-         <td>아이디</td>
-         <td><input type="text" id="id"/></td>
+         <td>예약번호</td>
+         <td><input type="text" id="res_num"/></td>
+     </tr>
+     <!-- <tr>
+         <td>이사날짜</td>
+         <td><input type="text" id="reservat_date"/></td>
+     </tr> -->
+     <tr>
+         <td>출발지</td>
+         <td><input type="text" id="start_point"/></td>
      </tr>
      <tr>
-         <td>비번</td>
-         <td><input type="text" id="pw"/></td>
-     </tr>
-     <tr>
-         <td>전화번호</td>
-         <td><input type="text" id="tel"/></td>
-     </tr>
-     <tr>
-         <td>이름</td>
-         <td><input type="text" id="name"/></td>
-     </tr>
-     <tr>
-         <td>이메일</td>
-         <td><input type="text" id="email"/></td>
+         <td>도착지</td>
+         <td><input type="text" id="end_point"/></td>
      </tr>
      
      <tr>
-         <td colspan="2"><button type="submit">등록</button></td>
+         <td colspan="2"><button class="submitBtn" type="submit">등록</button></td>
      </tr>
  </table>
 </div>
@@ -165,11 +160,15 @@ $(function(){
 
 <script>
 	$(function(){
+		$(".popupbg").click(function(){
+            $(this).fadeOut(500);
+            $(".stepsign").stop().animate({bottom:"-100vh"},500)
+        })
         
-        $(".popupbtnModify").click(function(e){
+        $("#editBtn").click(function(e){
             e.preventDefault();
             let cnt = 0;
-            let id = "";
+            let resnum = "";
             for(let i=0;i<$(".idchktr").length;i++){
             	if($(".idchktr").eq(i).find(".dataChk").is(':checked')){
             		cnt++;
@@ -179,48 +178,44 @@ $(function(){
             if(cnt!=1){
             	return alert("하나만 체크해 주세요");
             }
-            
-            modify = true;
+				
             console.log(id);
             $(".popupbg").fadeIn(500);
             $(".stepsign").stop().animate({bottom:"50%"},500)
-            $("#id").attr("readonly","readonly");
+            $("#res_num").attr("readonly","readonly");
 
 			
             $.ajax({
          	
-	         	url:"<c:url value='/ajax/Modify'/>",
+	         	url:"<c:url value='/ajax/MatchingModify'/>",
 	         	type:'POST',
 	 			data:{id:id},
 	 			async:false,
 	 			dataType:'json',
 	 			success:function(data){
 	 				
-	 				$("#id").val(decodeURIComponent(data.id));
-	 				$("#pw").val(decodeURIComponent(data.pw));
-	 				$("#name").val(decodeURIComponent(data.name));
-	 				$("#email").val(decodeURIComponent(data.email));
-	 				$("#tel").val(decodeURIComponent(data.tel));
+	 				$("#res_num").val(decodeURIComponent(data.res_num));
+//	 				$("#reservat_date").val(decodeURIComponent(data.reservat_date));
+	 				$("#start_point").val(decodeURIComponent(data.start_point));
+	 				$("#end_point").val(decodeURIComponent(data.end_point));
 	 				
 	 			},
 	 			error:function(e){console.log(e)}
 	    	})  
 	            
-	        $(".deletebtn").submit(function(e){
-	        	
+	        $(".submitBtn").click(function(e){
+	        	console.log("sadasrga");
                 e.preventDefault();
-                console.log(id+","+$("#pw").val()+","+$("#name").val()+","+$("#email").val()+","+$("#tel").val())
                 $.ajax({
-    	         	url:"<c:url value='/ajax/ModifyReg'/>",
+    	         	url:"<c:url value='/ajax/MatchingModifyReg'/>",
     	         	type:'POST',
-    	 			data:{id:id,pw:$("#pw").val(),name:$("#name").val(),email:$("#email").val(),tel:$("#tel").val(),level:level},
+    	 			data:{id:$("#res_num").val(),start_point:$("#start_point").val(),end_point:$("#end_point").val()},
     	 			async:false,
     	 			dataType:'json',
     	 			success:function(data){
-		  				console.log(data.chk);
-		  				if(data[0]=="false"){alert("실패")}
+		  				if(data.chk=="false"){alert("실패")}
 		  				else{alert("성공");
-		  					location.href="?level="+level;
+		  					location.href="";
 		  				}
     	 				
     	 			},

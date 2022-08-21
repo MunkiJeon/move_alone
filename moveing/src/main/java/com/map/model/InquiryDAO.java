@@ -153,7 +153,7 @@ public class InquiryDAO {
 	
 	public int insert(InquiryDTO dto) {
 		
-		sql = "insert into inquiry(id,name,contents,time,level) values(?,?,?,sysdate())";
+		sql = "insert into inquiry(id,name,contents,time,level) values(?,?,?,sysdate(),?)";
 
 		try {
 			ptmt = con.prepareStatement(sql);

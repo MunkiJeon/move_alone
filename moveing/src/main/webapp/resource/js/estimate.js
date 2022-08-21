@@ -110,28 +110,73 @@
     
     $(".shopping .test").click(function(e){
 		//detailNext //test
-		let item1 ="", req =0;
+		//let item ="", price =0, p_num=0; 
+		// item - 디비에 올릴 데이터(종류:수량) price - 합산 가격 p_num - 현재(대/중/소) 수량 받기
+		
+		//let p_price=$(".shopping .mainList .discprice").text(); //현재 품목 단가 받기
+		let itemNum =$(".shopping .mainList .itamnum").html();
+		//let item =$(".shopping .mainList .discprice").text();
+		
+		let Box_L,Box_M,Box_S;
+		let numBox_L,numBox_M,numBox_S;
+		let item ="",pname="",discprice=0,totprice=0;
+		/*let Box_L0 = $(".itam_1 .Box_L").is(":checked") ,Box_M0 = $(".itam_1 .Box_M").is(":checked"), Box_S0 = $(".itam_1 .Box_S").is(":checked");
+		let Box_L0 = $(".itam_2 .Box_L").is(":checked") ,Box_M0 = $(".itam_2 .Box_M").is(":checked"), Box_S0 = $(".itam_2 .Box_S").is(":checked");
+		let Box_L0 = $(".itam_3 .Box_L").is(":checked") ,Box_M0 = $(".itam_3 .Box_M").is(":checked"), Box_S0 = $(".itam_3 .Box_S").is(":checked");*/
+
+		
 		e.preventDefault();
 		
 		//---------------------4---------------------
 
-		 for(let i =0;i<$(".shopping .mainList .item ").length;i++){
-			let=0;
-			if(i<$(".shopping .mainList .item ").length-1){
-				lat=
-				item1 += $(".shopping .mainList .item ").eq(i).find(".item1").val()+",";
-			}else{
-				item1 += $(".shopping .mainList .item ").eq(i).find(".item1").val();
+		 for(let i=0;i<itemNum;i++){
+			Box_L = $(".itam_"+i+" .Box_L").is(":checked") ,Box_M = $(".itam_"+i+" .Box_M").is(":checked"), Box_S = $(".itam_"+i+" .Box_S").is(":checked");
+			numBox_L = $(".itam_"+i+" .numBox_L").val() ,numBox_M = $(".itam_"+i+" .numBox_M").val(), numBox_S = $(".itam_"+i+" .numBox_S").val();
+			discprice = $(".itam_"+i+" .discprice").val(),pname=$(".itam_"+i+" .pname").html();
+			
+			item += pname+" :";
+			if(Box_L){
+				item += "Box_L:"+numBox_L+"개,";
+				totprice += discprice*numBox_L;
+			}if(Box_M){
+				item += "Box_M:"+numBox_M+"개,";
+				totprice += discprice*numBox_M;
+			}if(Box_S){
+				item += "Box_L:"+numBox_S+"개,";
+				totprice += discprice*numBox_S;
+			}if(i<itemNum-1){
+				item += "@"
 			}
+			
+			/*if($(".itam_"+i+".Box_L").is(":checked")){
+				txt += ","+i+"눌림";
+			}else{
+				txt += ","+i+"안눌림";
+			}*/
+			
+/*			if(i<$(".shopping .mainList .item ").length-1){
+				if($(".shopping .mainList .item ")){
+					
+				}// 대 중 소 체크 된거만 받기위한 if
+				if($(".shopping .mainList .item ")){}// 대 중 소 체크 된거만 받기위한 if
+				if($(".shopping .mainList .item ")){}// 대 중 소 체크 된거만 받기위한 if
+				
+				item1 += $(".shopping .mainList .item ").eq(i).find(".item1").val()+",";//배열 첫번~마지막-1 값
+			}else{
+				item1 += $(".shopping .mainList .item ").eq(i).find(".item1").val();//배열 마지막값
+			}*/
 		}
-		
-		
-		
-		$("#item1").val(item1);
+		//console.log(item);
+		console.log(Box_L);
+		console.log(numBox_L);
+		console.log(discprice);
+		console.log(totprice);
+		console.log(item);
+		/*$("#item1").val(item1);
 		console.log(item1);
 		console.log($("#item1").val());
 		$("#price").val(price);
-		console.log(price);
+		console.log(price);*/
 		
 		
     })

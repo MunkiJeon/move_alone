@@ -41,10 +41,10 @@ tr, td {
 			<td>예약날짜</td>
 			<td>총가격</td>
 		</tr>
-<%-- <c:forEach items="${mainData }" var="dto" varStatus="no">
-	<c:if test="${dto.req_state==0}">
+<c:forEach items="${mainData }" var="dto" varStatus="no">
+	<c:if test="${dto.state==0}">
         <tr align="center"> <!-- 모양  -->
-            <td><input type="checkbox" id="allCheck"></td>
+            <td><input type="checkbox" id="allCheck"></td><!-- 덜바꿈  -->
             <td>${dto.res_num }</td>
             <td>${dto.user_ID }</td>
             <td>${dto.driver_ID }</td>
@@ -60,7 +60,7 @@ tr, td {
             <td>${dto.cost }</td>     
         </tr>
       </c:if>
-</c:forEach>  --%>
+</c:forEach>
 		
 	</table>
 </div>

@@ -3,27 +3,32 @@ package com.map.model;
 import java.util.Date;
 
 public class EstimateDTO {
-  int order; 
+  int res_num; 
   String id; 
   String pw; 
   String name; 
-  int SV_Type; 
-  Date DateTime;
-  String Start_Point; 
-  String End_Point; 
-  int Furniture; 
-  int Home_App; 
-  int Other; 
+  String SV_Type; 
+  Date sel_date;
+  String start_Point; 
+  String start_OP; 
+  String end_Point;
+  String end_OP;
+  String Furniture; 
+  String Home_App; 
+  String Other; 
   String Furniture_Det; 
   String Home_App_Det; 
   String Other_Det; 
-  int box; 
   String request;
-public int getOrder() {
-	return order;
+  String shopping_list;
+  int state;
+  int price;
+  Date req_date;
+public int getRes_num() {
+	return res_num;
 }
-public void setOrder(int order) {
-	this.order = order;
+public void setRes_num(int res_num) {
+	this.res_num = res_num;
 }
 public String getId() {
 	return id;
@@ -43,46 +48,58 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public int getSV_Type() {
+public String getSV_Type() {
 	return SV_Type;
 }
-public void setSV_Type(int sV_Type) {
+public void setSV_Type(String sV_Type) {
 	SV_Type = sV_Type;
 }
-public Date getDateTime() {
-	return DateTime;
+public Date getSel_date() {
+	return sel_date;
 }
-public void setDateTime(Date dateTime) {
-	DateTime = dateTime;
+public void setSel_date(Date sel_date) {
+	this.sel_date = sel_date;
 }
 public String getStart_Point() {
-	return Start_Point;
+	return start_Point;
 }
 public void setStart_Point(String start_Point) {
-	Start_Point = start_Point;
+	this.start_Point = start_Point;
+}
+public String getStart_OP() {
+	return start_OP;
+}
+public void setStart_OP(String start_OP) {
+	this.start_OP = start_OP;
 }
 public String getEnd_Point() {
-	return End_Point;
+	return end_Point;
 }
 public void setEnd_Point(String end_Point) {
-	End_Point = end_Point;
+	this.end_Point = end_Point;
 }
-public int getFurniture() {
+public String getEnd_OP() {
+	return end_OP;
+}
+public void setEnd_OP(String end_OP) {
+	this.end_OP = end_OP;
+}
+public String getFurniture() {
 	return Furniture;
 }
-public void setFurniture(int furniture) {
+public void setFurniture(String furniture) {
 	Furniture = furniture;
 }
-public int getHome_App() {
+public String getHome_App() {
 	return Home_App;
 }
-public void setHome_App(int home_App) {
+public void setHome_App(String home_App) {
 	Home_App = home_App;
 }
-public int getOther() {
+public String getOther() {
 	return Other;
 }
-public void setOther(int other) {
+public void setOther(String other) {
 	Other = other;
 }
 public String getFurniture_Det() {
@@ -103,17 +120,36 @@ public String getOther_Det() {
 public void setOther_Det(String other_Det) {
 	Other_Det = other_Det;
 }
-public int getBox() {
-	return box;
-}
-public void setBox(int box) {
-	this.box = box;
-}
 public String getRequest() {
 	return request;
 }
 public void setRequest(String request) {
 	this.request = request;
 }
+public String getShopping_list() {
+	return shopping_list;
+}
+public void setShopping_list(String shopping_list) {
+	this.shopping_list = shopping_list;
+}
+public int getState() {
+	return state;
+}
+public void setState(int state) {
+	this.state = state;
+}
+public int getPrice() {
+	return price;
+}
+public void setPrice(int price) {
+	this.price = price;
+}
+public Date getReq_date() {
+	return req_date;
+}
+public void setReq_date(Date req_date) {
+	this.req_date = req_date;
+}
+  
   
 }

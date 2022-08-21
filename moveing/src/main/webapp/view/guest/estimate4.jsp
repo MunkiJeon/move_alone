@@ -78,36 +78,38 @@
 <section class="shopping">
 	<form action="Estimate?num=Res" method="post">
 		<ul class="mainList">
-            <li><h2> 추가 선택 항목(쇼핑) </h2></li>
+            <li><h2> 추가 선택 항목(쇼핑) </h2><p class="itamnum" style="display: none">${list.size() }</p></li>
 <c:forEach items="${list }" var="pbean" varStatus="no">
-            <li>
+            <li class="itam_${no.index }">
             	<table id="mainListInside">
 						<tr>
 							<td><img src="<c:url value='/resource/image/'/>${ pbean.mainImgN}" width="300px" height="380px"></td>
 							<td width="300px" class="item">
-								<h3>${ pbean.name}</h3>
+								<h3 class="pname">${ pbean.name}</h3>
+								
 								<p>${ pbean.info}</p>
  							<%--<p style="text-decoration:line-through;">${ pbean.oriprice}원</> --%>
-								<p class="discprice">${ pbean.discprice}원</p>
+								<p>${ pbean.discprice}원</p>
+								<input type="number" class="discprice" value="${ pbean.discprice}" style="display: none">
 								<p>수량선택</p>
 								<div>
 								<p>
-									<input type="checkbox" name="option${no.index }"/>대
-									<button type="button" class="plus">[ + ]</button>
+									<input type="checkbox" class="Box_L" name="option${no.index }"/>대
+									<button type="button" class="plus_L">[ + ]</button>
 									<input type="number" class="numBox_L" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
+									<button type="button" class="minus_L">[ - ]</button>
 								</p>
 								<p>
-									<input type="checkbox" name="option${no.index }"/>중
-									<button type="button" class="plus">[ + ]</button>
+									<input type="checkbox" class="Box_M" name="option${no.index }"/>중
+									<button type="button" class="plus_M">[ + ]</button>
 									<input type="number" class="numBox_M" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
+									<button type="button" class="minus_M">[ - ]</button>
 								</p>
 								<p>
-									<input type="checkbox" name="option${no.index }"/>소
-									<button type="button" class="plus">[ + ]</button>
+									<input type="checkbox" class="Box_S" name="option${no.index }"/>소
+									<button type="button" class="plus_S">[ + ]</button>
 									<input type="number" class="numBox_S" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
+									<button type="button" class="minus_S">[ - ]</button>
 								</p>
 								</div>
 								
@@ -117,7 +119,7 @@
             </li>
 </c:forEach>
 			<li>
-				<input type="hidden" name="item1" id="item1">
+				<input type="hidden" name="item" id="item">
 				<input type="hidden" name="price" id="price">
 
 		        <button type="button" class="test">테스트</button>
@@ -174,25 +176,53 @@
 
 <script>
 	$(function(){
-	$(".plus").click(function() {
-		var num = $(this).siblings(".numBox").val();
+	$(".plus_L").click(function() {
+		var num = $(this).siblings(".numBox_L").val();
 		var plusNum = Number(num) + 1;
-		
-		$(this).siblings(".numBox").val(plusNum);
-		
-		
-		
+		$(this).siblings(".numBox_L").val(plusNum);
+	});
+	$(".plus_M").click(function() {
+		var num = $(this).siblings(".numBox_M").val();
+		var plusNum = Number(num) + 1;
+		$(this).siblings(".numBox_M").val(plusNum);
+	});
+	$(".plus_S").click(function() {
+		var num = $(this).siblings(".numBox_S").val();
+		var plusNum = Number(num) + 1;
+		$(this).siblings(".numBox_S").val(plusNum);
 	});
 
-	$(".minus").click(function() {
-		var num = $(this).siblings(".numBox").val();
+	$(".minus_L").click(function() {
+		var num = $(this).siblings(".numBox_L").val();
 		var minusNum = Number(num) - 1;
 		
 		if(minusNum < 0) {
-			$(this).siblings(".numBox").val(num);
+			$(this).siblings(".numBox_L").val(num);
 		} 
 		else {
-			$(this).siblings(".numBox").val(minusNum);          
+			$(this).siblings(".numBox_L").val(minusNum);          
+		}
+	});
+	$(".minus_M").click(function() {
+		var num = $(this).siblings(".numBox_M").val();
+		var minusNum = Number(num) - 1;
+		
+		if(minusNum < 0) {
+			$(this).siblings(".numBox_M").val(num);
+		} 
+		else {
+			$(this).siblings(".numBox_M").val(minusNum);          
+		}
+	});
+	$(".minus_S").click(function() {
+		var num = $(this).siblings(".numBox_S").val();
+		var minusNum = Number(num) - 1;
+		
+		if(minusNum < 0) {
+			$(this).siblings(".numBox_S").val(num);
+		} 
+		else {
+			$(this).siblings(".numBox_S").val(minusNum);          
 		}
 	});
 	})

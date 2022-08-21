@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 public class MatchingDAO {
@@ -28,9 +29,34 @@ public class MatchingDAO {
 	}
 
 	
-	public ArrayList<MatchingDTO> allUser() {
+	public ArrayList<MatchingDTO> allUser(HttpServletRequest request) {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
-		sql = "select * from matching";
+		String searchResnum = request.getParameter("search_resnum"); // 예약번호
+		String searchName   = request.getParameter("search_name");   // 이름(고객ID)
+		String searchId     = request.getParameter("search_id");     // 아이디(기사ID)
+		String searchDate   = request.getParameter("search_date");   // 이사날짜
+		
+		//System.out.println("searchResnum >>>" + searchResnum);
+		//System.out.println("searchName >>>" + searchName);
+		//System.out.println("searchId >>>" + searchId);
+		//System.out.println("searchDate >>>" + searchDate);
+		
+		sql = "select * from matching where 1=1";
+			if(searchResnum != "" && searchResnum != null) {
+				//sql	+= " and res_num = " + searchResnum; //전체검색
+				sql	+= " and res_num LIKE '%" + searchResnum + "%'"; //특정검색
+			}
+			if(searchName != "" && searchName != null) {
+				//sql	+= " and user_ID = '" + searchName + "'"; //전체검색
+				sql	+= " and user_ID LIKE '%" + searchName + "%'"; //특정검색
+			}
+			if(searchId != "" && searchId != null) {
+				sql	+= " and driver_ID = '" + searchId +"'";
+			}
+			if(searchDate != "" && searchDate != null) {
+				sql	+= " and DATE(reservat_date) = '" + searchDate +"'";
+			}
+		System.out.println("sql >>>" + sql);
 		try {
 			ptmt = con.prepareStatement(sql);
 			
@@ -139,11 +165,6 @@ public class MatchingDAO {
 		return res;
 	}
 	
-	
-	
-	
-	
-	
 	public ArrayList<MatchingDTO> afterWork(String id,int req_state) {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
 		sql = "select * from matching where driver_ID = ? and req_state = ?";
@@ -180,6 +201,14 @@ public class MatchingDAO {
 		
 		return res;
 	}
+	
+	//예약번호 검색
+	
+	//이름으로 검색
+	
+	//아이디로 검색
+	
+	//이사날짜로 검색
 	
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}

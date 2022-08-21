@@ -12,7 +12,10 @@ public class Matching implements ManagerService {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		ArrayList<MatchingDTO> mainData = new MatchingDAO().allUser();
+		System.out.println("execute >>>>>" + request.getParameter("search_resnum"));
+		ArrayList<MatchingDTO> mainData = new MatchingDAO().allUser(request);
+		
+		System.out.println("mainData list >>>" + mainData.size());
 		
 		request.setAttribute("mainData", mainData);
 		request.setAttribute("mainUrl", "manager/matching.jsp");

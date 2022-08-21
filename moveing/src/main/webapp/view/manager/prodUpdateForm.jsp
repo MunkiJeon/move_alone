@@ -92,12 +92,12 @@
 		}
 		
 		if($("input[name='oriprice']").val() == ""){
-			alert("정가를 입력해주세요");
+			alert("도매가격을 입력해주세요");
 			return false;
 		}
 		
 		if($("input[name='discprice']").val() == ""){
-			alert("할인가를 입력해주세요");
+			alert("상품가격을 입력해주세요");
 			return false;
 		}
 		
@@ -195,11 +195,11 @@
 		 	<td><input type="text" name="name" value="${ pbean.name}"></td>
 		 </tr>
 		 <tr>
-		 	<td>정가</td>
+		 	<td>도매가격</td>
 		 	<td><input type="text" name="oriprice" value="${pbean.oriprice}"></td>
 		 </tr>
 		 <tr>
-		 	<td>할인판매가</td>
+		 	<td>상품가격</td>
 		 	<td><input type="text" name="discprice" value="${pbean.discprice}"></td>
 		 </tr>
 		 <tr>

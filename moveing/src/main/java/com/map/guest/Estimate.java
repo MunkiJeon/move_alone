@@ -1,12 +1,15 @@
 package com.map.guest;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.map.model.EstimateDAO;
+import com.map.model.ProductBean;
+import com.map.model.ProductDao;
 
 public class Estimate implements GuestService {
 
@@ -83,6 +86,11 @@ public class Estimate implements GuestService {
 //				request.setAttribute("item2Arr",item2.split(","));
 //				request.setAttribute("item3Arr",item3.split(","));
 //				request.setAttribute("item3Arr",req);
+				
+				ProductDao pdao = ProductDao.getInstance();
+				ArrayList<ProductBean> list = pdao.getAllProduct();
+				request.setAttribute("list", list);
+				request.setAttribute("mainUrl", "manager/productList.jsp");
 			}
 			System.out.println(pageNum +"번째 입력 값:"+gim_data); 
 			request.setAttribute("gim_data",gim_data);

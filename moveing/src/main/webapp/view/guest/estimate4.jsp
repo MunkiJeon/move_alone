@@ -43,7 +43,7 @@
 	}
 </style>
 
-<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="webapp/js/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#banner_image').show();
@@ -61,7 +61,7 @@
 <table id="banner_imageTable">
 	<tr>
 		<td>
-			<img id="banner_image" width=100% height="700" title="" alt="썸머뉴" rel="79-10" src="../images/main_img.png" style="display: none">
+			<img id="banner_image" width=100% height="700" title="" alt="썸머뉴" rel="79-10" src="<c:url value='/resource/image/'/>gg1.png" style="display: none">
 		</td>
 	</tr>
 	<tr>
@@ -82,31 +82,31 @@
 				<td>
 					<table id="mainListInside">
 						<tr>
-							<td><img src="../../../${ pbean.mainImgN}" width="300px" height="380px"></td>
+							<td><img src="<c:url value='/resource/image/'/>${ pbean.mainImgN}" width="300px" height="380px"></td>
 							<td width="300px">
 								<h3>${ pbean.name}</h3>
 								<p>${ pbean.info}</p>
-								<p style="text-decoration:line-through;">${ pbean.oriprice}원</>
+ 							<%--<p style="text-decoration:line-through;">${ pbean.oriprice}원</> --%>
 								<p>${ pbean.discprice}원</p>
 								<p>수량선택</p>
 								<div>
 								<p>
 									<input type="checkbox" name="option${no.index }"/>대
-									<button type="button" class="plus">+</button>
+									<button type="button" class="plus">[ + ]</button>
 									<input type="number" class="numBox" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">-</button>
+									<button type="button" class="minus">[ - ]</button>
 								</p>
 								<p>
 									<input type="checkbox" name="option${no.index }"/>중
-									<button type="button" class="plus">+</button>
+									<button type="button" class="plus">[ + ]</button>
 									<input type="number" class="numBox" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">-</button>
+									<button type="button" class="minus">[ - ]</button>
 								</p>
 								<p>
 									<input type="checkbox" name="option${no.index }"/>소
-									<button type="button" class="plus">+</button>
+									<button type="button" class="plus">[ + ]</button>
 									<input type="number" class="numBox" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">-</button>
+									<button type="button" class="minus">[ - ]</button>
 								</p>
 								</div>
 								

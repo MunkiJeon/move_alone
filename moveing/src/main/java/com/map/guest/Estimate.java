@@ -76,7 +76,7 @@ public class Estimate implements GuestService {
 				String item1 = request.getParameter("item1");
 				String item2 = request.getParameter("item2");
 				String item3 = request.getParameter("item3");
-				String req = request.getParameter("req"); // 쇼핑에서 받을예정
+				String req = request.getParameter("req"); 
 				gim_data= item1+"@"+item2+"@"+item3+"@"+req;
 				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
 //				request.setAttribute("item1Arr",item1.split(","));

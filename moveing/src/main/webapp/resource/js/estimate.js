@@ -66,7 +66,7 @@
 		
     })
     
-    $(".gim_detail .test").click(function(e){
+    $(".gim_detail .detailNext").click(function(e){
 		//detailNext //test
 		let item1 ="",item2 ="", item3 ="", req =$(".gim_detail .calcItem .item_opsReq .req").val();
 		//e.preventDefault();

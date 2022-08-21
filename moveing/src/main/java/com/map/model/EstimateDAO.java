@@ -87,10 +87,10 @@ public class EstimateDAO {
 					ptmt.setString(1,arr[0]);
 					ptmt.setString(2,arr[1]);
 					ptmt.setString(3,arr[2]);
-					ptmt.setString(4,arr[2]);
+					ptmt.setString(4,arr[3]);
 
-					ptmt.setString(4,user_id);
-					ptmt.setInt(5,0);
+					ptmt.setString(5,user_id);
+					ptmt.setInt(6,0);
 					rs = ptmt.executeQuery();
 					
 					System.out.println("개인 데이터 넣음"+pagenum+"// ID:"+user_id+"// date:"+sel_date);

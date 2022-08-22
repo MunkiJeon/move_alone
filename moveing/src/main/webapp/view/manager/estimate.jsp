@@ -31,36 +31,38 @@ tr, td {
 			<td>아이디</td>
 			<td>이름</td>
 			<td>배송 종류</td>
+			<td>예약날짜</td>
 			<td>출발지 주소</td>
 			<td>출발지 옵션</td>
-			<td>도착주소</td>
+			<td>도착지 주소</td>
 			<td>도착지 옵션</td>
-			<td>짐목록</td>
+			<!-- <td>짐목록</td> -->
 			<td>쇼핑리스트</td>
 			<td>요청사항</td>
 			<td>예약날짜</td>
 			<td>총가격</td>
 		</tr>
-<%-- <c:forEach items="${mainData }" var="dto" varStatus="no">
-	<c:if test="${dto.req_state==0}">
+<c:forEach items="${mainData }" var="dto" varStatus="no">
+	<c:if test="${dto.state!=9}"><!-- 임시로 전체 나오게 하려고 9 넣음 -->
         <tr align="center"> <!-- 모양  -->
             <td><input type="checkbox" id="allCheck"></td>
             <td>${dto.res_num }</td>
-            <td>${dto.user_ID }</td>
-            <td>${dto.driver_ID }</td>
-            <td>${dto.reservat_date }</td>
-            <td>${dto.start_point }</td>
-            <td>${dto.start_op }</td>
-            <td>${dto.end_point }</td>
-            <td>${dto.end_op }</td>
-            <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td>
+            <td>${dto.id }</td>
+            <td>${dto.name }</td>
+            <td>${dto.SV_Type }</td>
+            <td>${dto.sel_date }</td>
+            <td>${dto.start_Point }</td>
+            <td>${dto.start_OP }</td>
+            <td>${dto.end_Point }</td>
+            <td>${dto.end_OP }</td>
+            <%-- <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td> --%>
             <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
-            <td class="previewbtn1" data-value="${dto.requests }">보기</td>
+            <td class="previewbtn1" data-value="${dto.request }">보기</td>
             <td>${dto.req_date }</td>
-            <td>${dto.cost }</td>     
+            <td>${dto.price }</td>     
         </tr>
       </c:if>
-</c:forEach>  --%>
+</c:forEach>
 		
 	</table>
 </div>

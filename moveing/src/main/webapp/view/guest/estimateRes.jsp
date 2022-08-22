@@ -5,146 +5,80 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<c:url value='/resource/css/guest/calc.css'/>">
 <script src="<c:url value='/resource/js/estimate.js'/>"></script>
-<style type="text/css">
-	body {
-		font-family: Noto Sans Kr;
-		font-size: 13px;
-	}
-	
-	#mainList {
-		margin: auto;
-		margin-top : 50px;
-		text-align: center;
-		width: 750px;
-	}
-	
-	#mainListInside td {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	
-	#mainListInside h3 {
-		padding-top: 10px;
-		padding-bottom: 10px; font-size : 13px;
-		word-spacing: -1px;
-		color: #000;
-		border-bottom: 1px solid #D5D5D5;
-		font-size: 13px
-	}
-	
-	#mainListInside td>span {
-		color: #555555;
-		font-size: 12px;
-	}
-	
-	#banner_imageTable {
-		width :1550;
-		height : 700;
-		margin: auto;
-	}
+<style>
+tr, td {
+	border: 1px #979797 solid;
+}
+.btn1detaile{position: fixed;z-index:2;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;width: 600px;background: white;padding: 30px;border-radius: 15px;}
+.popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
 </style>
-
-<script type="text/javascript" src="webapp/js/jquery.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#banner_image').show();
-		/* $('#banner_image').hide();
-		$('#banner_image').fadeIn(3000);
-		setInterval(function(){
-			$('#banner_image').hide();
-			$('#banner_image').fadeIn(3000);
-		}, 5000); */
-	});
-</script>
-
-
-<table id="banner_imageTable">
-	<tr>
-		<td>
-			<img id="banner_image" width=100% height="700" title="" alt="썸머뉴" rel="79-10" src="<c:url value='/resource/image/'/>gg1.png" style="display: none">
-		</td>
-	</tr>
-	<tr>
-		<td><br><br></td>
-	</tr>
-	<tr>
-		<td align="center">
-			<!-- <img width="570" height="160" src="../images/secondImage.PNG"> -->
-		</td>
-	</tr>
-</table>
-
-<section class="product">
-	<form action="Estimate?num=Res" method="post">
-	</form>
-</section>
-<table id="mainList">
-	
-	<c:forEach items="${list }" var="pbean" varStatus="no">
-			<tr>
-				<td>
-					<table id="mainListInside">
-						<tr>
-							<td><img src="<c:url value='/resource/image/'/>${ pbean.mainImgN}" width="300px" height="380px"></td>
-							<td width="300px">
-								<h3>${ pbean.name}</h3>
-								<p>${ pbean.info}</p>
- 							<%--<p style="text-decoration:line-through;">${ pbean.oriprice}원</> --%>
-								<p>${ pbean.discprice}원</p>
-								<p>수량선택</p>
-								<div>
-								<p>
-									<input type="checkbox" name="option${no.index }"/>대
-									<button type="button" class="plus">[ + ]</button>
-									<input type="number" class="numBox" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
-								</p>
-								<p>
-									<input type="checkbox" name="option${no.index }"/>중
-									<button type="button" class="plus">[ + ]</button>
-									<input type="number" class="numBox" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
-								</p>
-								<p>
-									<input type="checkbox" name="option${no.index }"/>소
-									<button type="button" class="plus">[ + ]</button>
-									<input type="number" class="numBox" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
-									<button type="button" class="minus">[ - ]</button>
-								</p>
-								</div>
-								
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>			
-	</c:forEach>
-	
-</table>
-
+<div class="managerWrap">
+	<table border="" width="100%">
+		<tr>
+			<td colspan="16" align="center">
+				<h1>${id } 님 견적을 보냈습니다.</h1>
+			</td>
+		</tr>
+		
+		<tr align="center">
+			<td><input type="checkbox" id="allCheck"></td>
+			<td>예약번호</td>
+			<td>아이디</td>
+			<td>이름</td>
+			<td>배송 종류</td>
+			<td>예약날짜</td>
+			<td>출발지 주소</td>
+			<td>출발지 옵션</td>
+			<td>도착지 주소</td>
+			<td>도착지 옵션</td>
+			<!-- <td>짐목록</td> -->
+			<td>쇼핑리스트</td>
+			<td>요청사항</td>
+			<td>예약날짜</td>
+			<td>총가격</td>
+		</tr>
+<c:forEach items="${mainData }" var="dto" varStatus="no">
+	<c:if test="${dto.state!=9}"><!-- 임시로 전체 나오게 하려고 9 넣음 -->
+        <tr align="center"> <!-- 모양  -->
+            <td><input type="checkbox" id="allCheck"></td>
+            <td>${dto.res_num }</td>
+            <td>${dto.id }</td>
+            <td>${dto.name }</td>
+            <td>${dto.SV_Type }</td>
+            <td>${dto.sel_date }</td>
+            <td>${dto.start_Point }</td>
+            <td>${dto.start_OP }</td>
+            <td>${dto.end_Point }</td>
+            <td>${dto.end_OP }</td>
+            <%-- <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td> --%>
+            <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
+            <td class="previewbtn1" data-value="${dto.request }">보기</td>
+            <td>${dto.req_date }</td>
+            <td>${dto.price }</td>     
+        </tr>
+      </c:if>
+</c:forEach>
+		
+	</table>
+</div>
+<p class="btn1detaile"></p>
+<div class="popupbg"></div>
 <script>
-	$(function(){
-	$(".plus").click(function() {
-		var num = $(this).siblings(".numBox").val();
-		var plusNum = Number(num) + 1;
-		
-		$(this).siblings(".numBox").val(plusNum);
-		
-		
-		
-	});
-
-	$(".minus").click(function() {
-		var num = $(this).siblings(".numBox").val();
-		var minusNum = Number(num) - 1;
-		
-		if(minusNum < 0) {
-			$(this).siblings(".numBox").val(num);
-		} 
-		else {
-			$(this).siblings(".numBox").val(minusNum);          
-		}
-	});
+$(function(){
+	$(".previewbtn1").click(function(){
+        let arr = $(this).attr("data-value").split(",");
+        console.log(arr[0]);
+        let str ="";
+        for(let i=0;i<arr.length;i++){
+        	str+=arr[i]+"<br/>"
+        }
+        $(".popupbg").fadeIn(500);
+        $(".btn1detaile").stop().animate({bottom:"50%"},500)
+		$(".btn1detaile").html(str)
 	})
-	
+	$(".popupbg").click(function(){
+            $(this).fadeOut(500);
+            $(".btn1detaile").stop().animate({bottom:"-100vh"},500)
+    })
+})
 </script>

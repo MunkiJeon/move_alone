@@ -42,11 +42,11 @@
 					<li class="option">
 						<h3>운송옵션을 알려주세요.</h3> 
 						<label for="option1"> 
-							<input type="radio" id="option1" name="option" value="일반"> 
+							<input type="radio" id="option1" name="option" value="일반이사"> 
 							일반이사
 						</label>
 						<label for="option2"> 
-							<input type="radio" id="option2" name="option" value="포장"> 
+							<input type="radio" id="option2" name="option" value="포장이사"> 
 							포장이사
 						</label>
 					</li>
@@ -62,9 +62,9 @@
 					<li class="time">
 						<h3>픽업시간을 선택해 주세요.</h3>
 						<div class="timeWrap">
-							<input type="radio" id="time1" name="time" value="오전"> 
+							<input type="radio" id="time1" name="time" value="주간"> 
 							<label for="time1"> 08:00 ~ 17:30 주간 </label> 
-							<input type="radio" id="time2" name="time" value="오후"> 
+							<input type="radio" id="time2" name="time" value="야간"> 
 							<label for="time2"> 18:00 ~ 07:30 야간 </label>
 						</div>
 						<hr/>
@@ -85,9 +85,9 @@
 					<li class="ELWrap">
 						<h3>출발지 엘레베이터 유무</h3>
 						<div class="start_ELWrap">
-							<input type="radio" id="st_el1" name="start_el" value="true">
+							<input type="radio" id="st_el1" name="start_el" value="엘베있음">
 							<label for="st_el1"> 있음 </label> 
-							<input type="radio" id="st_el2" name="start_el" value="false">
+							<input type="radio" id="st_el2" name="start_el" value="엘베있음">
 							<label for="st_el2"> 없음 </label>
 						</div>
 					</li>
@@ -95,9 +95,9 @@
 					<li class="PKWrap">
 						<h3>출발지 주차장 유무</h3>
 						<div class="start_PKWrap">
-							<input type="radio" id="st_pk1" name="start_pk" value="true">
+							<input type="radio" id="st_pk1" name="start_pk" value="주차가능">
 							<label for="st_pk1"> 있음 </label> 
-							<input type="radio" id="st_pk2" name="start_pk" value="false">
+							<input type="radio" id="st_pk2" name="start_pk" value="주차불가">
 							<label for="st_pk2"> 없음 </label>
 						</div>
 						<hr/>
@@ -117,18 +117,18 @@
 					<li class="ELWrap">
 						<h3>도착지 엘레베이터 유무</h3>
 						<div class="end_ELWrap">
-							<input type="radio" id="en_el1" name="end_el" value="true">
+							<input type="radio" id="en_el1" name="end_el" value="엘베있음">
 							<label for="en_el1"> 있음 </label> 
-							<input type="radio" id="en_el2" name="end_el" value="false"> 
+							<input type="radio" id="en_el2" name="end_el" value="엘베있음"> 
 							<label for="en_el2"> 없음 </label>
 						</div>
 					</li>
 					<li class="PKWrap">
 						<h3>도착지 주차장 유무</h3>
 						<div class="end_PKWrap">
-							<input type="radio" id="en_pk1" name="end_pk" value="true">
+							<input type="radio" id="en_pk1" name="end_pk" value="주차가능">
 							<label for="en_pk1"> 있음 </label> 
-							<input type="radio" id="en_pk2" name="end_pk" value="false">
+							<input type="radio" id="en_pk2" name="end_pk" value="주차불가">
 							<label for="en_pk2"> 없음 </label>
 						</div>
 					</li>

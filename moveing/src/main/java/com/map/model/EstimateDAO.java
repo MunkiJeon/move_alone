@@ -25,14 +25,12 @@ public class EstimateDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			close();
 		}
 	}
 	
 	public ArrayList<EstimateDTO> one(String user_id) {
 		ArrayList<EstimateDTO> res = new ArrayList<EstimateDTO>();
-		sql = "select * from estimate where id=?";
+		sql = "select * from estimate where id = ?";
 		try {
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1,user_id);
@@ -145,13 +143,15 @@ public class EstimateDAO {
 			sql = "select res_num from estimate where id = '"+user_id+"'";
 		return res_num;
 	}
+	
 	public void addEstimate(String pagenum,String user_id, String sel_date,String data) {
 		
 		System.out.println("addEstiate들어옴"+pagenum+"// ID:"+user_id+"// date:"+sel_date);
 		
 		try {
-			sql = "select id from estimate where id = '"+user_id+"'";
+			sql = "select id from estimate where id = ?";
 			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1,user_id);
 			rs = ptmt.executeQuery();
 			
 			if(pagenum.equals("") || data.equals(null)) {
@@ -166,8 +166,28 @@ public class EstimateDAO {
 				String[] arr= data.split("@");
 				System.out.println("arr길이: "+arr.length+"\n---"+data);
 				if(pagenum.equals("2")) {//1페이지에서 2페이지 넘어갈때
+					String[] stop = arr[4].split(",");
+					String[] enop = arr[6].split(",");
+					
+					String[] res = {arr[0],stop[0],stop[1],enop[0],enop[1]};
+					
+					//System.out.println(res.length+"//"+arr[0]+"//"+stop[0]+"//"+stop[1]+"//"+enop[0]+"//"+enop[1]);
+					int price=0;
+					sql = "select name, cost from ecategory";
+					ptmt = con.prepareStatement(sql);
+					rs = ptmt.executeQuery();
+					while (rs.next()) {
+						for(String a : res) {
+							if(a.equals(rs.getString("name"))) {
+								price += rs.getInt("cost");
+								//price = price + rs.getInt("cost");
+								//System.out.println(rs.getInt("cost"));
+							}
+						}
+					}
+					
 					sql = "update estimate set "
-							+ "SV_Type =?, sel_date =?, Start_point =?, Start_OP =?, End_point =?, End_OP =? "
+							+ "SV_Type =?, sel_date =?, Start_point =?, Start_OP =?, End_point =?, End_OP =?, price=? "
 							+ "where id =? and state =? ";
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1,arr[0]);
@@ -176,8 +196,9 @@ public class EstimateDAO {
 					ptmt.setString(4,arr[4]);
 					ptmt.setString(5,arr[5]);
 					ptmt.setString(6,arr[6]);
-					ptmt.setString(7,user_id);
-					ptmt.setInt(8,0);
+					ptmt.setInt(7,price);
+					ptmt.setString(8,user_id);
+					ptmt.setInt(9,0);
 					rs = ptmt.executeQuery();
 					
 					System.out.println("개인 데이터 넣음"+pagenum+"// ID:"+user_id+"// date:"+sel_date);
@@ -211,12 +232,23 @@ public class EstimateDAO {
 					
 					System.out.println("개인 데이터 넣음"+pagenum+"// ID:"+user_id+"// date:"+sel_date);
 				}else if(pagenum.equals("Res")) {//4페이지에서 결과 확인페이지 넘어갈때
+					sql = "select price from estimate where id =? and state =? ";
+					ptmt = con.prepareStatement(sql);
+					ptmt.setString(1,user_id);
+					ptmt.setInt(2,0);
+					rs = ptmt.executeQuery();
+					
+					rs.next();
+					int price= rs.getInt("price");
+					System.out.println("견적 중간 값!!"+price);
+					price += Integer.parseInt(arr[1]);
+					System.out.println("견적 최종 값!!"+price);
 					sql = "update estimate set "
 							+ "shopping_list =?, price =? "
 							+ "where id =? and state =? ";
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1,arr[0]);
-					ptmt.setString(2,arr[1]);
+					ptmt.setString(2,""+price);
 
 					ptmt.setString(3,user_id);
 					ptmt.setInt(4,0);

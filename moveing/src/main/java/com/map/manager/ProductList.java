@@ -18,6 +18,9 @@ public class ProductList implements ManagerService {
 		ProductDao pdao = ProductDao.getInstance();
 		ArrayList<ProductBean> list = pdao.getAllProduct();
 		
+//		for (ProductBean bean : list) {
+//			bean.setMainImgN("C:\\Users\\csy97\\git\\moveing\\src\\main\\webapp\\resource\\productImg\\" + bean.getMainImgN());
+//		}
 		
 		request.setAttribute("list", list);
 		request.setAttribute("mainUrl", "manager/productList.jsp");

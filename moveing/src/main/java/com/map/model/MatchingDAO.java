@@ -41,20 +41,20 @@ public class MatchingDAO {
 		//System.out.println("searchId >>>" + searchId);
 		//System.out.println("searchDate >>>" + searchDate);
 		
-		sql = "select * from matching where 1=1";
+		sql = "select * from matching ";
 			if(searchResnum != "" && searchResnum != null) {
 				//sql	+= " and res_num = " + searchResnum; //전체검색
-				sql	+= " and res_num LIKE '%" + searchResnum + "%'"; //특정검색
+				sql	+= "where res_num LIKE '%" + searchResnum + "%'"; //특정검색
 			}
 			if(searchName != "" && searchName != null) {
 				//sql	+= " and user_ID = '" + searchName + "'"; //전체검색
-				sql	+= " and user_ID LIKE '%" + searchName + "%'"; //특정검색
+				sql	+= "where user_ID LIKE '%" + searchName + "%'"; //특정검색
 			}
 			if(searchId != "" && searchId != null) {
-				sql	+= " and driver_ID = '" + searchId +"'";
+				sql	+= "where driver_ID = '" + searchId +"'";
 			}
 			if(searchDate != "" && searchDate != null) {
-				sql	+= " and DATE(reservat_date) = '" + searchDate +"'";
+				sql	+= "where DATE(reservat_date) = '" + searchDate +"'";
 			}
 		System.out.println("sql >>>" + sql);
 		try {
@@ -78,6 +78,7 @@ public class MatchingDAO {
 				dto.setRequests(rs.getString("requests"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
+				dto.setReq_state(rs.getInt("req_state"));
 				
 				res.add(dto);
 			}

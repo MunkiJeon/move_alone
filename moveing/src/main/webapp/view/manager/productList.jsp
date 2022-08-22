@@ -19,7 +19,10 @@
 	/* #productManage tr:hover {background-color: #C2674B;} */
 </style>
 
-
+<script>
+	let path = "${path}";
+		
+</script>
 <table id="productManage">
 	<caption>
 		<b>상품관리</b>
@@ -46,10 +49,9 @@
 		<td>${ pbean.discprice}원</td>
 		<td><a href="ProductUpdateForm?pno=${ pbean.no}">수정</a></td>
 		<td><a href="ProductDelete?pno=${pbean.no}">삭제</a></td>
-		<%-- <td>
-			
-			<img src="<%=fullPath%>" width="50px" height="60px">		
-		</td> --%>
+		<td>
+			<img src="../resource/productImg/${pbean.mainImgN }" width="50px" height="60px">		
+		</td>
 	</tr>
 	</c:forEach>
 	<tr>

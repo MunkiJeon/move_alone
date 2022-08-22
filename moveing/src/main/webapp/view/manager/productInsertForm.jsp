@@ -149,7 +149,8 @@
 		height:70px;
 	}
 </style>
-<form name="f" action="ProductInsertProc" method="post" enctype="multipart/form-data">
+
+<form name="f" action="<c:url value='/manager/ProductInsertProc'/>" method="post" enctype="multipart/form-data">
 	<table id="producRegister">
 		<caption>
 				<strong>상품등록</strong>

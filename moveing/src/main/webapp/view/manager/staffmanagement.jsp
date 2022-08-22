@@ -12,15 +12,18 @@
     <table  border="" width="100%">
         <tr>
             <td colspan="5" align="center">
-                <div id="SearchBox">
-                    이름: <input type="text" id="search_title" name="search_name" placeholder="${title }명">
-                    아이디: <input type="text"  id="search_id" name="search_id" placeholder="아이디">
-                    입사일:<input type="date" id="search_date" name="search_date" placeholder="입사일">
-                    <button id="searchBtn">검색</button>    
-                </div>
-                <button id="addBtn" class="popupbtn">추가</button>
-                <button id="editBtn" class="popupbtnModify">수정</button>
-                <button id="deleteBtn">삭제</button>
+            	<form action="<c:url  value='/manager/'/>StaffManagement?level=${level}">
+	                <div id="SearchBox">
+	                    이름: <input type="text" id="search_title" name="search_name" placeholder="${title }명"  value="<c:out value="${param.search_name}"/>">
+	                    아이디: <input type="text"  id="search_id" name="search_id" placeholder="아이디"  value="<c:out value="${param.search_id}"/>">
+	                    입사일:<input type="date" id="search_date" name="search_date" placeholder="입사일" value="<c:out value="${param.search_date}"/>">
+	                    <input type="hidden"  name="level" value="<c:out value="${level}"/>">
+	                    <button id="searchBtn">검색</button>    
+	                </div>
+	                <button id="addBtn" class="popupbtn">추가</button>
+	                <button id="editBtn" class="popupbtnModify">수정</button>
+	                <button id="deleteBtn">삭제</button>
+            	</form>
             </td>
         </tr>
         <tr align="center">
@@ -265,5 +268,10 @@
 		            	
 		        })
        	 })
+       	 
+       	         <%-- 검색하기 --%>
+        $("#searchBtn").click(function(e){
+        	$('#form').submit();
+        })
 	})
 </script>

@@ -62,7 +62,7 @@
 <table id="banner_imageTable">
 	<tr>
 		<td>
-			<img id="banner_image" width=100% height="700" title="" alt="썸머뉴" rel="79-10" src="<c:url value='/resource/image/'/>gg1.png" style="display: none">
+			<img id="banner_image" width=100% height="700" title="" rel="79-10" src="<c:url value='/resource/image/'/>gg1.png" style="display: none">
 		</td>
 	</tr>
 	<tr>
@@ -83,7 +83,7 @@
             <li class="itam_${no.index }">
             	<table id="mainListInside">
 						<tr>
-							<td><img src="<c:url value='/resource/image/'/>${ pbean.mainImgN}" width="300px" height="380px"></td>
+							<td><img src="<c:url value='/resource/productImg/'/>${ pbean.mainImgN}" width="300px" height="380px"></td>
 							<td width="300px" class="item">
 								<h3 class="pname">${ pbean.name}</h3>
 								

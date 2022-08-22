@@ -14,7 +14,8 @@ public class StaffManagement implements ManagerService {
 		
 		int level = Integer.parseInt(request.getParameter("level"));
 		
-		ArrayList<UserDTO> mainData = new UserDAO().levelUser(level);
+//		ArrayList<UserDTO> mainData = new UserDAO().levelUser(level);
+		ArrayList<UserDTO> mainData = new UserDAO().searUser(request);
 		
 		if(level==1) {request.setAttribute("title", "기사");}
 		else {request.setAttribute("title", "고객");}

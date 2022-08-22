@@ -48,7 +48,7 @@ public class ProductDelete implements ManagerService {
 		StockDao sdao = StockDao.getInstance();
 		int cnt2 = sdao.deleteAllStock(pno);
 		request.setAttribute("mainUrl", "inc/alert.jsp");
-		request.setAttribute("goUrl", "ProductList");
+		request.setAttribute("goUrl", "manager/ProductList");
 		
 		if(cnt>0) {
 			msg="삭제 완료";

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 public class UserDAO {
@@ -125,6 +126,54 @@ public class UserDAO {
 		
 		return res;
 	}
+	
+	public ArrayList<UserDTO> searUser(HttpServletRequest request) {
+		ArrayList<UserDTO> res = new ArrayList<UserDTO>();
+		String searchName   = request.getParameter("search_name");   
+		String searchId     = request.getParameter("search_id");     
+		String searchDate   = request.getParameter("search_date");   
+		int level   = Integer.parseInt(request.getParameter("level"));   
+		sql = "select * from user where level = ? ";
+		
+		if(searchName != "" && searchName != null) {
+			//sql	+= " and user_ID = '" + searchName + "'"; //전체검색
+			sql	+= "AND NAME LIKE '%" + searchName + "%'"; //특정검색
+		}
+		if(searchId != "" && searchId != null) {
+			sql	+= "AND ID = '" + searchId +"'";
+		}
+		if(searchDate != "" && searchDate != null) {
+			sql	+= "AND DATE(JOIN_DATE) = '" + searchDate +"'";
+		}
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setInt(1, level);
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				UserDTO dto = new UserDTO();
+				
+				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setJoin_date(rs.getDate("join_date"));
+				dto.setTel(rs.getString("tel"));
+				dto.setState(rs.getInt("state"));
+				dto.setLevel(rs.getInt("level"));
+				
+				res.add(dto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return res;
+	}
+	
+	
+	
 	public ArrayList<UserDTO> levelUser(int level) {
 		ArrayList<UserDTO> res = new ArrayList<UserDTO>();
 		sql = "select * from user where level = ?";

@@ -21,7 +21,7 @@ public class ProductInsertProc implements ManagerService {
 		try{
 			// 1. 웹서버 내에서 저장될 위치를 지정하기 위해, jsp의 내장객체 config를 이용해서 웹서버 내에서 특정 위치의 경로를 생성
 			//String targetLocation = config.getServletContext().getRealPath("/admin/product_images");
-			String targetLocation ="C:\\Users\\main\\Desktop\\last\\moveing\\src\\main\\webapp\\resource\\productImg";
+			String targetLocation ="C:\\Users\\csy97\\git\\moveing\\src\\main\\webapp\\resource\\productImg";
 			//System.out.println(targetLocation);
 			
 			// 2. 최대 업로드 가능 사이즈를 지정 및 인코딩 방식 지정
@@ -65,7 +65,7 @@ public class ProductInsertProc implements ManagerService {
 
 		
 		request.setAttribute("mainUrl", "inc/alert.jsp");
-		request.setAttribute("goUrl", "ProductList");
+		request.setAttribute("goUrl", "manager/ProductList");
 		request.setAttribute("msg", "성공");
 		
 	}

@@ -8,6 +8,7 @@ tr, td {
 }
 .stepsign{position: fixed;z-index:2;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;width: 600px;background: white;padding: 30px;border-radius: 15px;}
 .popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
+.btn1detaile{position: fixed;z-index:2;bottom: -100vh;left: 50%;transform:translate(-50%,50%) ;background: white;padding: 30px;border-radius: 15px;}
 </style>
 
 <form action="/moveing/manager/Matching" id="form" name="form" method="post">
@@ -63,7 +64,6 @@ tr, td {
             <td class="previewbtn1" data-value="${dto.requests }">보기</td>
             <td>${dto.req_date }</td>
             <td>${dto.cost }</td>
-     
            <!--  <td><a href="">보기</a></td> -->
         </tr>
       </c:if>
@@ -112,6 +112,8 @@ tr, td {
 	</table>
 </div>
 <div class="popupbg"></div>
+<div class="btn1detaile"></div>
+
 <div class="stepsign">
  <table>
      <tr>

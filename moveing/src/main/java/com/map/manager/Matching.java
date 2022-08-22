@@ -13,8 +13,8 @@ public class Matching implements ManagerService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		System.out.println("execute >>>>>" + request.getParameter("search_resnum"));
-//		ArrayList<MatchingDTO> mainData = new MatchingDAO().allUser(request);
-		ArrayList<MatchingDTO> mainData = new MatchingDAO().list();
+		ArrayList<MatchingDTO> mainData = new MatchingDAO().allUser(request);
+//		ArrayList<MatchingDTO> mainData = new MatchingDAO().list();
 		
 		System.out.println("mainData list >>>" + mainData.size());
 		

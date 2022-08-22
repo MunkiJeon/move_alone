@@ -25,6 +25,8 @@ public class EstimateDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close();
 		}
 	}
 	
@@ -65,6 +67,8 @@ public class EstimateDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close();
 		}
 		return res;
 	}
@@ -227,6 +231,8 @@ public class EstimateDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}finally {
+			close();
 		}
 		
 	}

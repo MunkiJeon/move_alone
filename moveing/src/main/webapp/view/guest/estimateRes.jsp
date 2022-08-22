@@ -13,7 +13,7 @@ tr, td {
 .popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
 </style>
 <div class="managerWrap">
-	<table border="" width="100%">
+	<table border="" >
 		<tr>
 			<td colspan="16" align="center">
 				<h1>${id } 님 견적을 보냈습니다.</h1>

@@ -5,8 +5,8 @@
 <div class="managerWrap">
     <div class="talk">
         <div class="list">
-            <button>고객</button>
             <button>직원</button>
+            <button>고객</button>
         </div>
         <div class="line"></div>
         <table class="talkWrap">

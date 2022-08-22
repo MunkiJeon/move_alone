@@ -83,7 +83,7 @@
 	            <td><input type="file"/></td>
 	        </tr-->
 	        <tr>
-	            <td colspan="2"><button type="submit">등록</button></td>
+	            <td colspan="2"><button class="seletebtn" type="submit">등록</button></td>
 	        </tr>
 	    </table>
     </form>
@@ -106,6 +106,7 @@
 			$("#name").val("");
 			$("#email").val("");
 			$("#tel").val("");
+            $("#id").attr("readonly",false);
 			add = true;
             if(add){
 	            $(".stepsign").submit(function(e){
@@ -189,7 +190,7 @@
 	    	})  
 	            
 	        if(modify){    
-		        $(".deletebtn").submit(function(e){
+		        $(".seletebtn").click(function(e){
 		        	
 	                e.preventDefault();
 	                console.log(id+","+$("#pw").val()+","+$("#name").val()+","+$("#email").val()+","+$("#tel").val())
@@ -200,10 +201,11 @@
 	    	 			async:false,
 	    	 			dataType:'json',
 	    	 			success:function(data){
-			  				console.log(data.chk);
-			  				if(data[0]=="false"){alert("실패")}
+	    	 				console.log(data.chk)
+			  				if(data.chk=="false"){alert("실패")}
 			  				else{alert("성공");
 			  					location.href="?level="+level;
+			  					
 			  				}
 	    	 				
 	    	 			},

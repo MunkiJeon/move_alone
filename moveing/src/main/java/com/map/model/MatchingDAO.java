@@ -89,6 +89,42 @@ public class MatchingDAO {
 		
 		return res;
 	}
+	public ArrayList<MatchingDTO> list() {
+		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
+			
+		sql	= "select * from matching";
+		try {
+			ptmt = con.prepareStatement(sql);
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				MatchingDTO dto = new MatchingDTO();
+				dto = new MatchingDTO();
+				
+				dto.setReq_state(rs.getInt("req_state"));
+				dto.setRes_num(rs.getInt("res_num"));
+				dto.setUser_ID(rs.getString("user_ID"));
+				dto.setDriver_ID(rs.getString("driver_ID"));
+				dto.setReservat_date(rs.getDate("reservat_date"));
+				dto.setStart_point(rs.getString("start_point"));
+				dto.setStart_op(rs.getString("start_op"));
+				dto.setEnd_point(rs.getString("end_point"));
+				dto.setEnd_op(rs.getString("end_op"));
+				dto.setLuggage_list(rs.getString("luggage_list"));
+				dto.setShopping_list(rs.getString("shopping_list"));
+				dto.setRequests(rs.getString("requests"));
+				dto.setReq_date(rs.getDate("req_date"));
+				dto.setCost(rs.getInt("cost"));
+				
+				res.add(dto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return res;
+	}
 	
 	public ArrayList<MatchingDTO> oneUserForGuest(String id,int req_state ) {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();

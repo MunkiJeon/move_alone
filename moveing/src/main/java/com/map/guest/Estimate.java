@@ -44,6 +44,7 @@ public class Estimate implements GuestService {
 				String start_point = request.getParameter("st_zip")
 									+request.getParameter("st_addr1")
 									+request.getParameter("st_addr2");
+				
 				String[] start_op = {
 						request.getParameter("start_el"),//엘베 유무
 						request.getParameter("start_pk"),//주차 유무
@@ -62,9 +63,11 @@ public class Estimate implements GuestService {
 						request.getParameter("en_addr3"),//층수
 						request.getParameter("en_addr4"),//방개수
 				};
+				String mo_km = request.getParameter("mo_km");
 				gim_data= option+"@"+sel_date+"@"+time+"@"
 				+start_point+"@"+start_op[0]+","+start_op[1]+","+start_op[2]+","+start_op[3]+"@"
-				+end_point+"@"+end_op[0]+","+end_op[1]+","+end_op[2]+","+end_op[3];
+				+end_point+"@"+end_op[0]+","+end_op[1]+","+end_op[2]+","+end_op[3]+"@"
+				+mo_km;
 				
 			}else if(pageNum.equals("3")) {
 				String item1 = request.getParameter("item1");

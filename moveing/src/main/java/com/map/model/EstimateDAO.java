@@ -185,7 +185,9 @@ public class EstimateDAO {
 							}
 						}
 					}
-					
+					System.out.println("거리값 뺴고:"+price);
+					price += Double.parseDouble(arr[7])*1000;
+					System.out.println("거리값:"+price);
 					sql = "update estimate set "
 							+ "SV_Type =?, sel_date =?, Start_point =?, Start_OP =?, End_point =?, End_OP =?, price=? "
 							+ "where id =? and state =? ";

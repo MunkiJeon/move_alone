@@ -94,7 +94,7 @@ function req(){
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),//TC0ONETIME
 	    name : '주문명:결제테스트',
-	    amount : 100, //판매 가격
+	    amount : ${dto.price }, //판매 가격
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',

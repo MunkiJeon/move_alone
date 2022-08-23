@@ -144,14 +144,6 @@
                         <input type="radio" id="option2" name="option">
                         포장이사
                     </label>
-                    <label for="option3">
-                        <input type="radio" id="option3" name="option">
-                        기사님이 짐을 같이 옮겨줌
-                    </label>
-                    <label for="option4">
-                        <input type="radio" id="option4" name="option">
-                        기사님 도움 + 인부 1명 추가
-                    </label>
                 </li>
             </ul>
             <div>

@@ -427,7 +427,7 @@ public class CategoryDao {
 
 		} catch (SQLException e) {
 			System.out.println(e);
-			System.out.println("insertSCategory() SQL문 실행중 오류 발생");
+			System.out.println("insertLCategory() SQL문 실행중 오류 발생");
 		} finally {
 			try {
 				if (ps != null)
@@ -465,12 +465,13 @@ public class CategoryDao {
 			ps.setString(1, scname);
 			ps.setInt(2, maxStep+1);
 			ps.setInt(3, lno);
-			
+			System.out.println(scname+"-----------------------------");
+			System.out.println(maxStep+1+"-----------------------------");
 			// 4. SQL문 실행
 			cnt = ps.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 			System.out.println("insertSCategory() SQL문 실행중 오류 발생");
 		} finally {
 			try {

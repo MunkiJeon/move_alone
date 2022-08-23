@@ -1,0 +1,33 @@
+package com.map.manager;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.map.model.CategoryDao;
+
+public class SmallCategoryUp implements ManagerService {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+
+
+		int lno = Integer.parseInt(request.getParameter("lno"));
+		int sno = Integer.parseInt(request.getParameter("sno"));
+		int sstep = Integer.parseInt(request.getParameter("sstep")); // 해당 대분류의 순서
+		
+	 	CategoryDao cdao = CategoryDao.getInstance();	
+
+	 		
+		int result = -1;
+		
+		if (sstep != 1) { // 수정하려는 행의 step이 맨 첫번째가 아닌 경우
+			result = cdao.updateUpSStep(lno, sno, sstep);
+		}
+		
+		request.setAttribute("mainUrl", "inc/alert.jsp");
+		request.setAttribute("goUrl", "manager/CategoryManager");
+	}
+
+}

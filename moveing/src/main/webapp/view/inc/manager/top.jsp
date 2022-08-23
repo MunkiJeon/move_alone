@@ -74,6 +74,7 @@
             <div id="box7" class="accordion-collapse collapse" data-bs-parent="#boxs">
                 <div class="accordion-body">
                     <a class="accordionList" href="<c:url  value='/manager/'/>ProductList">재고 관리</a>
+                    <a class="accordionList" href="<c:url  value='/manager/'/>CategoryManager">카태고리 관리</a>
                 </div>
             </div>
         </div>

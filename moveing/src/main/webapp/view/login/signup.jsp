@@ -191,13 +191,7 @@ input{
 			return;
 		}
 		
-		var reg3 =  /^[0-9]*$/;
-		
-		var tempNum = $('input[name="number"]').val();
-		if(tempNum.search(reg3) == -1){
-			alert("전화번호는 숫자만 입력해주세요.");
-			return;
-		}
+	
 		
 		document.f.submit();
 	}

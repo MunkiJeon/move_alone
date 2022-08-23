@@ -87,6 +87,11 @@
  }
 .menuI>.box2 input[type=checkbox]{
 	display: none;
+
+}
+#bo {
+background: transparent;
+cursor: pointer;	
 }
 </style>
 <script type="text/javascript" src="../ggg/jquery-3.6.0.js"></script>
@@ -112,7 +117,7 @@ $(function () {
 		index = $(this).index()
 		$(".tableM .section").hide();
 		$(".tableM .section").eq(index).show();
-		
+		if(index!=0) $(".modifyForm").hide();
 	})
 
 	$(".menuI>.box>label").each(function () {
@@ -138,24 +143,33 @@ $(function () {
 	$(".modifyForm .cancel").click(function() {
 		$(".modifyForm").hide();
 	})
+	
+	
+	$("#bo").click(function(){
+		if(!$(this).hasClass("asdf")){
+			$(this).addClass("asdf")
+			$(".menuI").animate({left:"0"})
+			$(this).html("◀");	
+			
+		}else{
+			$(this).removeClass("asdf")
+			$(".menuI").animate({left:"-100px"})
+			$(this).html("▶");						
+		}
+	})
 })
 </script>
 
-<!-- <input type="checkbox" id="w1">
-<input type="checkbox" id="w2">
-<input type="checkbox" id="w3">
-<input type="checkbox" id="w4">
-<input type="checkbox" id="w5"> -->
 
 <div class="menuI">
 	<div class="box">
 		<label class="menuI2" id ="w1">내 정보</label>
 		<label class="menuI2" id ="w2">이사정보</label>
-		<label class="menuI2" id ="w3">내역</label>
+		<label class="menuI2" id ="w3">내역</label> 
 	</div>
 	
 	<label for="bo"class="box2">
-	▶<input type="checkbox" id="bo">
+	<button id="bo">▶</button>
 	</label>
 </div>
 

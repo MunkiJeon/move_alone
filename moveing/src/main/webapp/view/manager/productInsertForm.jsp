@@ -207,7 +207,7 @@
 		 </tr>
 		 
 		 <tr border="1">
-		 	<td>
+		 	<!-- <td>
 		 	옵션/재고
 		 	</td>
 		 	<td> 
@@ -215,7 +215,7 @@
 				<span><input type='text' value='S' size='5' placeholder='사이즈 등' name="opn_1"> 
 				<input type='text' value='10' size='5' placeholder='재고수량' name="stock_1"><br></span>	
 
-		 	</td>
+		 	</td> -->
 		 <tr>
 		 
 		 <tr >

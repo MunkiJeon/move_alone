@@ -69,4 +69,12 @@ public class UserDTO {
 		this.pic = pic;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel=" + tel + ", pic="
+				+ pic + ", join_date=" + join_date + ", state=" + state + ", level=" + level + "]";
+	}
+	
+	
+	
 }

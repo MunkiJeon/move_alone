@@ -11,16 +11,6 @@
 <!--   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
-<script>
-
-naver.maps.Service.geocode({ address: '불정로 6' }, function(status, response) {
-    if (status === naver.maps.Service.Status.ERROR) {
-        return alert('Something wrong!');
-    }
-
-    // 성공 시의 response 처리
-});;
-</script>
 </head>
 <body>
   <button style="width:100px;height:100px;position:fixed;top:200px;left:300px" onclick="req()">결제하기</button>

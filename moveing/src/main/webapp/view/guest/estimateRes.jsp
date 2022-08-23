@@ -6,6 +6,13 @@
 <link rel="stylesheet" href="<c:url value='/resource/css/guest/calc.css'/>">
 <script src="<c:url value='/resource/js/estimate.js'/>"></script>
 <style>
+.managerWrap{padding:100px;}
+.estimateResTable{margin:0 auto;}
+.estimateResTable td{padding:10px;}
+.estimateResTable .tr1{background: #eee;}
+.estimateResTable td:nth-last-child(1){width:400px;}
+.estimateResTable td:nth-last-child(2){width:150px;background: #eee;}
+
 tr, td {
 	border: 1px #979797 solid;
 }
@@ -13,52 +20,67 @@ tr, td {
 .popupbg{position: fixed;background-color: rgba(0,0, 0, 0.3);width: 100%;height: 100%;display: none;top:0;left:0;}
 </style>
 <div class="managerWrap">
-	<table border="" >
-		<tr>
-			<td colspan="16" align="center">
+	<table class="estimateResTable" border="" >
+		<tr class="tr1">
+			<td colspan="2" align="center">
 				<h1>${id } 님 견적을 보냈습니다.</h1>
 			</td>
 		</tr>
 		
 		<tr align="center">
-			<td><input type="checkbox" id="allCheck"></td>
+		
 			<td>예약번호</td>
+            <td>${dto.res_num }</td>
+		</tr>
+		<tr align="center">
 			<td>아이디</td>
+			<td>${dto.id }</td>
+		</tr>
+		<tr align="center">	
 			<td>이름</td>
+			<td>${dto.name }</td>
+		</tr>
+		<tr align="center">
 			<td>배송 종류</td>
-			<td>예약날짜</td>
+			<td>${dto.SV_Type }</td>
+		</tr>
+		<tr align="center">
+			<td>배송 날짜</td>
+			<td>${dto.sel_date }</td>
+		</tr>
+		<tr align="center">
 			<td>출발지 주소</td>
+			<td>${dto.start_Point }</td>
+		</tr>
+		<tr align="center">
 			<td>출발지 옵션</td>
+			<td>${dto.start_OP }</td>
+		</tr>
+		<tr align="center">
 			<td>도착지 주소</td>
+			<td>${dto.end_Point }</td>
+		</tr>
+		<tr align="center">
 			<td>도착지 옵션</td>
+			<td>${dto.end_OP }</td>
+		</tr>
+		<tr align="center">
 			<!-- <td>짐목록</td> -->
 			<td>쇼핑리스트</td>
-			<td>요청사항</td>
-			<td>예약날짜</td>
-			<td>총가격</td>
+			<td>${dto.shopping_list }</td>
 		</tr>
-<c:forEach items="${mainData }" var="dto" varStatus="no">
-	<c:if test="${dto.state!=9}"><!-- 임시로 전체 나오게 하려고 9 넣음 -->
-        <tr align="center"> <!-- 모양  -->
-            <td><input type="checkbox" id="allCheck"></td>
-            <td>${dto.res_num }</td>
-            <td>${dto.id }</td>
-            <td>${dto.name }</td>
-            <td>${dto.SV_Type }</td>
-            <td>${dto.sel_date }</td>
-            <td>${dto.start_Point }</td>
-            <td>${dto.start_OP }</td>
-            <td>${dto.end_Point }</td>
-            <td>${dto.end_OP }</td>
-            <%-- <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td> --%>
-            <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
-            <td class="previewbtn1" data-value="${dto.request }">보기</td>
-            <td>${dto.req_date }</td>
-            <td>${dto.price }</td>     
-        </tr>
-      </c:if>
-</c:forEach>
-		
+		<tr align="center">
+			<td>요청사항</td>
+			<td>${dto.request }</td>
+		</tr>
+		<tr align="center">
+			<td>예약날짜</td>
+			<td>${dto.req_date }</td>
+		</tr>
+		<tr align="center">
+			<td>총가격</td>
+			<td>${dto.price }</td>
+		</tr>
 	</table>
 </div>
 <p class="btn1detaile"></p>

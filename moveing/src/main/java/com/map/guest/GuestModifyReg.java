@@ -14,25 +14,26 @@ public class GuestModifyReg implements GuestService {
 		try {
 			UserDTO dto = new UserDTO();
 			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("id");
 			dto.setId((String)session.getAttribute("id"));
-			dto.setPw((request.getParameter("pw")));
+			dto.setName(request.getParameter("pname"));
 			dto.setEmail((request.getParameter("email")));
 			dto.setTel((request.getParameter("tel")));
+			UserDTO dto2 = new UserDAO().oneUser(id);
+			
 			
 			int cnt = new UserDAO().modify(dto);
 			
-			request.setAttribute("oh", "no");
-			System.out.println(dto.getEmail());
-			if(!dto.getEmail().equals("")||!dto.getTel().equals("")||!dto.getPw().equals("")) {
-				
-				request.setAttribute("msg", "성공");
-				request.setAttribute("mainUrl", "guest/mypage.jsp");
-				request.setAttribute("oh", "yes");
-			}else {
-				request.setAttribute("msg", "실패");
-				request.setAttribute("mainUrl", "guest/mypage.jsp");
-				request.setAttribute("oh", "yes");
-			}
+			request.setAttribute("msg", "기본정보 변경완료");
+			request.setAttribute("mainUrl", "guest/alert.jsp");
+			request.setAttribute("url", "/guest/GuestMyPage");
+			request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
+			
+			
+			
+			
+			
+		
 			
 			request.setAttribute("dto", dto);
 			

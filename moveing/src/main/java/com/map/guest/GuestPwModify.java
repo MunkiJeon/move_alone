@@ -7,44 +7,42 @@ import javax.servlet.http.HttpSession;
 import com.map.model.UserDAO;
 import com.map.model.UserDTO;
 
-public class GuestDeleteReg implements GuestService {
+public class GuestPwModify implements GuestService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
 		try {
-			UserDTO dto = new UserDTO();
-			UserDTO dto2 = new UserDTO();
 			HttpSession session = request.getSession();
 			String id = (String)session.getAttribute("id");
-			dto.setId(((String)session.getAttribute("id")).trim());
-			dto.setPw(request.getParameter("pw2"));
-			dto2=new UserDAO().oneUser(id);
 			
+			UserDTO dto = new UserDTO();
+			UserDTO dto2 = new UserDAO().oneUser(id);
+			UserDTO dto3= new UserDTO();
+		
+			dto.setId(id);
+			dto3.setId(id);
 			
+			dto.setPw(request.getParameter("pwP"));
+			dto3.setPw(request.getParameter("pwN"));
 			
-			if(!dto2.getPw().equals(dto.getPw())) {
+			if(dto2.getPw().equals(dto.getPw())) {
+				int cnt = new UserDAO().pwModify(dto3);
+				request.setAttribute("msg", "비밀번호가 변경되었습니다.");
+				request.setAttribute("mainUrl", "guest/alert.jsp");
+				request.setAttribute("url", "/guest/GuestMyPage");
+				request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
+			}else if(!dto2.getPw().equals(dto.getPw())) {
 				request.setAttribute("msg", "비밀번호가 틀립니다.");
 				request.setAttribute("mainUrl", "guest/alert.jsp");
-				request.setAttribute("url", "/guest/Out");
+				request.setAttribute("url", "/guest/GuestMyPage");
 				request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
-				
-			}else if(dto2.getPw().equals(dto.getPw())){
-				request.setAttribute("msg", "탈퇴되었습니다.");
-				request.setAttribute("mainUrl", "guest/alert.jsp");
-				request.setAttribute("url", "/login/LogOut");
-				request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
-				int cnt = new UserDAO().delete(dto);
 			}
-			
-			//System.out.println(cnt);
-			//System.out.println((String)session.getAttribute("id"));
-			
-			
 			
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 

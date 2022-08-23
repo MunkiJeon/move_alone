@@ -209,7 +209,7 @@ $(function () {
 				if(data.cnt==1){
 					
 					console.log(data.cnt)
-					info2.parent(".btn").remove();
+					$("."+info2.attr("data-index")).remove();
 					alert("선택완료");
 					
 				}
@@ -324,15 +324,15 @@ $(function () {
 							</tr>
 							<tr><td colspan="6"><hr></td></tr>
 						
-								<c:forEach items="${dto4}" var="dtoaa">
+								<c:forEach items="${dto4}" var="dtoaa" varStatus="no">
 									
-								<tr class="btn">
+								<tr class="btn${no.index}">
 									<td>${dtoaa.user_ID}</td>
 									<td>${dtoaa.reservat_date }</td>
 									<td>${dtoaa.start_point }</td>
 									<td>${dtoaa.end_point }</td>
 									<td>${dtoaa.shopping_list }</td>
-									<td><button class="selected" value="${dtoaa.res_num }">선택</button></td>
+									<td><button class="selected" data-index="btn${no.index}" value="${dtoaa.res_num }">선택</button></td>
 								</tr>
 								</c:forEach>
 								

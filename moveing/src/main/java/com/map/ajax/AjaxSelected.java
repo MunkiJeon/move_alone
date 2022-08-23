@@ -33,10 +33,7 @@ public class AjaxSelected implements AjaxService {
 			if(cnt>0) {
 				System.out.println("ddd");
 				data.put("cnt", cnt);
-				System.out.println("cnt");
-				System.out.println(cnt);
 				response.getWriter().append(data.toJSONString());
-				System.out.println(data);
 			}
 			
 			

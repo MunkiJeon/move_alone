@@ -357,6 +357,23 @@ public class UserDAO {
 		   return 0;
 	  }
 	
+	public int staffLength() {
+		int res = 0;
+		try {
+			sql = "select count(level) from user where level = 1;";
+		
+			ptmt = con.prepareStatement(sql);
+			rs = ptmt.executeQuery();
+			rs.next();
+			res = rs.getInt("count(level)");
+		   } catch (Exception e) {
+			   e.printStackTrace();
+		}finally {
+			close();
+		}
+	   return res;
+	}
+	
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}
 		if(ptmt!=null)try {ptmt.close();} catch (SQLException e) {}

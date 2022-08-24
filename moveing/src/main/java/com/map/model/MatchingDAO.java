@@ -363,6 +363,25 @@ public class MatchingDAO {
 		return dto;
 	}
 	
+	public int diaryNon(String start,String end){	
+		int res = 0; 
+		sql = "select count(reservat_date) from matching where reservat_date >= ? and reservat_date < ?;";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, start);
+			ptmt.setString(2, end);
+			rs = ptmt.executeQuery();
+			if(rs.next()) {
+				res = rs.getInt("count(reservat_date)");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+		
+	}
+	 
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}
 		if(ptmt!=null)try {ptmt.close();} catch (SQLException e) {}

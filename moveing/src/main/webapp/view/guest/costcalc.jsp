@@ -116,7 +116,7 @@
                         </label>
                     </div>
                 </li>
-                <li class="time">
+                <!-- <li class="time">
                     <h3>이사</h3>
                     <div class="timeWrap">
                         <input type="radio" id="time1" name="time">
@@ -133,7 +133,7 @@
                         </label>
                         
                     </div>
-                </li>
+                </li> -->
                 <li class="option">
                     <h3>운송옵션을 알려주세요.</h3>
                     <label for="option1">

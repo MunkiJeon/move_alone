@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="<c:url value='/resource/css/guest/calc.css'/>">
 <link rel="stylesheet" href="<c:url value='/resource/css/diary.css'/>">
-
+<style>
+.chk{cursor: pointer;}
+.chk.unchk{cursor: not-allowed;}
+.calc .address .addressIn input{display: inline-block;}
+</style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="<c:url value='/resource/js/jquery-3.6.0.js'/>"></script>
@@ -92,7 +96,7 @@ function cal() {
 <section class="detail">
 
 	<section class="calc">
-		<form action="Estimate?num=2" method="post">
+		<form action="Estimate?num=2" name="sb" method="post">
 			<!-- <input type="hidden" name="num" value="2"/> -->
 			<div class="calcList">
 				<ul class="calcItem">
@@ -110,7 +114,7 @@ function cal() {
 					
 					<li>
 						<h3>예약 날짜를 선택해 주세요.</h3>
-						<div class="diary">
+						<div class="diary" tabindex="0">
 							<div class="wrapper"></div>
 							<input type="hidden" name="sel_date" id="sel_date">
 						</div>
@@ -119,9 +123,9 @@ function cal() {
 					<li class="time">
 						<h3>픽업시간을 선택해 주세요.</h3>
 						<div class="timeWrap">
-							<input type="radio" id="time1" name="time" value="주간"> 
+							<input class="op1" type="radio" id="time1" name="time" value="주간"> 
 							<label for="time1"> 08:00 ~ 17:30 주간 </label> 
-							<input type="radio" id="time2" name="time" value="야간"> 
+							<input class="op1" type="radio" id="time2" name="time" value="야간"> 
 							<label for="time2"> 18:00 ~ 07:30 야간 </label>
 						</div>
 						<hr/>
@@ -130,10 +134,10 @@ function cal() {
 					<li class="address">
 						<div>
 							<h3>출발지를 입력해 주세요.</h3> <!-- <input type="text" placeholder="여기를 눌러서 출발지 주소 검색" name="start_point"> -->
-		                    <input type="text"  name="st_addr1" placeholder="여기를 눌러서 출발지 주소 검색"  onfocus="st_openZipSearch()">
-		                    <input type="text"  name="st_addr2" placeholder="상세 주소 입력 : 건물 이름 혹은 동호수">
-							<input type="text" name="st_addr3" style="width: 20%" placeholder="층수: ex) 2층">
-							<input type="text" name="st_addr4" style="width: 20%" placeholder="방수: ex) 3개">
+		                    <input type="text" id="st_addr1" name="st_addr1" placeholder="여기를 눌러서 출발지 주소 검색"  onfocus="st_openZipSearch()">
+		                    <input type="text" id="st_addr2"  name="st_addr2" placeholder="상세 주소 입력 : 건물 이름 혹은 동호수">
+							<p class="addressIn"><input id="st_addr3" type="text" name="st_addr3" style="width: 20%" placeholder="층수: ex) 2층">층</p>
+							<p class="addressIn"><input id="st_addr4" type="text" name="st_addr4" style="width: 20%" placeholder="방수: ex) 3개">개</p>
 							<input type="hidden" name="start">
 						</div>
 					</li>
@@ -189,7 +193,7 @@ function cal() {
 					</li>
 					<li>
 					<input type="hidden" class="mo_km" name="mo_km">
-					<button type="submit" class="detailNext">다음</button>
+					<button type="button" class="detailNext">다음</button>
 					</li>
 				</ul>
 				<!-- <button type="button" class="test">테스트</button> -->
@@ -204,7 +208,144 @@ const now = new Date();
 let realMonth = now.getMonth();
 let realDay = now.getDate();
 diaryAjax(num);
+$(".detailNext").click(effectiveness);
+function effectiveness(){
+	
+	let number = /^[0-9]+$/;
+	
+	if( !($("#option1").is(":checked")) &&
+		!($("#option2").is(":checked"))
+	){
+		alert("운송 옵션을 확인하세요");
+		$("#option1").focus()
+		return 
+	}
+
+	if( $("#sel_date").val()=="" )
+	{
+		alert("날짜를 확인하세요");
+		$(".diary").focus()
+		return;
+	}
+	if( !($("#time1").is(":checked")) &&
+		!($("#time2").is(":checked"))
+	){
+		alert("시간을 확인하세요");
+		$("#time1").focus();
+		return;
+	}
+	
+	if($("#st_addr1").val()==""){
+		alert("출발지 주소를 입력해 주세요");
+		$("#st_addr1").focus();
+		return;
+	}
+	
+	if($("#st_addr2").val()==""){
+		alert("출발지 상세 주소를 입력해 주세요");
+		$("#st_addr2").focus();
+		return;
+	}
+	
+	if($("#st_addr3").val()==""){
+		alert("출발지 층수를 입력해 주세요");
+		$("#st_addr3").focus();
+		return;
+	}
+	if(!number.test($("#st_addr3").val())){
+		alert("출발지 층수는 숫자만 입력해 주세요");
+		$("#st_addr3").focus();
+		return;
+	}
+	
+	if($("#st_addr4").val()==""){
+		alert("출발지 방수를 입력해 주세요");
+		$("#st_addr4").focus();
+		return;
+	}
+	if(!number.test($("#st_addr4").val())){
+		alert("출발지 방수는 숫자만 입력해 주세요");
+		$("#st_addr4").focus();
+		return;
+	}
+	
+	
+	
+	if( !($("#st_el1").is(":checked")) &&
+		!($("#st_el2").is(":checked"))
+	){
+		alert("출발지 엘레베이터 유무 여부를 체크해주세요");
+		$("#st_el1").focus();
+		return;
+	}
+	
+	if( !($("#st_pk1").is(":checked")) &&
+		!($("#st_pk2").is(":checked"))
+	){
+		alert("출발지 주차장 유무 여부를 체크해주세요");
+		$("#st_pk1").focus();
+		return;
+	}
+	
+
+	if($("#en_addr1").val()==""){
+		alert("도착지 주소를 입력해 주세요");
+		$("#en_addr1").focus();
+		return;
+	}
+	
+	if($("#en_addr2").val()==""){
+		alert("도착지 상세 주소를 입력해 주세요");
+		$("#en_addr2").focus();
+		return;
+	}
+	
+	if($("#en_addr3").val()==""){
+		alert("도착지 층수를 입력해 주세요");
+		$("#en_addr3").focus();
+		return;
+	}
+	if(!number.test($("#en_addr3").val())){
+		alert("도착지 층수는 숫자만 입력해 주세요");
+		$("#en_addr3").focus();
+		return;
+	}
+	
+	if($("#en_addr4").val()==""){
+		alert("도착지 방수를 입력해 주세요");
+		$("#en_addr4").focus();
+		return;
+	}
+	if(!number.test($("#en_addr4").val())){
+		alert("도착지 방수는 숫자만 입력해 주세요");
+		$("#en_addr4").focus();
+		return;
+	}
+
+	if( !($("#en_el1").is(":checked")) &&
+		!($("#en_el2").is(":checked"))
+	){
+		alert("도착지 엘레베이터 유무 여부를 체크해주세요");
+		$("#en_el1").focus();
+		return;
+	}
+	
+	if( !($("#en_pk1").is(":checked")) &&
+		!($("#en_pk2").is(":checked"))
+	){
+		alert("도착지 주차장 유무 여부를 체크해주세요");
+		$("#en_pk1").focus();
+		return;
+	}
+	document.sb.submit();
+	
+}
+
+
+
 function diaryAjax(num){
+	$(".calcList .time .timeWrap .op1").attr("disabled",true);
+	$(".calcList .time .timeWrap .op1").attr("checked",false);
 	$.ajax({
 		url:'<c:url value="/ajax/Diary"/>',
 		type:'GET',
@@ -233,11 +374,13 @@ function diaryAjax(num){
 				diaryAjax(num);
 			})
 			$(".diary .chk").click(function(){
+				if($(this).hasClass("unchk")) return;
 				if($(".month").html().split("월")[0]*1-1<=realMonth && $(this).html().trim()*1<=realDay) return;
 				$(".diary .chk").css({background:"transparent"});
 				$(this).css({background:"red"});
 				$(".diary .chk").removeClass("dayChk");
 				$(this).addClass("dayChk");
+				$(".calcList .time .timeWrap .op1").attr("disabled",false);
 				
 				console.log($(".diary .month").html()+$(this).html()+"일");
 				/* console.log((now.getYear()+1900)+ "-ㅇ-" +dd.title + "-ㅇ-" + $(this).html()); */

@@ -36,7 +36,7 @@ tr, td {
 			<td>출발지 옵션</td>
 			<td>도착지 주소</td>
 			<td>도착지 옵션</td>
-			<!-- <td>짐목록</td> -->
+			<td>짐목록</td>
 			<td>쇼핑리스트</td>
 			<td>요청사항</td>
 			<td>예약날짜</td>
@@ -55,7 +55,7 @@ tr, td {
             <td>${dto.start_OP }</td>
             <td>${dto.end_Point }</td>
             <td>${dto.end_OP }</td>
-            <%-- <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td> --%>
+            <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td>
             <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
             <td class="previewbtn1" data-value="${dto.request }">보기</td>
             <td>${dto.req_date }</td>

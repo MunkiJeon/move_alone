@@ -1,3 +1,4 @@
+<%@page import="com.map.model.StockDao"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,7 @@
 <link rel="stylesheet" href="<c:url value='/resource/css/guest/calc.css'/>">
 <script src="<c:url value='/resource/js/estimate.js'/>"></script>
 <style type="text/css">
+	html{scroll-behavior: smooth;}
 	body {
 		font-family: Noto Sans Kr;
 		font-size: 13px;
@@ -42,9 +44,27 @@
 		height : 700;
 		margin: auto;
 	}
+	.catagoreHeader {
+	position: sticky;
+	top:100px;
+	max-width: 1440px;
+	margin:0 auto;
+	display: flex;
+	
+	}
+	.catagoreHeader li{
+		width:100%;
+		border:1px solid #eee;
+		height: 100px;
+		line-height: 100px;
+		text-align: center;
+	}
+	.mainList {
+		max-width:1440px;
+		margin: 0 auto;
+	}
 </style>
 
-<script type="text/javascript" src="webapp/js/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#banner_image').show();
@@ -55,6 +75,31 @@
 			$('#banner_image').fadeIn(3000);
 		}, 5000); */
 	});
+
+	$(function(){
+		let cnt = 0;
+		let arr = []
+		for(let i=0;i<$(".lnameList").length;i++){
+			if($(".lnameList").eq(i).attr("data-lname")==$(".lnameList").eq(i+1).attr("data-lname")){
+				arr[cnt] = i;
+				cnt++;
+			}			
+		}
+		console.log(arr)
+		for(let i=(arr.length-1);i>=0;i--){
+			$(".lnameList").eq(arr[i]+1).remove();
+		}
+		
+		for(let i=0;i<$(".catagoreHeaderItem").length;i++){
+			for(let j=0;j<$(".lnameList").length;j++){
+				
+				if($(".catagoreHeaderItem").eq(i).attr("data-lname")==$(".lnameList").eq(j).attr("data-lname")){
+					$(".lnameList").eq(j).attr("id",$(".catagoreHeaderItem").eq(i).attr("href").substring(1));
+				}
+				
+			}
+		}
+	})
 </script>
 
 
@@ -74,13 +119,22 @@
 		</td>
 	</tr>
 </table>
-
+<ul class="catagoreHeader">
+	<c:forEach var="cbean" items="${lcalist }">
+	<c:if test="${cbean.lno != -1 }">
+		<li><a class="catagoreHeaderItem" href="#test${cbean.lstep }" data-lno="${cbean.lno }" data-lname="${cbean.lname }" >${cbean.lname }</a></li>
+	</c:if>
+	</c:forEach>
+</ul> 
 <section class="shopping">
 	<form action="Estimate?num=Res" method="post">
 		<ul class="mainList">
             <li><h2> 추가 선택 항목(쇼핑) </h2><p class="itamnum" style="display: none">${list.size() }</p></li>
 <c:forEach items="${list }" var="pbean" varStatus="no">
+            	
+				<li><h3  class="lnameList" data-lname="${pbean.lcname }">${pbean.lcname }</h3></li>
             <li class="itam_${no.index }">
+				
             	<table id="mainListInside">
 						<tr>
 							<td><img src="<c:url value='/resource/productImg/'/>${ pbean.mainImgN}" width="300px" height="380px"></td>
@@ -112,7 +166,38 @@
 									<button type="button" class="minus_S">[ - ]</button>
 								</p>
 								</div>
-								
+								<%-- <div>
+										<select style="width : 100%; height: 25px" id="optionSelect">
+											<option value="">옵션선택</option>
+											<%
+											StockDao sdao = StockDao.getInstance();
+											ArrayList<StockBean> slist = sdao.getAllStockByPno(pno);
+											
+											for(StockBean sbean : slist){%>
+												<option value="<%=sbean.getOpname()%>" <%if(sbean.getCount() == 0){%> disabled <%} %>>
+													<%=sbean.getOpname()%> 
+													<%
+														for(int i = 0; i<30 ;i++){%>
+															&nbsp;		
+														<%}
+													
+														if(sbean.getCount() == 0){
+														%>
+														(품절)
+														<%		
+														}
+														else{%>
+														(<%=sbean.getCount()%>개 남음)
+														
+														<%	
+														}
+													%>									
+												 </option>
+											<%
+											}
+											%>
+										</select>
+								</div> --%>
 							</td>
 						</tr>
 				</table>

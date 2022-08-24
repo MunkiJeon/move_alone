@@ -36,13 +36,13 @@
 			});
 		});
 		
-		$('#optionAdd').live("click", function(){
+		$('#optionAdd').on("click", function(){
 			$(this).parent().append("<span><input type='text' value='' size='5' name='opn_" + (++opcount) + "'> <input type='text' value='' size='5' name='stock_" + opcount +"'> <input type='button' value='-' class='deleteopt'> <br></span>");
 			opArr.push(opcount);
 		});
 		
 		
-		$('.deleteopt').live("click", function(){
+		$('.deleteopt').on("click", function(){
 			//name속성 뒤에 붙은 값을 분리해서 이걸 배열에서 제거하자.
 			var temp = $(this).prev().attr("name"); // stock_2
 			var tempArr = temp.split('_');
@@ -104,7 +104,7 @@
 		//alert($("select[name='selSmallCategory']").val());
 		
 		
-		for(var i = 0; i<opArr.length; i++){
+		 for(var i = 0; i<opArr.length; i++){
 			if($("input[name='opn_"+ opArr[i] +"']").val() == ""){
 				alert("빈칸없이 옵션명을 입력해야 합니다.");
 				$("input[name='opn_"+ opArr[i] +"']").focus();
@@ -121,8 +121,8 @@
 				alert("재고수량은 숫자만 입력가능합니다.");
 				$("input[name='stock_"+ opArr[i] +"']").focus().select();
 				return false;
-			}	
-		}
+			}
+		 }
 		
 		
 		
@@ -169,7 +169,6 @@
 		 		</select>	 	
 		 	</td>
 		 <tr>
-		 
 		 <tr>
 		 	<td>소분류</td>
 		 	<td>
@@ -207,18 +206,16 @@
 		 </tr>
 		 
 		 <tr border="1">
-		 	<!-- <td>
+		 	<td>
 		 	옵션/재고
 		 	</td>
 		 	<td> 
-				<input type="button" value="추가" id="optionAdd">	<br>	<br>
-				<span><input type='text' value='S' size='5' placeholder='사이즈 등' name="opn_1"> 
+				<input type="button" value="추가" id="optionAdd"><br><br>
+				<span><!-- <input type='text' value='S' size='5' placeholder='사이즈 등' name="opn_1">  -->
 				<input type='text' value='10' size='5' placeholder='재고수량' name="stock_1"><br></span>	
-
-		 	</td> -->
+		 	</td>
 		 <tr>
-		 
-		 <tr >
+		 <tr>
 		 	<td colspan="2" align="center">
 		 		<input type="hidden" value="" name="opnums">
 		 		<input type="button" value="상품등록" onClick="check()">

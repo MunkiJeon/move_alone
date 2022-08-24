@@ -105,7 +105,7 @@ public class StockDao {
 				
 				// 3. SQL 작상 및 분석
 				String sql = "insert into stock values(nextval(stockseq),(select "//last_number-1 
-						+ "from user_sequences where sequence_name = 'PRODSEQ'))";//,?,?
+						+ "last_number-1 from user_sequences where sequence_name = 'PRODSEQ'),?,?)";//,?,?
 				ps = conn.prepareStatement(sql);
 				
 				ps.setString(1, opname);
@@ -127,6 +127,56 @@ public class StockDao {
 		}
 		return cnt;
 	}
+	
+	public int insertStock1(MultipartRequest multi) {
+		
+		int cnt = -1;
+		
+		PreparedStatement ps = null;
+		
+		
+		/* 재고 수량 처리하는 부분 */
+		try {
+			String preParseStr = multi.getParameter("opnums");
+			//System.out.println("preParseStr:" + preParseStr);
+			
+			String[] strArr = preParseStr.split(",");
+			for(String s : strArr){
+				//System.out.println(s + " abc");
+				String opname = multi.getParameter("opn_" + s); // 실제로 값을 얻는 부분
+				int count = Integer.parseInt(multi.getParameter("stock_" + s));
+				System.out.println(opname + " " + count);
+				
+				// 3. SQL 작상 및 분석
+				String sql = "insert into stock values(nextval(stockseq),(select "//last_number-1 
+						+ "last_number-1 from user_sequences where sequence_name = 'PRODSEQ'),?,?)";//,?,?
+				ps = conn.prepareStatement(sql);
+				
+				ps.setString(1, opname);
+				ps.setInt(2, count);
+				
+				// 4. SQL문 실행
+				cnt = ps.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//System.out.println("insertStock() SQL문 실행중 오류 발생");
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				System.out.println("접속 종료 실패");
+			}
+		}
+		return cnt;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	public int insertStockForUpdate(MultipartRequest multi) {

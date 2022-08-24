@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.oreilly.servlet.MultipartRequest;
+
 public class CalculateDAO {
 	Connection con;
 	PreparedStatement ptmt;
@@ -83,7 +85,29 @@ public class CalculateDAO {
 		
 		return list;
 	}
-
+	
+	public int insert(MultipartRequest multi) {
+		sql = "insert into calculate(po_code,c_date,po_wname,po_name,quantity,unit_price,price,cal_type) values('a001',sysdate(),?,?,?,?,?,'매입')";
+		try {
+			ptmt = con.prepareStatement(sql);
+			
+			ptmt.setInt(1, Integer.parseInt(multi.getParameter("selLargeCategory")));
+//			ptmt.setInt(2, Integer.parseInt(multi.getParameter("selSmallCategory")));
+			ptmt.setString(2, multi.getParameter("name"));
+			ptmt.setInt(3, Integer.parseInt(multi.getParameter("stock_1")));
+			ptmt.setInt(4, Integer.parseInt(multi.getParameter("oriprice")));
+			ptmt.setInt(5, Integer.parseInt(multi.getParameter("stock_1")) * Integer.parseInt(multi.getParameter("oriprice")) );
+			
+			return ptmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return 0;
+	}
+	
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}
 		if(ptmt!=null)try {ptmt.close();} catch (SQLException e) {}

@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.map.model.CalculateDAO;
 import com.map.model.ProductDao;
+import com.map.model.StockDao;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -22,6 +24,7 @@ public class ProductInsertProc implements ManagerService {
 			// 1. 웹서버 내에서 저장될 위치를 지정하기 위해, jsp의 내장객체 config를 이용해서 웹서버 내에서 특정 위치의 경로를 생성
 			//String targetLocation = config.getServletContext().getRealPath("/admin/product_images");
 			String targetLocation ="C:\\Users\\csy97\\git\\moveing\\src\\main\\webapp\\resource\\productImg";
+			targetLocation = "C:\\Users\\main\\Desktop\\last\\moveing\\src\\main\\webapp\\resource\\productImg";
 			//System.out.println(targetLocation);
 			
 			// 2. 최대 업로드 가능 사이즈를 지정 및 인코딩 방식 지정
@@ -52,11 +55,12 @@ public class ProductInsertProc implements ManagerService {
 //			System.out.println("sdao >>>" + sdao);
 //			int cnt2 = sdao.insertStock(multi);
 //			
-//			if(cnt2 > 0){
-//				System.out.println("재고 삽입 완료");
-//			}else{
-//				System.out.println("재고 삽입 실패");
-//			}
+			int cnt2 = new CalculateDAO().insert(multi);
+			if(cnt2 > 0){
+				System.out.println("재고 삽입 완료");
+			}else{
+				System.out.println("재고 삽입 실패");
+			}
 			
 			}catch(Exception ex){
 				System.out.println("error >>>>>" + ex.getMessage());

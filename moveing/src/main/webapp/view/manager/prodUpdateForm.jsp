@@ -101,7 +101,7 @@
 			return false;
 		}
 		
-		if($("input[name='opn_1']").val() == ""){
+		/*if($("input[name='opn_1']").val() == ""){
 			alert("옵션명을 입력해주세요");
 			return false;
 		}
@@ -114,7 +114,7 @@
 		if(isNaN($("input[name='stock_1']").val())){
 			alert("재고는 숫자만 입력 가능합니다.");
 			return false;
-		}
+		} */
 		
 		//alert(opcount);
 		var temp = "";
@@ -222,17 +222,17 @@
 		  <tr>
 		 	<td colspan="2"><hr></td>
 		 </tr>
-		 <%-- <tr>
+		 <tr>
 		 	<td>
 		 	옵션/재고
 		 	</td>
 		 	<td> 
-				<input type="button" value="추가" id="optionAdd">	<br>	<br>
+				<!-- <input type="button" value="추가" id="optionAdd">	<br>	<br> -->
 				
-				<span><input type='text' value='<c:if test="${slist.size() > 0 }">${slist.get(0).opname}</c:if>' size='5' placeholder='사이즈 등' name="opn_1"> 
+				<span><%-- <input type='text' value='<c:if test="${slist.size() > 0 }">${slist.get(0).opname}</c:if>' size='5' placeholder='사이즈 등' name="opn_1">  --%>
 				<input type='text' value='<c:if test="${slist.size() > 0 }">${slist.get(0).count}</c:if>' size='5' placeholder='재고수량' name="stock_1"><br></span>	
 		 	</td>
-		 <tr> --%>
+		 <tr>
 		 
 		 <tr >
 		 	<td colspan="2" align="center">

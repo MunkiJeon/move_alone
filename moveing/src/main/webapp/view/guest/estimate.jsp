@@ -79,7 +79,7 @@ function cal() {
 	        success: function (data){
 	        	
 	           console.log(data.routes[0].sections[0].distance);
-	           newJquery('[class=mo_km]').val((data.routes[0].sections[0].distance)/10);
+	           newJquery('[class=mo_km]').val((data.routes[0].sections[0].distance)/1000);
 	           console.log(data.routes[0].sections[0].duration);
 	           newJquery('[class=mo_time]').val((data.routes[0].sections[0].duration));
 	        }
@@ -134,7 +134,7 @@ function cal() {
 					<li class="address">
 						<div>
 							<h3>출발지를 입력해 주세요.</h3> <!-- <input type="text" placeholder="여기를 눌러서 출발지 주소 검색" name="start_point"> -->
-		                    <input type="text" id="st_addr1" name="st_addr1" placeholder="여기를 눌러서 출발지 주소 검색"  onfocus="st_openZipSearch()">
+		                    <input type="text" id="st_addr1" name="st_addr1" placeholder="여기를 눌러서 출발지 주소 검색"  onclick="st_openZipSearch()">
 		                    <input type="text" id="st_addr2"  name="st_addr2" placeholder="상세 주소 입력 : 건물 이름 혹은 동호수">
 							<p class="addressIn"><input id="st_addr3" type="text" name="st_addr3" style="width: 20%" placeholder="층수: ex) 2층">층</p>
 							<p class="addressIn"><input id="st_addr4" type="text" name="st_addr4" style="width: 20%" placeholder="방수: ex) 3개">개</p>
@@ -166,10 +166,10 @@ function cal() {
 					<li class="address">
 						<div>
 							<h3>도착지를 입력해 주세요.</h3>
-							<input type="text"  name="en_addr1" placeholder="여기를 눌러서 도착지 주소 검색"  onfocus="en_openZipSearch()">
+							<input type="text"  name="en_addr1" placeholder="여기를 눌러서 도착지 주소 검색"  onclick="en_openZipSearch()">
                     		<input type="text"  name="en_addr2" placeholder="상세 주소 입력 : 건물 이름 혹은 동호수">
-							<input type="text" name="en_addr3" style="width: 20%" placeholder="층수: ex) 3층">
-							<input type="text" name="en_addr4" style="width: 20%" placeholder="방수: ex) 2개">
+							<p class="addressIn"><input type="text" id="en_addr3" name="en_addr3" style="width: 20%" placeholder="층수: ex) 3층"></p>
+							<p class="addressIn"><input type="text" id="en_addr4" name="en_addr4" style="width: 20%" placeholder="방수: ex) 2개"></p>
 							<input type="hidden" name="end">
 						</div>	
 					</li>
@@ -178,7 +178,7 @@ function cal() {
 						<div class="end_ELWrap">
 							<input type="radio" id="en_el1" name="end_el" value="엘베있음">
 							<label for="en_el1"> 있음 </label> 
-							<input type="radio" id="en_el2" name="end_el" value="엘베있음"> 
+							<input type="radio" id="en_el2" name="end_el" value="엘베없음"> 
 							<label for="en_el2"> 없음 </label>
 						</div>
 					</li>
@@ -305,6 +305,8 @@ function effectiveness(){
 		$("#en_addr3").focus();
 		return;
 	}
+	
+	console.log(number.test($("#en_addr3").val()))
 	if(!number.test($("#en_addr3").val())){
 		alert("도착지 층수는 숫자만 입력해 주세요");
 		$("#en_addr3").focus();

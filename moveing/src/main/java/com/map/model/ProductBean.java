@@ -13,7 +13,15 @@ public class ProductBean {
 	private String detailImgN2;
 	private String detailImgN3;
 	private String detailImgN4;
+	private int count;
 	
+	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getNo() {
 		return no;
 	}

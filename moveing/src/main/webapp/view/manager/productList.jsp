@@ -35,8 +35,8 @@
 		<th>상품명</th>
 		<th>도매가격</th>
 		<th>상품가격</th>
-		<th></td>
-		<th></td>
+		<th></th>
+		<th></th>
 		<th>상품이미지</th>
 	</tr>
 	<c:forEach items="${list }" var="pbean">
@@ -44,10 +44,10 @@
 		<td>${ pbean.no}</td>
 		<td>${ pbean.lcname }</td>
 		<td>${pbean.scname}</td>
-		<%-- <td><a href="<%=request.getContextPath()%>/user/productDetail.jsp?no=<%=pbean.getNo()%>"><%=pbean.getName()%></a></td>--%>
+		<td>${pbean.name}</td>
 		<td>${ pbean.oriprice}</td>
 		<td>${ pbean.discprice}원</td>
-		<td><a href="ProductUpdateForm?pno=${ pbean.no}">수정</a></td>
+		<td><a href="ProductUpdateForm?pno=${ pbean.no}">추가/수정</a></td>
 		<td><a href="ProductDelete?pno=${pbean.no}">삭제</a></td>
 		<td>
 			<img src="../resource/productImg/${pbean.mainImgN }" width="50px" height="60px">		

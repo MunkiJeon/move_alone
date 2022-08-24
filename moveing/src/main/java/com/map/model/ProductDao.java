@@ -264,7 +264,7 @@ public class ProductDao {
 
 		try {
 			// 3. SQL 작상 및 분석
-			String sql = "insert into product values(nextval(prodseq),?,?,?,?,?,?,?)";
+			String sql = "insert into product values(nextval(prodseq),?,?,?,?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, Integer.parseInt(multi.getParameter("selLargeCategory")));
@@ -274,6 +274,7 @@ public class ProductDao {
 			ps.setInt(5, Integer.parseInt(multi.getParameter("discprice")));
 			ps.setString(6, multi.getParameter("info"));
 			ps.setString(7, multi.getFilesystemName("mainImg"));
+			ps.setInt(8, Integer.parseInt(multi.getParameter("stock_1")));
 			
 			
 			// 4. SQL문 실행
@@ -362,6 +363,66 @@ public class ProductDao {
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.out.println("deleteProduct() SQL문 실행중 오류 발생");
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				System.out.println("접속 종료 실패");
+			}
+		}
+		return cnt;
+	}
+	public int selectCount(int no) {
+		int cnt = 0;
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			// 3. SQL 작상 및 분석
+			String sql = "select count from product where no = ?";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1,no);
+			
+			// 4. SQL문 실행
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt("count");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("updateProduct() SQL문 실행중 오류 발생");
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				System.out.println("접속 종료 실패");
+			}
+		}
+		return cnt;
+
+	}
+	public int updateCount(int res,int no) {
+		int cnt = 0;
+
+		PreparedStatement ps = null;
+
+		try {
+			// 3. SQL 작상 및 분석
+			String sql = "update product set count = ? where no = ?";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1,res);
+			ps.setInt(2,no);
+			
+			// 4. SQL문 실행
+			cnt = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("updateProduct() SQL문 실행중 오류 발생");
 		} finally {
 			try {
 				if (ps != null)

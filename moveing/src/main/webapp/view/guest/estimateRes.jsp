@@ -23,63 +23,65 @@ tr, td {
 	<table class="estimateResTable" border="" >
 		<tr class="tr1">
 			<td colspan="2" align="center">
-				<h1>${id } 님 견적을 보냈습니다.</h1>
+				<h1>${estimate_d.get("id") } 님 견적을 보냈습니다.</h1><!-- 이름 받기 적용예정  -->
 			</td>
 		</tr>
 		
 		<tr align="center">
-		
 			<td>예약번호</td>
-            <td>${dto.res_num }</td>
+            <td>${estimate_d.get("res_num") } </td>
 		</tr>
 		<tr align="center">
 			<td>아이디</td>
-			<td>${dto.id }</td>
+			<td>${estimate_d.get("id") } </td>
 		</tr>
-		<tr align="center">	
+<%-- 		<tr align="center">	
 			<td>이름</td>
-			<td>${dto.name }</td>
-		</tr>
+			<td>${mainData.name }</td>
+		</tr> --%>
 		<tr align="center">
 			<td>배송 종류</td>
-			<td>${dto.SV_Type }</td>
+			<td>${estimate_d.get("SV_Type") } </td>
 		</tr>
 		<tr align="center">
 			<td>배송 날짜</td>
-			<td>${dto.sel_date }</td>
+			<td>${estimate_d.get("sel_date") } </td>
 		</tr>
 		<tr align="center">
 			<td>출발지 주소</td>
-			<td>${dto.start_Point }</td>
+			<td>${estimate_d.get("start_Point") } </td>
 		</tr>
 		<tr align="center">
 			<td>출발지 옵션</td>
-			<td>${dto.start_OP }</td>
+			<td>${estimate_d.get("start_OP") } </td>
 		</tr>
 		<tr align="center">
 			<td>도착지 주소</td>
-			<td>${dto.end_Point }</td>
+			<td>${estimate_d.get("end_Point") } </td>
 		</tr>
 		<tr align="center">
 			<td>도착지 옵션</td>
-			<td>${dto.end_OP }</td>
+			<td>${estimate_d.get("end_OP") } </td>
 		</tr>
 		<tr align="center">
-			<!-- <td>짐목록</td> -->
+			<td>짐목록</td>
+			<td>${estimate_d.get("luggage_list") } </td>
+		</tr>
+		<tr align="center">
 			<td>쇼핑리스트</td>
-			<td>${dto.shopping_list }</td>
+			<td>${estimate_d.get("shopping_list") } </td>
 		</tr>
 		<tr align="center">
 			<td>요청사항</td>
-			<td>${dto.request }</td>
+			<td>${estimate_d.get("request") } </td>
 		</tr>
 		<tr align="center">
 			<td>예약날짜</td>
-			<td>${dto.req_date }</td>
+			<td>${estimate_d.get("req_date") } </td>
 		</tr>
 		<tr align="center">
 			<td>총가격</td>
-			<td>${dto.price }</td>
+			<td>${estimate_d.get("price") } </td>
 		</tr>
 	</table>
 	<button class="resBtn" onclick="req()">결제하기</button>
@@ -94,7 +96,7 @@ function req(){
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),//TC0ONETIME
 	    name : '주문명:결제테스트',
-	    amount : ${dto.price }, //판매 가격
+	    amount : ${Integer.parseInt(estimate_d.get("price")) }, //판매 가격
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
@@ -102,16 +104,17 @@ function req(){
 	    buyer_postcode : '123-456'
 	}, function(rsp) {
 	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
+	        var msg = '결제가 완료되었습니다.\n';
 	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '\n결제 금액 : ' + rsp.paid_amount;
+	        msg += '\n카드 승인번호 : ' + rsp.apply_num;
 	    } else {
-	        var msg = '결제에 실패하였습니다.';
+	        var msg = '결제에 실패하였습니다.\n';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
+	    location.href = "EstimateRes";
 	});
 }
 

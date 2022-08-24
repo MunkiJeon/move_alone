@@ -96,6 +96,36 @@ public class UserDAO {
 		
 		return dto;
 	}
+	//---------------------------------------------찬희
+	public ArrayList<UserDTO> allStaff(String id) {
+		ArrayList<UserDTO> res = new ArrayList<UserDTO>();
+		sql = "select * from user where id = ?";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, id);
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				UserDTO dto = new UserDTO();
+				
+				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setJoin_date(rs.getDate("join_date"));
+				dto.setTel(rs.getString("tel"));
+				dto.setState(rs.getInt("state"));
+				dto.setLevel(rs.getInt("level"));
+				
+				res.add(dto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return res;
+	}
 	
 	public ArrayList<UserDTO> allUser() {
 		ArrayList<UserDTO> res = new ArrayList<UserDTO>();

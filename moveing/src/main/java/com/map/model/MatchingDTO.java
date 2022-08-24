@@ -18,6 +18,7 @@ public class MatchingDTO {
 	int req_state; // 매칭상태
 	Date req_date; //예약날짜
 	int cost; // 총가격
+	String SV_Type;
 	
 	
 	public int getRes_num() {
@@ -104,6 +105,11 @@ public class MatchingDTO {
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
-	
+	public String getSV_Type() {
+		return SV_Type;
+	}
+	public void setSV_Type(String sV_Type) {
+		SV_Type = sV_Type;
+	}
 	
 }

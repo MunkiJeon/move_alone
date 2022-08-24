@@ -12,7 +12,7 @@
          	 <c:choose>
          	 	<c:when test="${id!=null }">
 		             <li><a href="<c:url value='/login/LogOut'/>">로그아웃</a></li>
-		             <li><a href="<c:url value='/guest/GuestMyPage'/>">마이페이지</a></li>     
+		             <li><a href="<c:url value='/guest/GuestInformation'/>">마이페이지</a></li>     
 		                 	 		
          	 	</c:when>
          	 	<c:otherwise>

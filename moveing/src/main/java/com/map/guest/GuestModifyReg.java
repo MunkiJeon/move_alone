@@ -26,7 +26,7 @@ public class GuestModifyReg implements GuestService {
 			
 			request.setAttribute("msg", "기본정보 변경완료");
 			request.setAttribute("mainUrl", "guest/alert.jsp");
-			request.setAttribute("url", "/guest/GuestMyPage");
+			request.setAttribute("url", "/guest/GuestInformation");
 			request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
 			
 			

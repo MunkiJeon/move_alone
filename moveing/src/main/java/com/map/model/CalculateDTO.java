@@ -11,6 +11,7 @@ public class CalculateDTO {
 	  int unit_price; 
 	  int price; 
 	  String cal_type;
+	  int res_num;
 	public Date getC_date() {
 		return c_date;
 	}
@@ -58,7 +59,13 @@ public class CalculateDTO {
 	}
 	public void setCal_type(String cal_type) {
 		this.cal_type = cal_type;
+	}
+	public int getRes_num() {
+		return res_num;
+	}
+	public void setRes_num(int res_num) {
+		this.res_num = res_num;
 	} 
-	  
+	 
 	  
 }

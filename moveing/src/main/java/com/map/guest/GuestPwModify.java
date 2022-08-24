@@ -30,12 +30,12 @@ public class GuestPwModify implements GuestService {
 				int cnt = new UserDAO().pwModify(dto3);
 				request.setAttribute("msg", "비밀번호가 변경되었습니다.");
 				request.setAttribute("mainUrl", "guest/alert.jsp");
-				request.setAttribute("url", "/guest/GuestMyPage");
+				request.setAttribute("url", "/guest/GuestInformation");
 				request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
 			}else if(!dto2.getPw().equals(dto.getPw())) {
 				request.setAttribute("msg", "비밀번호가 틀립니다.");
 				request.setAttribute("mainUrl", "guest/alert.jsp");
-				request.setAttribute("url", "/guest/GuestMyPage");
+				request.setAttribute("url", "/guest/GuestInformation");
 				request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
 			}
 			

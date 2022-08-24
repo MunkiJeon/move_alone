@@ -285,6 +285,8 @@ public class MatchingDAO {
 		return res;
 	}
 	
+	
+	
 	public int update(MatchingDTO dto){
 		sql = "update matching set req_state = ?, driver_ID = ? where res_num = ? ";
 		try {
@@ -305,6 +307,27 @@ public class MatchingDAO {
 		
 		return 0;
 	}
+	//----------------------------------찬희
+	public int update2(MatchingDTO dto){
+		sql = "update matching set req_state = ? where res_num = ? ";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setInt(1, dto.getReq_state());
+			ptmt.setInt(2, dto.getRes_num());
+			
+			
+			
+			return ptmt.executeUpdate();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return 0;
+	}
+	
 	public int managerUpdate(MatchingDTO dto){
 		sql = "update matching set start_point = ? , end_point = ? where res_num = ? ";
 		try {
@@ -353,6 +376,7 @@ public class MatchingDAO {
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
+				dto.setSV_Type(rs.getNString("SV_Type"));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

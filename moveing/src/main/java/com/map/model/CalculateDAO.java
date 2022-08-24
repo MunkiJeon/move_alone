@@ -107,7 +107,25 @@ public class CalculateDAO {
 		
 		return 0;
 	}
-	
+	//---------------------찬희
+	public int insert2(CalculateDTO dto){
+		sql = "insert into calculate (c_date, po_code, po_wname,po_name,quantity,price,cal_type,res_num ) values(sysdate(),'a001','이사',?,1,?,'매입',?)";
+		try {
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, dto.getPo_name());
+			ptmt.setInt(2, dto.getPrice());
+			ptmt.setInt(3, dto.getRes_num());
+			return ptmt.executeUpdate();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		
+		return 0;
+	}
 	public void close() {
 		if(rs!=null)try {rs.close();} catch (SQLException e) {}
 		if(ptmt!=null)try {ptmt.close();} catch (SQLException e) {}

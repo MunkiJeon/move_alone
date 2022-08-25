@@ -148,12 +148,12 @@
 								<p>수량선택</p>
 								<div>
 								<p>
-									<input type="checkbox" class="Box_L" name="option${no.index }"/>대
+									<%-- <input type="checkbox" class="Box_L" name="option${no.index }"/>대 --%>
 									<button type="button" class="plus_L">[ + ]</button>
 									<input type="number" class="numBox_L" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
 									<button type="button" class="minus_L">[ - ]</button>
 								</p>
-								<p>
+								<%-- <p>
 									<input type="checkbox" class="Box_M" name="option${no.index }"/>중
 									<button type="button" class="plus_M">[ + ]</button>
 									<input type="number" class="numBox_M" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
@@ -164,7 +164,7 @@
 									<button type="button" class="plus_S">[ + ]</button>
 									<input type="number" class="numBox_S" min="1" max="999" size="10" value="0" readonly="readonly" style="width: 40px; text-align:right;" >
 									<button type="button" class="minus_S">[ - ]</button>
-								</p>
+								</p> --%>
 								</div>
 								<%-- <div>
 										<select style="width : 100%; height: 25px" id="optionSelect">

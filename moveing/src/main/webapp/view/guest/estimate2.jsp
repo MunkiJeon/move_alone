@@ -5,9 +5,12 @@
 <script src="<c:url value='/resource/js/estimate.js'/>"></script>
 <form action="Estimate?num=3" method="post">
 	<!-- <input type="hidden" name="num" value="3"/> -->
+        <div class="line" align="center" style="margin-top: 100px">
+        <h2 class="productExplanation">짐 수량에 맞춰 아이콘을 터치해주세요</h2>
+        </div>
+  <!--  
     <section class="product">
-        <p class="productExplanation">짐 수량에 맞춰 아이콘을 터치해주세요</p>
-        <div class="line"></div>
+      <div class="line"></div>
         <h2 class="productTitle">침실/거실가구</h2>
         <ul class="productItem productItem1">
             <li class="productList">
@@ -102,9 +105,64 @@
             </li>
         </ul>
     </section>
+ --> 
+<section class="product">
+        <div class="line"></div>
+		<h2 class="productTitle">침실/거실가구</h2>
+		<ul class="productItem productItem1">
+		<c:forEach items="${itemName[0]}" var="itemNo1" varStatus="no">
+			<li class="productList">
+                <figure class="productIcon">
+                    <img src="<c:url value='/resource/image/item/'/>${itemImg[0][no.index] }" alt="">
+                </figure>
+                <p>${itemNo1 }</p>
+                <div class="productBtn">
+                    <button class="productBtnM">-</button>
+                    <p class="item1">0</p>
+                </div>
+            </li>
+		</c:forEach>
+		</ul>
+</section>
+<section class="product">
+        <div class="line"></div>
+		<h2 class="productTitle">생활 가전 제품</h2>
+		<ul class="productItem productItem2">
+		<c:forEach items="${itemName[1]}" var="itemNo2" varStatus="no">
+			<li class="productList">
+                <figure class="productIcon">
+                    <img src="<c:url value='/resource/image/item/'/>${itemImg[1][no.index] }" alt="">
+                </figure>
+                <p>${itemNo2 }</p>
+                <div class="productBtn">
+                    <button class="productBtnM">-</button>
+                    <p class="item2">0</p>
+                </div>
+            </li>
+		</c:forEach>
+		</ul>
+</section>
+<section class="product">
+        <div class="line"></div>
+		<h2 class="productTitle">기타 항목</h2>
+		<ul class="productItem productItem3">
+		<c:forEach items="${itemName[2]}" var="itemNo3" varStatus="no">
+			<li class="productList">
+                <figure class="productIcon">
+                    <img src="<c:url value='/resource/image/item/'/>${itemImg[2][no.index] }" alt="">
+                </figure>
+                <p>${itemNo3 }</p>
+                <div class="productBtn">
+                    <button class="productBtnM">-</button>
+                    <p class="item3">0</p>
+                </div>
+            </li>
+		</c:forEach>
+		</ul>
+</section>
 
     <section class="product">
-        <div class="line"></div>
+<%--         <div class="line"></div>
         <h2 class="productTitle">생활 가전 제품</h2>
         <ul class="productItem productItem2">
             <li class="productList">
@@ -294,7 +352,7 @@
                     <p class="item3">0</p>
                 </div>
             </li>
-        </ul>
+        </ul> --%>
         <div class="line"></div>
         <input type="hidden" name="item1" id="item1">
         <input type="hidden" name="item2" id="item2">

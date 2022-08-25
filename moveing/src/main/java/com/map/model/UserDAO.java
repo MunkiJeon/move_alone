@@ -386,7 +386,51 @@ public class UserDAO {
 		}
 		   return 0;
 	  }
-	
+	   public String findId(String name, String tel) {
+		      String id = null;
+
+		      try {
+		         String sql = "select id from user where name=? and tel=? ";
+		         ptmt = con.prepareStatement(sql);
+		         ptmt.setString(1, name);
+		         ptmt.setString(2, tel);
+
+		         rs = ptmt.executeQuery();
+
+		         if (rs.next()) {
+		            id = rs.getString("id");
+		         }
+
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         close();
+		      }
+		      return id;
+		   }
+	   public String findPw(String id, String tel) {
+		      String pw = null;
+
+		      try {
+		         String sql = "select pw from user where id=? and tel=? ";
+		         ptmt = con.prepareStatement(sql);
+		         ptmt.setString(1, id);
+		         ptmt.setString(2, tel);
+
+		         rs = ptmt.executeQuery();
+
+		         if (rs.next()) {
+		            pw = rs.getString("pw");
+		         }
+
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         close();
+		      }
+		      return pw;
+		   }
+
 	public int staffLength() {
 		int res = 0;
 		try {

@@ -448,29 +448,7 @@ public class UserDAO {
 	   return res;
 	}
 	
-	public String findPw(String id, String tel) {
-		String pw = null;
-
-		try {
-			String sql = "select pw from user where id=? and tel=? ";
-			ptmt = con.prepareStatement(sql);
-			ptmt.setString(1, id);
-			ptmt.setString(2, tel);
-
-			rs = ptmt.executeQuery();
-
-			if (rs.next()) {
-				pw = rs.getString("pw");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return pw;
-	}
-
+	
 	public void close() {
 		if (rs != null) {
 			try {

@@ -175,6 +175,50 @@ public class CategoryDao {
 		}
 		return list;
 	}//getOnlySmallCategory()
+	public ArrayList<CategoryBean> getOnlySmallCategory(){
+		
+		ArrayList<CategoryBean> list = new ArrayList<CategoryBean>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			// 3. SQL 작상 및 분석
+			String sql = "select * from scategory order by lcno asc, step asc"; 
+			ps = conn.prepareStatement(sql);
+			
+			
+			// 4. SQL문 실행
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				CategoryBean cbean = new CategoryBean();
+				
+				cbean.setSno(rs.getInt("no"));
+				cbean.setSname(rs.getString("name"));
+				cbean.setSstep(rs.getInt("step"));
+				cbean.setLno(rs.getInt("lcno"));
+				
+				list.add(cbean);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("getAllCategory() 메소드 내 SQL문 실행중 오류 발생");
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				System.out.println(e);
+				System.out.println("접속 종료 실패");
+			}
+		}
+		return list;
+	}//getOnlySmallCategory()
 	
 	
 	

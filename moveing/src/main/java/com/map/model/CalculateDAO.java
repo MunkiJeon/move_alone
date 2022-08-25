@@ -57,13 +57,30 @@ public class CalculateDAO {
 		return list;
 	}
 	
-	public ArrayList<CalculateDTO> monthList(String start,String end) {
+	public ArrayList<CalculateDTO> monthList(String start,String end,String type) {
 		ArrayList<CalculateDTO> list = new ArrayList<CalculateDTO>();
-		sql = "select * from calculate where c_date >= ? and c_date <= ?";
+
+		sql = "select * from calculate ";
 		try {
-			ptmt = con.prepareStatement(sql);
-			ptmt.setString(1,start);
-			ptmt.setString(2,end);
+			if((start=="" || end=="") && type != "") {
+				sql+="where type = ?";
+				ptmt = con.prepareStatement(sql);
+				ptmt.setString(1,type);
+			}else if(start!="" && end!="" && type != "") {
+				sql+="where c_date >= ? and c_date <= ? and po_name = ?";	
+				ptmt = con.prepareStatement(sql);
+				ptmt.setString(1,start);
+				ptmt.setString(2,end);		
+				ptmt.setString(3,type);		
+			}else if(start != "" && end != "" && type == "") {
+				sql+="where c_date >= ? and c_date <= ? ";	
+				ptmt = con.prepareStatement(sql);
+				ptmt.setString(1,start);
+				ptmt.setString(2,end);		
+			}else {
+				ptmt = con.prepareStatement(sql);				
+			}
+		
 			rs = ptmt.executeQuery();
 			while(rs.next()) {
 				CalculateDTO dto = new CalculateDTO();

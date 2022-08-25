@@ -170,7 +170,7 @@ public class UserDAO {
 			sql	+= "AND NAME LIKE '%" + searchName + "%'"; //특정검색
 		}
 		if(searchId != "" && searchId != null) {
-			sql	+= "AND ID = '" + searchId +"'";
+			sql	+= "AND ID LIKE '%" + searchId +"%'";
 		}
 		if(searchDate != "" && searchDate != null) {
 			sql	+= "AND DATE(JOIN_DATE) = '" + searchDate +"'";

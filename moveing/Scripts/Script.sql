@@ -53,3 +53,4 @@ ALTER TABLE calculate MODIFY no INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
 ALTER TABLE calculate MODIFY no INT NOT NULL AUTO_INCREMENT;
 
+select * from scategory order by lcno asc, step asc

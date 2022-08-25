@@ -17,9 +17,6 @@
             <div id="box1" class="accordion-collapse collapse" data-bs-parent="#boxs">
                 <div class="accordion-body">
                     <a class="accordionList" href="<c:url  value='/manager/'/>StaffManagement?level=1">직원 조회</a>
-                    <a class="accordionList" href="<c:url  value='/manager/'/>StaffManagement?level=1">직원 추가</a>
-                    <a class="accordionList" href="<c:url  value='/manager/'/>StaffManagement?level=1">직원 수정</a>
-                    <a class="accordionList" href="<c:url  value='/manager/'/>StaffManagement?level=1">직원 삭제</a>
                 </div>
             </div>
         </div>
@@ -36,9 +33,6 @@
             <div id="box2" class="accordion-collapse collapse" data-bs-parent="#boxs">
                 <div class="accordion-body">
                     <a class="accordionList" href="<c:url  value='/manager/'/>Matching">매칭 현황 조회</a>
-                    <a class="accordionList" href="<c:url  value='/manager/'/>Matching">매칭 현황 추가</a>
-                    <a class="accordionList" href="<c:url  value='/manager/'/>Matching">매칭 현황 수정</a>
-                    <a class="accordionList" href="<c:url  value='/manager/'/>Matching">매칭 현황 삭제</a>
                 </div>
             </div>
         </div>

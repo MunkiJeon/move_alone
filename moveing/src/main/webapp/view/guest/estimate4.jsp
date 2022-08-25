@@ -59,6 +59,17 @@
 		line-height: 100px;
 		text-align: center;
 	}
+	
+	.catagoreHeaderItemS{
+		height: 0;
+		overflow: hidden;
+  transition-property: background-color, color;
+  transition-duration: 1s;
+  transition-timing-function: ease-out;
+	}
+	.catagoreHeader li:hover .catagoreHeaderItemS{
+		height: auto;
+	}
 	.mainList {
 		max-width:1440px;
 		margin: 0 auto;
@@ -99,6 +110,37 @@
 				
 			}
 		}
+		let a = {};
+		let cc = 0;
+		<c:forEach var="bean" items="${scalist }" varStatus="l">
+			<c:if test='${bean.sno != -1}'>
+			cc++;
+			a[${l.index}] = "${bean.sname },${bean.lno}";
+			</c:if>
+		</c:forEach>
+		let cz = 0;
+		for(let i = 0;i < $(".catagoreHeaderItem").length;i++){
+			for(let j = 1;j < cc;j++){
+				console.log($(".test").eq(i).find(".catagoreHeaderItemS").attr("data-step")+"--")
+				console.log(a[j].split(",")[1]+"-");
+				if($(".test").eq(i).find(".catagoreHeaderItemS").attr("data-step")==a[j].split(",")[1]){
+					$(".test").eq(i).find(".catagoreHeaderItemS").append("<p><a href='lk"++"'>"+a[j].split(",")[0]+"</a></p>")
+					cz++;
+					if($(".catagoreHeaderItem").eq(i).attr("data-lname")==$(".lnameList").eq(j).attr("data-lname")){
+						$(".lnameList").eq(j).attr("id",$(".catagoreHeaderItem").eq(i).attr("href").substring(1));
+					}
+				}
+			
+			}				
+		}		
+		
+		
+		
+		console.log(a)
+		console.log(a[1])
+		console.log(cc)
+		console.log(a[1].split(",")[1])
+		console.log($(".test").eq(1).find(".catagoreHeaderItemS"))
 	})
 </script>
 
@@ -122,7 +164,11 @@
 <ul class="catagoreHeader">
 	<c:forEach var="cbean" items="${lcalist }">
 	<c:if test="${cbean.lno != -1 }">
-		<li><a class="catagoreHeaderItem" href="#test${cbean.lstep }" data-lno="${cbean.lno }" data-lname="${cbean.lname }" >${cbean.lname }</a></li>
+		<li class="test"><a class="catagoreHeaderItem" href="#test${cbean.lstep }" data-lno="${cbean.lno }" data-lname="${cbean.lname }" >${cbean.lname }</a>
+			<div class="catagoreHeaderItemS" data-step="${cbean.lstep }">
+				
+			</div>
+		</li>
 	</c:if>
 	</c:forEach>
 </ul> 

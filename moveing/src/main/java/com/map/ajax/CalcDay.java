@@ -24,8 +24,10 @@ public class CalcDay implements AjaxService {
 		}
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
+		String type = request.getParameter("type");
 		
-		ArrayList<CalculateDTO> list = new CalculateDAO().monthList(start, end);
+		ArrayList<CalculateDTO> list = new CalculateDAO().monthList(start, end,type);
+		System.out.println(request.getParameter("type")+"--");
 		System.out.println(request.getParameter("param")+"--");
 		System.out.println(request.getParameter("start")+"--");
 		System.out.println(request.getParameter("end")+"--");
@@ -33,11 +35,11 @@ public class CalcDay implements AjaxService {
 		if(!request.getParameter("param").equals("")) {
 		for (CalculateDTO dto : list) {
 			if(dto.getCal_type().equals(request.getParameter("param")))
-			data.add( URLEncoder.encode(dto.getPo_name())+","+URLEncoder.encode(dto.getQuantity()+"")+","+URLEncoder.encode(dto.getUnit_price()+"")+","+URLEncoder.encode(dto.getPrice()+"")+","+URLEncoder.encode(dto.getCal_type()));			
+				data.add( URLEncoder.encode(dto.getPo_name())+","+URLEncoder.encode(dto.getPrice()+"") );			
 		}
 		}else {
 			for (CalculateDTO dto : list) {
-				data.add( URLEncoder.encode(dto.getPo_name())+","+URLEncoder.encode(dto.getQuantity()+"")+","+URLEncoder.encode(dto.getUnit_price()+"")+","+URLEncoder.encode(dto.getPrice()+"")+","+URLEncoder.encode(dto.getCal_type()));			
+				data.add( URLEncoder.encode(dto.getPo_name())+","+URLEncoder.encode(dto.getPrice()+"") );			
 			}
 		}
 		try {

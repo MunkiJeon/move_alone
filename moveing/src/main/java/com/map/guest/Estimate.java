@@ -100,11 +100,19 @@ public class Estimate implements GuestService {
 				ArrayList<CategoryBean> calist = cadao.getAllCategory();
 				CategoryDao lcadao = CategoryDao.getInstance();
 				ArrayList<CategoryBean> lcalist = lcadao.getOnlyLargeCategory();
-				
+				CategoryDao scadao = CategoryDao.getInstance();
+				ArrayList<CategoryBean> scalist = scadao.getOnlySmallCategory();
+				for (CategoryBean sc : scalist) {
+					System.out.println(sc.getSstep()+"---sc");
+				}
+				for (CategoryBean sc : lcalist) {
+					System.out.println(sc.getLstep()+"---lc");
+				}
 				
 				request.setAttribute("list", list);
 				request.setAttribute("calist", calist);
 				request.setAttribute("lcalist", lcalist);
+				request.setAttribute("scalist", scalist);
 				
 			}else if(pageNum.equals("Res")) {
 				String item = request.getParameter("item");

@@ -467,6 +467,7 @@ public class CategoryDao {
 			ps.setInt(3, lno);
 			System.out.println(scname+"-----------------------------");
 			System.out.println(maxStep+1+"-----------------------------");
+			System.out.println(lno+"----------------------------->>>>>");
 			// 4. SQL문 실행
 			cnt = ps.executeUpdate();
 			

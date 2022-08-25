@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id"
-	content="935361390447-sdf1ni7i8qsp2g9j32dh4ivhr7if5qan.apps.googleusercontent.com">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style type="text/css">
 .custom-btn {
 	color: #fff;
@@ -68,17 +66,46 @@ input, select {
 			return false;
 		}
 	}
-	
-	function onSignIn(googleUser) {
-		  var profile = googleUser.getBasicProfile();
-		  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-		  console.log('Name: ' + profile.getName());
-		 // console.log('Image URL: ' + profile.getImageUrl());
-		  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-		}
-	
-	
 	</script>
+	
+ <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        window.Kakao.init('ca6ca84b0af293faaba25728ed29e816');
+
+        function kakaoLogin() {
+            window.Kakao.Auth.login({
+                scope: 'profile, account_email', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                success: function(response) {
+                    console.log(response) // 로그인 성공하면 받아오는 데이터
+                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+                        url: '/v2/user/me',
+                        success: (res) => {
+                            const kakao_account = res.kakao_account;
+                            console.log(kakao_account)
+                        }
+                    });
+                    // window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
+                },
+                fail: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+        
+        window.Kakao.init('ca6ca84b0af293faaba25728ed29e816');
+    	function kakaoLogout() {
+        	if (!Kakao.Auth.getAccessToken()) {
+    		    console.log('Not logged in.');
+    		    return;
+    	    }
+    	    Kakao.Auth.logout(function(response) {
+        		alert(response +' logout');
+    		    window.location.href='/'
+    	    });
+    };
+
+    </script>
+
 
 <form action="LoginReg" id="loginform" name="myform" class="formW"
 	method="post" onsubmit="return checkForm();">
@@ -101,19 +128,24 @@ input, select {
 				<td align="center" colspan="2"><input type="submit" value="로그인"
 					class="custom-btn"></td>
 			</tr>
-
-			<!-- <tr>
-				<td align="center" colspan="2"><input type="" value="아이디찾기"
-					class="custom-btn_2"></td>
+			<tr>
+				<td class="button-login" align="center">
+				<a href="javascript:kakaoLogin();">
+				 <img src="<c:url value="/resource/image/"/>kakao_login.png" alt="카카오계정 로그인">
+				</a>
+				
+				</td>
 			</tr>
 
 			<tr>
-				<td align="center" colspan="2"><input type="" value="비밀번호찾기"
-					class="custom-btn_2"></td>
+				<td><a href="<c:url value='/login/FindId'/>">ID 찾기</a></td>
+				<td><a href="<c:url value='/login/FindPw'/>">PW 찾기</a></td>
 			</tr>
-			<tr>
-				<td class="g-signin2" data-onsuccess="onSignIn"></td>
-			</tr> -->
+
+
+
+
+
 
 
 		</table>

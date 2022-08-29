@@ -31,7 +31,7 @@ public class EstimateDAO {
 	
 	public HashMap<String, String> one(String user_id) {
 		HashMap<String, String> res = new HashMap<String, String>();
-		String gim = "";
+		String gim = "",gim_Det = "";
 		sql = "select * from estimate where id = ?";
 		try {
 			ptmt = con.prepareStatement(sql);
@@ -52,13 +52,14 @@ public class EstimateDAO {
 				gim += rs.getString("Home_App") + "@";
 				gim += rs.getString("Other");
 				res.put("luggage", gim);
-				gim = "";
-				gim += rs.getString("Furniture_Det") + "@";
-				gim += rs.getString("Home_App_Det") + "@";
-				gim += rs.getString("Other_Det");
-				res.put("luggage_list", gim);
+				
+				gim_Det += rs.getString("Furniture_Det") + "@";
+				gim_Det += rs.getString("Home_App_Det") + "@";
+				gim_Det += rs.getString("Other_Det");
+				
+				res.put("luggage_list", gim_Det);
 
-				res.put("shopping_list", "" + rs.getString("shopping_list"));
+				/* res.put("shopping_list", "" + rs.getString("shopping_list")); */
 				res.put("request", "" + rs.getString("request"));
 				res.put("req_date", "" + rs.getDate("req_date"));
 				res.put("price", "" + rs.getInt("price"));
@@ -90,9 +91,11 @@ public class EstimateDAO {
 					step = 2; break ee;
 				}else if(rs.getString("Furniture_Det") ==null || rs.getString("Home_App_Det") ==null || rs.getString("Other_Det") ==null || rs.getString("request") ==null) {
 					step = 3; break ee;
-				}else if(rs.getString("shopping_list") ==null) {
-					step = 4; break ee;
-				}else if(rs.getInt("state") != 1) {
+				}
+				/*
+				 * else if(rs.getString("shopping_list") ==null) { step = 4; break ee; }
+				 */
+				else if(rs.getInt("state") != 1) {
 					step = 5; break ee;
 				}				
 			}
@@ -169,6 +172,19 @@ public class EstimateDAO {
 	public String findName (String user_id) {
 		String name="";
 		
+		try {
+			sql = "select name from user where id = '" + user_id + "'";
+			ptmt = con.prepareStatement(sql);
+			rs = ptmt.executeQuery();
+			if (rs.next()) {
+				name = rs.getString("name");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return name;
 	}
 	public int detailToRes_num(String user_id) {
@@ -206,9 +222,9 @@ public class EstimateDAO {
 						+ rs.getString("Other_Det");
 			}
 			
-			sql = "INSERT INTO matching(res_num ,user_ID, SV_Type ,reservat_date, start_point, start_op, end_point, end_op, luggage_list, shopping_list, requests, cost)"
+			sql = "INSERT INTO matching(res_num ,user_ID, SV_Type ,reservat_date, start_point, start_op, end_point, end_op, luggage_list, requests, cost)"
 					+ "select res_num, id, SV_Type, sel_date, start_Point, start_OP, end_Point, end_OP,'" + luggage_list
-					+ "', shopping_list, request, price from estimate " + "where id =? and state =0 and res_num ='"
+					+ "', request, price from estimate " + "where id =? and state =0 and res_num ='"
 					+ res_num + "'";
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, user_id);
@@ -262,7 +278,7 @@ public class EstimateDAO {
 				System.out.println(user_id + ": 데이터 유지");
 			} else if (!pagenum.equals("") && res_num != 0) {// 그냥 else해도됨
 				String[] arr = data.split("@");
-				System.out.println("arr길이: " + arr.length + "/번호: " + res_num + "\n---" + data);
+				System.out.println("arr길이: " + arr.length + "/번호: " + res_num + "\n DAO->->" + data);
 				if (pagenum.equals("2")) {// 1페이지에서 2페이지 넘어갈때
 
 					String[] stop = arr[4].split(",");
@@ -340,53 +356,76 @@ public class EstimateDAO {
 					rs = ptmt.executeQuery();
 
 					System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" + sel_date);
-				} else if (pagenum.equals("4")) {// 3페이지에서 4페이지 넘어갈때
-					sql = "update estimate set " + "Furniture_Det =?, Home_App_Det =?, Other_Det =?, request =? "
+				}else if (pagenum.equals("Res")) {// 3페이지에서 Res페이지 넘어갈때
+					int price=0,
+					Furniture_Price= arr[0].split(",").length*1000, 
+					Home_App_Price= arr[1].split(",").length*700, 
+					Other_Price= arr[2].split(",").length*500,
+					luggage_price= Furniture_Price+Home_App_Price+Other_Price;
+					System.err.println("Home_App_Price--------------->"+arr[1].toString());
+					System.out.println("가구"+Furniture_Price+"가전"+Home_App_Price+"기타:"+Other_Price+"="+luggage_price);
+					
+					String luggage_list = "";
+					sql = "select Furniture_Det, Home_App_Det, Other_Det, price from estimate "
+							+ "where id =? and state =0 and res_num =" + res_num + "";
+					ptmt = con.prepareStatement(sql);
+					ptmt.setString(1, user_id);
+					rs = ptmt.executeQuery();
+					while (rs.next()) {
+						luggage_list = 
+								  rs.getString("Furniture_Det") + "," 
+								+ rs.getString("Home_App_Det") + ","
+								+ rs.getString("Other_Det");
+						price	= rs.getInt("price");
+					}
+					
+					price += luggage_price;
+					
+					sql = "update money set luggage_list =?, luggage_price=?, price =? "
+							+ "where id =? and state =0 and "+ res_num; 
+					ptmt = con.prepareStatement(sql);
+					ptmt.setString(1, luggage_list);
+					ptmt.setInt(2, luggage_price);
+					ptmt.setInt(3, price);
+					ptmt.setString(4, user_id);
+					rs = ptmt.executeQuery();
+					
+					sql = "update estimate set " + "Furniture_Det =?, Home_App_Det =?, Other_Det =?, request =?,  price =? "
 							+ "where id =? and state =0 and res_num ="+ res_num;
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1, arr[0]);
 					ptmt.setString(2, arr[1]);
 					ptmt.setString(3, arr[2]);
 					ptmt.setString(4, arr[3]);
+					ptmt.setInt(5, price);
 
-					ptmt.setString(5, user_id);
-					rs = ptmt.executeQuery();
-
-					System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" + sel_date);
-				} else if (pagenum.equals("Res")) {// 4페이지에서 결과 확인페이지 넘어갈때
-					int price = 0;
-					sql = "select price from estimate "
-							+ "where id =? and state =0 and res_num ="+ res_num;
-					ptmt = con.prepareStatement(sql);
-					ptmt.setString(1, user_id);
-					rs = ptmt.executeQuery();
-					while (rs.next()) {
-						price = rs.getInt("price");
-					}
-
-					System.out.println("견적 중간 값!!" + price);
-					price += Integer.parseInt(arr[1]);
-					System.out.println("견적 최종 값!!" + price);
-					
-					sql = "update money set shopping_list =?, shopping_price=?, price =? "
-							+ "where id =? and state =0 and "+ res_num;
-					ptmt = con.prepareStatement(sql);
-					ptmt.setString(1, arr[0]);
-					ptmt.setInt(2, Integer.parseInt(arr[1]));
-					ptmt.setInt(3, price);
-					ptmt.setString(4, user_id);
-					rs = ptmt.executeQuery();
-					
-					sql = "update estimate set shopping_list =?, price =? "
-							+ "where id =? and state =0 and "+ res_num;
-					ptmt = con.prepareStatement(sql);
-					ptmt.setString(1, arr[0]);
-					ptmt.setString(2, "" + price);
-					ptmt.setString(3, user_id);
+					ptmt.setString(6, user_id);
 					rs = ptmt.executeQuery();
 
 					System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" + sel_date);
 				}
+				/*
+				 * else if (pagenum.equals("Res")) {// 4페이지에서 결과 확인페이지 넘어갈때 int price = 0; sql =
+				 * "select price from estimate " + "where id =? and state =0 and res_num ="+
+				 * res_num; ptmt = con.prepareStatement(sql); ptmt.setString(1, user_id); rs =
+				 * ptmt.executeQuery(); while (rs.next()) { price = rs.getInt("price"); }
+				 * 
+				 * System.out.println("견적 중간 값!!" + price); price += Integer.parseInt(arr[1]);
+				 * System.out.println("견적 최종 값!!" + price);
+				 * 
+				 * sql = "update money set shopping_list =?, shopping_price=?, price =? " +
+				 * "where id =? and state =0 and "+ res_num; ptmt = con.prepareStatement(sql);
+				 * ptmt.setString(1, arr[0]); ptmt.setInt(2, Integer.parseInt(arr[1]));
+				 * ptmt.setInt(3, price); ptmt.setString(4, user_id); rs = ptmt.executeQuery();
+				 * 
+				 * sql = "update estimate set shopping_list =?, price =? " +
+				 * "where id =? and state =0 and "+ res_num; ptmt = con.prepareStatement(sql);
+				 * ptmt.setString(1, arr[0]); ptmt.setString(2, "" + price); ptmt.setString(3,
+				 * user_id); rs = ptmt.executeQuery();
+				 * 
+				 * System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" +
+				 * sel_date); }
+				 */
 
 			}
 

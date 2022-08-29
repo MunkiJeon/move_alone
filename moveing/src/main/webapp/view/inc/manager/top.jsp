@@ -12,14 +12,14 @@
 </ul>
 <div class="sideWrap">
     <div class="accordion" id="boxs">
-        <div class="accordion-item">
+<%--         <div class="accordion-item">
             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#box1">직원 관리</button></h2>
             <div id="box1" class="accordion-collapse collapse" data-bs-parent="#boxs">
                 <div class="accordion-body">
                     <a class="accordionList" href="<c:url  value='/manager/'/>StaffManagement?level=1">직원 조회</a>
                 </div>
             </div>
-        </div>
+        </div> --%>
         <div class="accordion-item">
             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#box6">고객 관리</button></h2>
             <div id="box6" class="accordion-collapse collapse" data-bs-parent="#boxs">
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
+<%--         <div class="accordion-item">
             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#box7">재고 관리</button></h2>
             <div id="box7" class="accordion-collapse collapse" data-bs-parent="#boxs">
                 <div class="accordion-body">
@@ -71,6 +71,6 @@
                     <a class="accordionList" href="<c:url  value='/manager/'/>CategoryManager">카태고리 관리</a>
                 </div>
             </div>
-        </div>
+        </div> --%>
     </div>
 </div>

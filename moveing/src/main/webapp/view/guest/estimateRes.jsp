@@ -65,12 +65,12 @@ tr, td {
 		</tr>
 		<tr align="center">
 			<td>짐목록</td>
-			<td>${estimate_d.get("luggage_list") } </td>
+			<td>${estimate_d.get("luggage_list") } </td><!--예정: 누르면 짐목록 팝업 처리  -->
 		</tr>
-		<tr align="center">
+<%-- 		<tr align="center">
 			<td>쇼핑리스트</td>
 			<td>${estimate_d.get("shopping_list") } </td>
-		</tr>
+		</tr> --%>
 		<tr align="center">
 			<td>요청사항</td>
 			<td>${estimate_d.get("request") } </td>

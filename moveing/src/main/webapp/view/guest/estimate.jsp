@@ -136,8 +136,8 @@ function cal() {
 							<h3>출발지를 입력해 주세요.</h3> <!-- <input type="text" placeholder="여기를 눌러서 출발지 주소 검색" name="start_point"> -->
 		                    <input type="text" id="st_addr1" name="st_addr1" placeholder="여기를 눌러서 출발지 주소 검색"  onclick="st_openZipSearch()">
 		                    <input type="text" id="st_addr2"  name="st_addr2" placeholder="상세 주소 입력 : 건물 이름 혹은 동호수">
-							<p class="addressIn"><input id="st_addr3" type="text" name="st_addr3" style="width: 20%" placeholder="층수: ex) 2층">층</p>
-							<p class="addressIn"><input id="st_addr4" type="text" name="st_addr4" style="width: 20%" placeholder="방수: ex) 3개">개</p>
+							<p class="addressIn"><input id="st_addr3" type="number" name="st_addr3" style="width: 20%" placeholder="층수: ex) 2층">층</p>
+							<p class="addressIn"><input id="st_addr4" type="number" name="st_addr4" style="width: 20%" placeholder="방수: ex) 3개">개</p>
 							<input type="hidden" name="start">
 						</div>
 					</li>
@@ -168,8 +168,8 @@ function cal() {
 							<h3>도착지를 입력해 주세요.</h3>
 							<input type="text"  name="en_addr1" placeholder="여기를 눌러서 도착지 주소 검색"  onclick="en_openZipSearch()">
                     		<input type="text"  name="en_addr2" placeholder="상세 주소 입력 : 건물 이름 혹은 동호수">
-							<p class="addressIn"><input type="text" id="en_addr3" name="en_addr3" style="width: 20%" placeholder="층수: ex) 3층"></p>
-							<p class="addressIn"><input type="text" id="en_addr4" name="en_addr4" style="width: 20%" placeholder="방수: ex) 2개"></p>
+							<p class="addressIn"><input type="number" id="en_addr3" name="en_addr3" style="width: 20%" placeholder="층수: ex) 3층">층</p>
+							<p class="addressIn"><input type="number" id="en_addr4" name="en_addr4" style="width: 20%" placeholder="방수: ex) 2개">개</p>
 							<input type="hidden" name="end">
 						</div>	
 					</li>

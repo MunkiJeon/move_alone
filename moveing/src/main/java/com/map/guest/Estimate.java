@@ -94,54 +94,72 @@ public class Estimate implements GuestService {
 				if(step != null){
 					HashMap<String, String> gim = new EstimateDAO().one(user_id);
 					String[] items = gim.get("luggage").split("@");
-					item1 = items[0];item2 = items[1];item3 = items[2];
+					System.out.println("EstimateDAO().one 드가고");
+					item1 = items[0];
+					System.out.println("\n items[0] :"+items[0]);
+					item2 = items[1];
+					System.out.println("\n items[1] :"+items[1]);
+					item3 = items[2];
+					System.out.println("\n items[2] :"+items[2]);
 				}
 				gim_data= item1+"@"+item2+"@"+item3;
 				
-				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
+				System.out.println(pageNum +"번째 Java 드감?"+"\n----"+gim_data);
 				
 				request.setAttribute("itemName",itemName);
 				request.setAttribute("item1Arr",item1.split(","));
 				request.setAttribute("item2Arr",item2.split(","));
 				request.setAttribute("item3Arr",item3.split(","));
 				
-			}else if(pageNum.equals("4")) {
+			}
+			/*
+			 * else if(pageNum.equals("4")) { String item1 = request.getParameter("item1");
+			 * String item2 = request.getParameter("item2"); String item3 =
+			 * request.getParameter("item3"); String req = request.getParameter("req"); //
+			 * 쇼핑에서 받을예정 gim_data= item1+"@"+item2+"@"+item3+"@"+req;
+			 * System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
+			 * 
+			 * ProductDao pdao = ProductDao.getInstance(); ArrayList<ProductBean> list =
+			 * pdao.getAllProduct(); CategoryDao cadao = CategoryDao.getInstance();
+			 * ArrayList<CategoryBean> calist = cadao.getAllCategory(); CategoryDao lcadao =
+			 * CategoryDao.getInstance(); ArrayList<CategoryBean> lcalist =
+			 * lcadao.getOnlyLargeCategory();
+			 * 
+			 * 
+			 * request.setAttribute("list", list); request.setAttribute("calist", calist);
+			 * request.setAttribute("lcalist", lcalist);
+			 * 
+			 * }
+			 */
+			else if(pageNum.equals("Res")) {
 				String item1 = request.getParameter("item1");
 				String item2 = request.getParameter("item2");
 				String item3 = request.getParameter("item3");
-				String req = request.getParameter("req"); // 쇼핑에서 받을예정
-				gim_data= item1+"@"+item2+"@"+item3+"@"+req;
-				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
+				String req = request.getParameter("req");
 				
-				ProductDao pdao = ProductDao.getInstance();
-				ArrayList<ProductBean> list = pdao.getAllProduct();
-				CategoryDao cadao = CategoryDao.getInstance();
-				ArrayList<CategoryBean> calist = cadao.getAllCategory();
-				CategoryDao lcadao = CategoryDao.getInstance();
-				ArrayList<CategoryBean> lcalist = lcadao.getOnlyLargeCategory();
-				
-				
-				request.setAttribute("list", list);
-				request.setAttribute("calist", calist);
-				request.setAttribute("lcalist", lcalist);
-				
-			}else if(pageNum.equals("Res")) {
-				String item = request.getParameter("item");
-				String price = request.getParameter("price");
-
-				gim_data= item+"@"+price;
-				if(step == null){
-					data.addEstimate(pageNum, user_id, sel_date,gim_data);					
+				if(step != null){
+					HashMap<String, String> res = new EstimateDAO().one(user_id);
+					String[] luggage_list = res.get("luggage_list").split("@");
+					System.out.println("luggage_list 길이"+luggage_list.length+"\n"+
+							luggage_list[0]+"//"+luggage_list[1]+"//");
+					item1 = luggage_list[0];
+					item2 = luggage_list[1];
+					item3 = luggage_list[2];
+					req = 	res.get("request");
 				}
+				gim_data= item1+"@"+item2+"@"+item3+"@"+req;
+				data.addEstimate(pageNum, user_id, sel_date,gim_data);
+				request.setAttribute("itemName",itemName);
+				request.setAttribute("item1Arr",item1.split(","));
+				request.setAttribute("item2Arr",item2.split(","));
+				request.setAttribute("item3Arr",item3.split(","));
 				
 				HashMap<String, String> estimate_d = new EstimateDAO().one(user_id);
-				System.out.println("estimate_d list >>>" + estimate_d.size());
 				request.setAttribute("estimate_d", estimate_d);
-				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
-				
+				System.out.println(pageNum +"번째 Java 드감?"+"\n----"+gim_data);
 			}
 			
-			System.out.println(pageNum +"번째 입력 값:"+gim_data); 
+			System.out.println(pageNum +"번째 Java 입력 값:"+gim_data); 
 			request.setAttribute("gim_data",gim_data);
 			if(!pageNum.equals("Res")&& step == null) {
 				data.addEstimate(pageNum, user_id, sel_date,gim_data);

@@ -16,7 +16,7 @@
 	                <div id="SearchBox">
 	                    이름: <input type="text" id="search_title" name="search_name" placeholder="${title }명"  value="<c:out value="${param.search_name}"/>">
 	                    아이디: <input type="text"  id="search_id" name="search_id" placeholder="아이디"  value="<c:out value="${param.search_id}"/>">
-	                    입사일:<input type="date" id="search_date" name="search_date" placeholder="입사일" value="<c:out value="${param.search_date}"/>">
+	                    가입일:<input type="date" id="search_date" name="search_date" placeholder="입사일" value="<c:out value="${param.search_date}"/>">
 	                    <input type="hidden"  name="level" value="<c:out value="${level}"/>">
 	                    <button id="searchBtn">검색</button>    
 	                </div>
@@ -30,8 +30,8 @@
             <td><input type="checkbox" id="allCheck"></td>
             <td>이름</td>
             <td>아이디</td>
-            <td>입사일</td>
-            <td>실적보기</td>
+            <td>가입일</td>
+            <!-- <td>실적보기</td> -->
         </tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
 <%-- 	<c:if test="${dto.leval }"></c:if> --%>
@@ -40,7 +40,7 @@
             <td>${dto.name }</td>
             <td>${dto.id }</td>
             <td>${dto.join_date }</td>
-            <td><a href="">보기</a></td>
+            <!-- <td><a href="">보기</a></td> -->
         </tr>
 </c:forEach>        
     </table>
@@ -140,17 +140,6 @@
             add=false;
             modify=false;
         })
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         $(".popupbtnModify").click(function(e){
             e.preventDefault();

@@ -83,7 +83,7 @@
 			}
 		}
 		 for(let i =0;i<$(".gim_detail .calcItem .item_ops2 ").length;i++){
-			if(i<$(".gim_detail .calcItem .productItem2 ").length-1){
+			if(i<$(".gim_detail .calcItem .item_ops2 ").length-1){
 				item2 += $(".gim_detail .calcItem .item_ops2 ").eq(i).find("h4").text()+":"+
 				$(".gim_detail .calcItem .item_ops2 ").eq(i).find(".item2").val()+",";
 			}else{

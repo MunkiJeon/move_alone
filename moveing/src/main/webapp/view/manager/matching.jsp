@@ -100,9 +100,9 @@ tr, td {
             <td>${dto.start_op }</td>
             <td>${dto.end_point }</td>
             <td>${dto.end_op }</td>
-            <td>${dto.luggage_list }</td>
-            <td>${dto.shopping_list }</td>
-            <td>${dto.requests }</td>
+            <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td>
+            <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
+            <td class="previewbtn1" data-value="${dto.requests }">보기</td>
             <td>${dto.req_date }</td>
             <td>${dto.cost }</td>
             <!-- <td><a href="">보기</a></td> -->

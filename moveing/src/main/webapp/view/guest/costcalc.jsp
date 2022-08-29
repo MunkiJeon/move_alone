@@ -237,8 +237,23 @@
                         <p class="mo_tot">-</p>원
                     </div>
               <c:choose>
-         	 	<c:when test="${id!=null }">
+         	 	<c:when test="${id!=null && res_num ==0}">
                     <a class="resultBtn" href="Estimate">나홀로 이사 첫 운송 할인받기</a>
+                </c:when>
+               	<c:when test="${id!=null && res_num !=0 && step == 1}">
+                    <a class="resultBtn" href="Estimate">나홀로 이사 첫 운송 할인받기</a>
+                </c:when>
+                <c:when test="${id!=null && res_num !=0 && step == 2}">
+                    <a class="resultBtn" href="Estimate?num=2&step=2">나홀로 이사 첫 운송 할인받기</a>
+                </c:when>
+                <c:when test="${id!=null && res_num !=0 && step == 3}">
+                    <a class="resultBtn" href="Estimate?num=3&step=3">나홀로 이사 첫 운송 할인받기</a>
+                </c:when>
+                <c:when test="${id!=null && res_num !=0 && step == 4}">
+                    <a class="resultBtn" href="Estimate?num=4&step=4">나홀로 이사 첫 운송 할인받기</a>
+                </c:when>
+                <c:when test="${id!=null && res_num !=0 && step == 5}">
+                    <a class="resultBtn" href="Estimate?num=Res&step=5">나홀로 이사 첫 운송 할인받기</a>
                 </c:when>
                 <c:otherwise>
                 	<a class="resultBtn" href="<c:url value='/login/Login'/>">나홀로 이사 첫 운송 할인받기</a>

@@ -6,6 +6,12 @@
 <style>
 .mar{
 	margin:10% auto;
+	width:80%;
+}
+
+.tList{
+ width:80%;
+
 }
 </style>
 
@@ -27,25 +33,40 @@ $(function(){
 				</tr>
 				<tr>
 					<td>
-						<table>
+						<table class="tList">
 							<tr>
 								<td>아이디</td>
-								<td>예약날짜</td>
+								<td>기사아이디</td>
+								<td>종류</td>
+								<td>이사날짜</td>
 								<td>출발지</td>
 								<td>도착지</td>
+								<td>목록</td>
 								<td>포장박스</td>
 								<td>비용</td>
 							</tr>
-							<tr><td colspan="6"><hr></td></tr>
+							<tr><td colspan="9" style="border-bottom: 2px solid black;"></td></tr>
 							<c:forEach items="${dto2 }" var="dtoa">
 							<tr>
 								<td>${dtoa.user_ID }</td>
+								<td>${dtoa.driver_ID }</td>
+								<td>${dtoa.SV_Type }</td>
 								<td>${dtoa.reservat_date }</td>
 								<td>${dtoa.start_point }</td>
 								<td>${dtoa.end_point }</td>
+								<td>${dtoa.luggage_list }</td>
 								<td>${dtoa.shopping_list }</td>
 								<td>${dtoa.cost }</td>
 							</tr>
+							<tr><td><c:if test="${dtoa.req_state==0 }">
+								매칭중
+							</c:if>
+							<c:if test="${dtoa.req_state==1 }">
+								매칭완료
+							</c:if>
+							<c:if test="${dtoa.req_state==2 }">
+								이사완료
+							</c:if></td></tr>
 							</c:forEach>
 							
 							

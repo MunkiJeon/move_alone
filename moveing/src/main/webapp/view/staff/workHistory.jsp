@@ -27,15 +27,13 @@
 						<table border="">
 							<tr>
 								<td>아이디</td>
-								<td>예약날짜</td>
+								<td>이사날짜</td>
 								<td>출발지</td>
 								<td>도착지</td>
 								<td>포장박스</td>
 								<td>금액</td>
 							</tr>
-							<tr>
-								<td colspan="6"><hr></td>
-							</tr>
+							<tr><td colspan="7" style="border-bottom: 2px solid black;"></td></tr>
 							
 							<c:forEach items="${dtoS2}" var="dtoa">
 						
@@ -49,8 +47,17 @@
 							</tr>
 							
 							</c:forEach>
+							<tr><td colspan="7" style="border-bottom: 2px solid black;"></td></tr>
+							<tr>
 							
-							<tr><td colspan="6">합계:${re }</td></tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>합계:${re }</td>
+							
+							</tr>
 						</table>
 					
 			</table>

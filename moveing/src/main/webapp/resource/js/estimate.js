@@ -68,30 +68,36 @@
     
     $(".gim_detail .detailNext").click(function(e){
 		//detailNext //test
-		let item1 ="",item2 ="", item3 ="", req =$(".gim_detail .calcItem .item_opsReq .req").val();
+		let item1 ="",item2 ="", item3 ="", req ="요청사항:"+$(".gim_detail .calcItem .item_opsReq .req").val();
 		//e.preventDefault();
 		
 		//---------------------3---------------------
 
 		 for(let i =0;i<$(".gim_detail .calcItem .item_ops1 ").length;i++){
 			if(i<$(".gim_detail .calcItem .item_ops1 ").length-1){
-				item1 += $(".gim_detail .calcItem .item_ops1 ").eq(i).find(".item1").val()+",";
+				item1 += $(".gim_detail .calcItem .item_ops1 ").eq(i).find("h4").text()+":"+
+				$(".gim_detail .calcItem .item_ops1 ").eq(i).find(".item1").val()+",";
 			}else{
-				item1 += $(".gim_detail .calcItem .item_ops1 ").eq(i).find(".item1").val();
+				item1 += $(".gim_detail .calcItem .item_ops1 ").eq(i).find("h4").text()+":"+
+				$(".gim_detail .calcItem .item_ops1 ").eq(i).find(".item1").val();
 			}
 		}
 		 for(let i =0;i<$(".gim_detail .calcItem .item_ops2 ").length;i++){
 			if(i<$(".gim_detail .calcItem .productItem2 ").length-1){
-				item2 += $(".gim_detail .calcItem .item_ops2 ").eq(i).find(".item2").val()+",";
+				item2 += $(".gim_detail .calcItem .item_ops2 ").eq(i).find("h4").text()+":"+
+				$(".gim_detail .calcItem .item_ops2 ").eq(i).find(".item2").val()+",";
 			}else{
-				item2 += $(".gim_detail .calcItem .item_ops2 ").eq(i).find(".item2").val();
+				item2 += $(".gim_detail .calcItem .item_ops2 ").eq(i).find("h4").text()+":"+
+				$(".gim_detail .calcItem .item_ops2 ").eq(i).find(".item2").val();
 			}
 		}
 		 for(let i =0;i<$(".gim_detail .calcItem .item_ops3 ").length;i++){
 			if(i<$(".gim_detail .calcItem .item_ops3 ").length-1){
-				item3 += $(".gim_detail .calcItem .item_ops3 ").eq(i).find(".item3").val()+",";
+				item3 += $(".gim_detail .calcItem .item_ops3 ").eq(i).find("h4").text()+":"+
+				$(".gim_detail .calcItem .item_ops3 ").eq(i).find(".item3").val()+",";
 			}else{
-				item3 += $(".gim_detail .calcItem .item_ops3 ").eq(i).find(".item3").val();
+				item3 += $(".gim_detail .calcItem .item_ops3 ").eq(i).find("h4").text()+":"+
+				$(".gim_detail .calcItem .item_ops3 ").eq(i).find(".item3").val();
 			}
 		}
 		
@@ -134,8 +140,16 @@
 			numBox_L = $(".itam_"+i+" .numBox_L").val() ,numBox_M = $(".itam_"+i+" .numBox_M").val(), numBox_S = $(".itam_"+i+" .numBox_S").val();
 			discprice = $(".itam_"+i+" .discprice").val(),pname=$(".itam_"+i+" .pname").html();
 			
-			item += pname+" :";
-			if(Box_L){
+			if(numBox_L!=0){
+				item += pname+":";
+				item += numBox_L+"개";
+				totprice += discprice*numBox_L;
+				if(i<itemNum-1){
+					item += ","
+				}				
+			}
+			
+			/*if(Box_L){
 				item += "Box_L:"+numBox_L+"개,";
 				totprice += discprice*numBox_L;
 			}if(Box_M){
@@ -146,7 +160,7 @@
 				totprice += discprice*numBox_S;
 			}if(i<itemNum-1){
 				item += ","
-			}
+			}*/
 			
 			/*if($(".itam_"+i+".Box_L").is(":checked")){
 				txt += ","+i+"눌림";
@@ -167,7 +181,7 @@
 			}*/
 		}
 		//console.log(item);
-		console.log(Box_L);
+		/*console.log(Box_L);*/
 		console.log(numBox_L);
 		console.log(discprice);
 		console.log(totprice);

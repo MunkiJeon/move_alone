@@ -19,13 +19,17 @@ public class Estimate implements GuestService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		try {
 			request.setCharacterEncoding("UTF-8");
+			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String pageNum = request.getParameter("num");
+		String step = request.getParameter("step");
+		System.out.println("페이비번호:"+pageNum+" 스탭:"+step);
 		String gim_data = null;
 		String sel_date =null;
 		EstimateDAO data = new EstimateDAO();
@@ -35,7 +39,12 @@ public class Estimate implements GuestService {
 		String[][] itemName = {
 				{"침대/토퍼/매트","옷장","행거","수납장/책장/선반","테이블/식탁","소파","의자","거울/파티션"},
 				{"TV/모니터","PC/데탑","세탁기/건조기","냉장고","공기청정기/제습기","정수기/식기세척기","주방기기","청소기","선풍기/서큘레이터/에어컨"},
-				{"운동 용품","침구류","악기","아동용 가구/완구","장식/화분","조명기기","빨래건조대/바구니","애완용품"}};
+				{"운동 용품","침구류","악기","장식/화분","조명기기","빨래건조대/바구니","애완용품","기타 박스"}};
+		
+		String[][] itemImg = {
+				{"침대.png","옷장.png","행거.png","수납장.png","테이블.png","소파.png","의자.png","거울.png"},
+				{"티비.png","컴퓨터.png","세탁기.png","냉장고.png","공기청정기.png","식기세척기.png","전자레인지.png","청소기.png","에어컨.png"},
+				{"운동.png","침구류.png","악기.png","화분.png", "조명.png","바구니.png","애완용품.png","박스.png"}};
 		
 		if(pageNum==null) {pageNum="";
 		System.out.println(pageNum +"번째 입력 값:"+user_id); 
@@ -43,14 +52,13 @@ public class Estimate implements GuestService {
 		
 		else if(pageNum!=null) {
 			if(pageNum.equals("2")) {
-				
 				String option = request.getParameter("option");
 				sel_date = request.getParameter("sel_date");
 				session.setAttribute("sel_date", sel_date);
 				String time = request.getParameter("time");
 				
 				String start_point = request.getParameter("st_addr1")
-						+request.getParameter("st_addr2");
+									+request.getParameter("st_addr2");
 				
 				String[] start_op = {
 						request.getParameter("start_el"),//엘베 유무
@@ -61,7 +69,7 @@ public class Estimate implements GuestService {
 				};
 				
 				String end_point = request.getParameter("en_addr1")
-						+request.getParameter("en_addr2");
+									+request.getParameter("en_addr2");
 				
 				String[] end_op = {
 						request.getParameter("end_el"),//엘베 유무
@@ -70,7 +78,9 @@ public class Estimate implements GuestService {
 						request.getParameter("en_addr4"),//방개수
 				};
 				String mo_km = request.getParameter("mo_km");
+				System.out.println("itemName 0 길이:"+itemName[0].length);
 				request.setAttribute("itemName",itemName);
+				request.setAttribute("itemImg",itemImg);
 				gim_data= option+"@"+sel_date+"@"+time+"@"
 				+start_point+"@"+start_op[0]+","+start_op[1]+","+start_op[2]+","+start_op[3]+"@"
 				+end_point+"@"+end_op[0]+","+end_op[1]+","+end_op[2]+","+end_op[3]+"@"
@@ -80,12 +90,21 @@ public class Estimate implements GuestService {
 				String item1 = request.getParameter("item1");
 				String item2 = request.getParameter("item2");
 				String item3 = request.getParameter("item3");
-//				String box = request.getParameter("box"); // 쇼핑에서 받을예정
+				
+				if(step != null){
+					HashMap<String, String> gim = new EstimateDAO().one(user_id);
+					String[] items = gim.get("luggage").split("@");
+					item1 = items[0];item2 = items[1];item3 = items[2];
+				}
 				gim_data= item1+"@"+item2+"@"+item3;
+				
 				System.out.println(pageNum +"번째 드감?"+"\n----"+gim_data);
+				
+				request.setAttribute("itemName",itemName);
 				request.setAttribute("item1Arr",item1.split(","));
 				request.setAttribute("item2Arr",item2.split(","));
 				request.setAttribute("item3Arr",item3.split(","));
+				
 			}else if(pageNum.equals("4")) {
 				String item1 = request.getParameter("item1");
 				String item2 = request.getParameter("item2");
@@ -100,26 +119,20 @@ public class Estimate implements GuestService {
 				ArrayList<CategoryBean> calist = cadao.getAllCategory();
 				CategoryDao lcadao = CategoryDao.getInstance();
 				ArrayList<CategoryBean> lcalist = lcadao.getOnlyLargeCategory();
-				CategoryDao scadao = CategoryDao.getInstance();
-				ArrayList<CategoryBean> scalist = scadao.getOnlySmallCategory();
-				for (CategoryBean sc : scalist) {
-					System.out.println(sc.getSstep()+"---sc");
-				}
-				for (CategoryBean sc : lcalist) {
-					System.out.println(sc.getLstep()+"---lc");
-				}
+				
 				
 				request.setAttribute("list", list);
 				request.setAttribute("calist", calist);
 				request.setAttribute("lcalist", lcalist);
-				request.setAttribute("scalist", scalist);
 				
 			}else if(pageNum.equals("Res")) {
 				String item = request.getParameter("item");
 				String price = request.getParameter("price");
 
 				gim_data= item+"@"+price;
-				data.addEstimate(pageNum, user_id, sel_date,gim_data);
+				if(step == null){
+					data.addEstimate(pageNum, user_id, sel_date,gim_data);					
+				}
 				
 				HashMap<String, String> estimate_d = new EstimateDAO().one(user_id);
 				System.out.println("estimate_d list >>>" + estimate_d.size());
@@ -130,7 +143,7 @@ public class Estimate implements GuestService {
 			
 			System.out.println(pageNum +"번째 입력 값:"+gim_data); 
 			request.setAttribute("gim_data",gim_data);
-			if(!pageNum.equals("Res")) {
+			if(!pageNum.equals("Res")&& step == null) {
 				data.addEstimate(pageNum, user_id, sel_date,gim_data);
 			}
 		}

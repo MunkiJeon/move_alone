@@ -47,7 +47,12 @@ public class EstimateDAO {
 				res.put("start_OP", "" + rs.getString("start_OP"));
 				res.put("end_Point", "" + rs.getString("end_Point"));
 				res.put("end_OP", "" + rs.getString("end_OP"));
-
+				
+				gim += rs.getString("Furniture") + "@";
+				gim += rs.getString("Home_App") + "@";
+				gim += rs.getString("Other");
+				res.put("luggage", gim);
+				gim = "";
 				gim += rs.getString("Furniture_Det") + "@";
 				gim += rs.getString("Home_App_Det") + "@";
 				gim += rs.getString("Other_Det");
@@ -68,6 +73,41 @@ public class EstimateDAO {
 		return res;
 	}
 	
+	public int checkStaps(String user_id, int res_num) {
+		int step = 0;
+		
+		try {
+			sql = "select * from estimate where id = ? and res_num =? and state = 0";
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, user_id);
+			ptmt.setInt(2, res_num);
+			rs = ptmt.executeQuery();
+			ee:while (rs.next()) {
+				if(rs.getString("SV_Type") == null || rs.getDate("sel_date") == null || rs.getString("start_Point") == null ||
+				   rs.getString("start_OP") == null ||	rs.getString("end_Point") == null || rs.getString("start_OP") == null) {
+					step = 1; break ee;
+				}else if(rs.getString("Furniture") ==null || rs.getString("Home_App") ==null || rs.getString("Other") ==null) {
+					step = 2; break ee;
+				}else if(rs.getString("Furniture_Det") ==null || rs.getString("Home_App_Det") ==null || rs.getString("Other_Det") ==null || rs.getString("request") ==null) {
+					step = 3; break ee;
+				}else if(rs.getString("shopping_list") ==null) {
+					step = 4; break ee;
+				}else if(rs.getInt("state") != 1) {
+					step = 5; break ee;
+				}				
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		
+		return step;
+	}
+	
 	public ArrayList<EstimateDTO> all(HttpServletRequest request) {
 		ArrayList<EstimateDTO> res = new ArrayList<EstimateDTO>();
 		String searchResnum = request.getParameter("search_resnum"); // 예약번호
@@ -75,25 +115,21 @@ public class EstimateDAO {
 		String searchId     = request.getParameter("search_id");     // 아이디(기사ID)
 		String searchDate   = request.getParameter("search_date");   // 이사날짜
 		
-		//System.out.println("searchResnum >>>" + searchResnum);
-		//System.out.println("searchName >>>" + searchName);
-		//System.out.println("searchId >>>" + searchId);
-		//System.out.println("searchDate >>>" + searchDate);
-		
-		sql = "select * from matching where 1=1";
+
+		sql = "select * from estimate ";
 			if(searchResnum != "" && searchResnum != null) {
 				//sql	+= " and res_num = " + searchResnum; //전체검색
 				sql	+= " and res_num LIKE '%" + searchResnum + "%'"; //특정검색
 			}
 			if(searchName != "" && searchName != null) {
 				//sql	+= " and user_ID = '" + searchName + "'"; //전체검색
-				sql	+= " and user_ID LIKE '%" + searchName + "%'"; //특정검색
+				sql	+= " and id LIKE '%" + searchName + "%'"; //특정검색
 			}
 			if(searchId != "" && searchId != null) {
-				sql	+= " and driver_ID = '" + searchId +"'";
+				sql	+= " and SV_Type = '" + searchId +"'";
 			}
 			if(searchDate != "" && searchDate != null) {
-				sql	+= " and DATE(reservat_date) = '" + searchDate +"'";
+				sql	+= " and DATE(sel_date) = '" + searchDate +"'";
 			}
 		System.out.println("sql >>>" + sql);
 		try {
@@ -112,18 +148,13 @@ public class EstimateDAO {
 				dto.setStart_OP(rs.getString("start_OP"));
 				dto.setEnd_Point(rs.getString("end_Point"));
 				dto.setEnd_OP(rs.getString("end_OP"));
-				dto.setFurniture(rs.getString("Furniture"));
-				dto.setHome_App(rs.getString("Home_App"));
-				dto.setOther(rs.getString("Other"));
-				//
 				dto.setFurniture_Det(rs.getString("Furniture_Det"));
 				dto.setHome_App_Det(rs.getString("Home_App_Det"));
 				dto.setOther_Det(rs.getString("Other_Det"));
-				//
 				dto.setShopping_list(rs.getString("shopping_list"));
 				dto.setRequest(rs.getString("request"));
 				dto.setReq_date(rs.getDate("req_date"));
-				
+				dto.setPrice(rs.getInt("price"));
 				res.add(dto);
 			}
 		}catch (Exception e) {
@@ -135,6 +166,11 @@ public class EstimateDAO {
 		return res;
 	}
 	
+	public String findName (String user_id) {
+		String name="";
+		
+		return name;
+	}
 	public int detailToRes_num(String user_id) {
 		int res_num = 0;
 		try {
@@ -186,7 +222,13 @@ public class EstimateDAO {
 			rs = ptmt.executeQuery();
 			
 			sql = "update estimate set state =1 "
-				+ "where id =? and state =0 and res_num =" + res_num + "";
+				+ "where id =? and state =0 and res_num ="+ res_num ;
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, user_id);
+			rs = ptmt.executeQuery();
+			
+			sql = "update money set state =1 "
+					+ "where id =? and state =0 and res_num ="+ res_num ;
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, user_id);
 			rs = ptmt.executeQuery();
@@ -203,15 +245,18 @@ public class EstimateDAO {
 
 		System.out.println("addEstiate들어옴" + pagenum + "// ID:" + user_id + "// date:" + sel_date);
 
+		int res_num = detailToRes_num(user_id);
+		String name = findName(user_id);
 		try {
-			int res_num = detailToRes_num(user_id);
 
 			if (pagenum.equals("") && res_num == 0) {
-				sql = "INSERT INTO estimate (id,state) VALUES (?, 0)";
+				sql = "INSERT INTO estimate (id,name,state) VALUES (?,?, 0)";
 
 				ptmt = con.prepareStatement(sql);
 				ptmt.setString(1, user_id);
+				ptmt.setString(2, name);
 				rs = ptmt.executeQuery();
+
 				System.out.println(user_id + ": 데이터 생성");
 			} else if (pagenum.equals("") && res_num != 0) {
 				System.out.println(user_id + ": 데이터 유지");
@@ -226,25 +271,48 @@ public class EstimateDAO {
 					String[] res = { arr[0], stop[0], stop[1], enop[0], enop[1] };
 
 					// System.out.println(res.length+"//"+arr[0]+"//"+stop[0]+"//"+stop[1]+"//"+enop[0]+"//"+enop[1]);
-					int price = 0;
+					int price = 0,SV_price=0,elevator_price=0,parking_price=0;
 					sql = "select name, cost from ecategory";
 					ptmt = con.prepareStatement(sql);
 					rs = ptmt.executeQuery();
 					while (rs.next()) {
+						int b=0;
 						for (String a : res) {
 							if (a.equals(rs.getString("name"))) {
 								price += rs.getInt("cost");
+								if(b==0) {
+									SV_price = rs.getInt("cost");
+								}else if(b==1 ||b==3) {
+									elevator_price +=rs.getInt("cost");
+								}else if(b==2 ||b==3) {
+									parking_price +=rs.getInt("cost");
+								}
 								// price = price + rs.getInt("cost");
 								// System.out.println(rs.getInt("cost"));
 							}
+							b++;
 						}
 					}
 					System.out.println("거리값 뺴고:" + price);
 					price += Double.parseDouble(arr[7]) * 1000;
 					System.out.println("거리값:" + price);
+					
+					sql = "INSERT INTO money (res_num, id, sel_date, start_Point, end_Point, km, km_price, "
+							+ "SV_Type, SV_price, elevator, elevator_price, parking, parking_price, state, price) "
+							+ "VALUES (?,?,?,?,?,?,?, ?,?,?,?,?,?,0,?)";
+					ptmt = con.prepareStatement(sql);
+					ptmt.setInt(1, res_num);								ptmt.setString(8, arr[0]);
+					ptmt.setString(2, user_id);								ptmt.setInt(9, SV_price);
+					ptmt.setString(3, arr[1]);								ptmt.setString(10, stop[0]+","+enop[0]);
+					ptmt.setString(4, arr[3]);								ptmt.setInt(11, elevator_price);
+					ptmt.setString(5, arr[5]);								ptmt.setString(12, stop[1]+","+enop[1]);
+					ptmt.setString(6, arr[7]);								ptmt.setInt(13, parking_price);
+					ptmt.setDouble(7, (Double.parseDouble(arr[7]) * 1000));	ptmt.setInt(14, price);
+					rs = ptmt.executeQuery();
+					
 					sql = "update estimate set "
 							+ "SV_Type =?, sel_date =?, Start_point =?, Start_OP =?, End_point =?, End_OP =?, price=? "
-							+ "where id =? and state =0 and res_num ='" + res_num + "'";
+							+ "where id =? and state =0 and res_num =" + res_num ;
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1, arr[0]);
 					ptmt.setString(2, arr[1]);
@@ -261,7 +329,7 @@ public class EstimateDAO {
 					System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" + sel_date);
 				} else if (pagenum.equals("3")) {// 2페이지에서 3페이지 넘어갈때
 					sql = "update estimate set " + "Furniture =?, Home_App =?, Other =? "
-							+ "where id =? and state =0 and res_num ='" + res_num + "'";
+							+ "where id =? and state =0 and res_num ="+ res_num;
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1, arr[0]);
 					ptmt.setString(2, arr[1]);
@@ -274,7 +342,7 @@ public class EstimateDAO {
 					System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" + sel_date);
 				} else if (pagenum.equals("4")) {// 3페이지에서 4페이지 넘어갈때
 					sql = "update estimate set " + "Furniture_Det =?, Home_App_Det =?, Other_Det =?, request =? "
-							+ "where id =? and state =0 and res_num ='" + res_num + "'";
+							+ "where id =? and state =0 and res_num ="+ res_num;
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1, arr[0]);
 					ptmt.setString(2, arr[1]);
@@ -288,7 +356,7 @@ public class EstimateDAO {
 				} else if (pagenum.equals("Res")) {// 4페이지에서 결과 확인페이지 넘어갈때
 					int price = 0;
 					sql = "select price from estimate "
-							+ "where id =? and state =0 and res_num ='" + res_num + "'";
+							+ "where id =? and state =0 and res_num ="+ res_num;
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1, user_id);
 					rs = ptmt.executeQuery();
@@ -299,8 +367,18 @@ public class EstimateDAO {
 					System.out.println("견적 중간 값!!" + price);
 					price += Integer.parseInt(arr[1]);
 					System.out.println("견적 최종 값!!" + price);
-					sql = "update estimate set " + "shopping_list =?, price =? "
-							+ "where id =? and state =0 and res_num ='" + res_num + "'";
+					
+					sql = "update money set shopping_list =?, shopping_price=?, price =? "
+							+ "where id =? and state =0 and "+ res_num;
+					ptmt = con.prepareStatement(sql);
+					ptmt.setString(1, arr[0]);
+					ptmt.setInt(2, Integer.parseInt(arr[1]));
+					ptmt.setInt(3, price);
+					ptmt.setString(4, user_id);
+					rs = ptmt.executeQuery();
+					
+					sql = "update estimate set shopping_list =?, price =? "
+							+ "where id =? and state =0 and "+ res_num;
 					ptmt = con.prepareStatement(sql);
 					ptmt.setString(1, arr[0]);
 					ptmt.setString(2, "" + price);

@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .mar{
-	margin:10% auto;
+	margin:10% 8%;
+	width:95%;
+}
+.tList{
+	width:95%;
 }
 
 </style>
@@ -50,26 +54,29 @@ $(function(){
 				
 				<tr>
 					<td>
-						<table border="2">
+						<table class="tList">
 						
 							<tr>
 								<td>아이디</td>
-								<td>예약날짜</td>
+								<td>이사날짜</td>
+								<td>종류</td>
 								<td>출발지</td>
 								<td>도착지</td>
-								<td>포장박스 수</td>
-								
+								<td>구매</td>
+								<td>금액</td>
 							</tr>
-							<tr><td colspan="6"><hr></td></tr>
+							<tr><td colspan="7" style="border-bottom: 2px solid black;"></td></tr>
 						
 								<c:forEach items="${dto4}" var="dtoaa" varStatus="no">
 									
 								<tr class="btn${no.index}">
 									<td>${dtoaa.user_ID}</td>
 									<td>${dtoaa.reservat_date }</td>
+									<td>${dtoaa.SV_Type }</td>
 									<td>${dtoaa.start_point }</td>
 									<td>${dtoaa.end_point }</td>
 									<td>${dtoaa.shopping_list }</td>
+									<td>${dtoaa.cost }</td>
 									<td><button class="selected" data-index="btn${no.index}" value="${dtoaa.res_num }">선택</button></td>
 								</tr>
 								</c:forEach>

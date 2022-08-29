@@ -5,6 +5,10 @@
 <style>
 .mar{
 	margin:10% auto;
+	width:80%;
+}
+.tList{
+ width:80%;
 }
 
 </style>
@@ -58,29 +62,29 @@ $(function(){
 				</tr>
 				<tr>
 					<td>
-						<table border="">
+						<table class="tList" border="">
 							
 							<tr>
-								<td>아이디</td>
-								<td>예약날짜</td>
+								<td>고객아이디</td>
+								<td>이사날짜</td>
+								<td>종류</td>
 								<td>출발지</td>
 								<td>도착지</td>
-								<td>포장박스</td>
+								<td>구매</td>
 								<td>금액</td>
 							</tr>
-							<tr>
-								<td colspan="6"><hr></td>
-							</tr>
+							<tr><td colspan="7" style="border-bottom: 2px solid black;"></td></tr>
 							
 							
 							<c:forEach items="${dtoS3}" var="dtoa" varStatus="no">
 							<tr class="btna${no.index}">
-								<td>${dtoa.driver_ID}</td>
-								<td>${dtoa.reservat_date}</td>
-								<td>${dtoa.start_point}</td>
-								<td>${dtoa.end_point}</td>
-								<td>${dtoa.shopping_list}</td>
-								<td>${dtoa.cost}</td>
+									<td>${dtoa.driver_ID}</td>
+									<td>${dtoa.reservat_date }</td>
+									<td>${dtoa.SV_Type }</td>
+									<td>${dtoa.start_point }</td>
+									<td>${dtoa.end_point }</td>
+									<td>${dtoa.shopping_list }</td>
+									<td>${dtoa.cost }</td>
 								<td><button class="selected2" data-index="btna${no.index}" value="${dtoa.res_num }">완료</button></td>
 							</tr>
 							

@@ -147,7 +147,7 @@ function cal() {
 						<div class="start_ELWrap">
 							<input type="radio" id="st_el1" name="start_el" value="엘베있음">
 							<label for="st_el1"> 있음 </label> 
-							<input type="radio" id="st_el2" name="start_el" value="엘베있음">
+							<input type="radio" id="st_el2" name="start_el" value="엘베없음">
 							<label for="st_el2"> 없음 </label>
 						</div>
 					</li>

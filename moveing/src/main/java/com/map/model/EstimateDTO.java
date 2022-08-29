@@ -24,6 +24,7 @@ public class EstimateDTO {
   int state;
   int price;
   Date req_date;
+  
 public int getRes_num() {
 	return res_num;
 }
@@ -150,6 +151,6 @@ public Date getReq_date() {
 public void setReq_date(Date req_date) {
 	this.req_date = req_date;
 }
-  
+
   
 }

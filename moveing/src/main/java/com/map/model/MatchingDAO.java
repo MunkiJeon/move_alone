@@ -153,6 +153,7 @@ public class MatchingDAO {
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
+				dto.setSV_Type(rs.getString("SV_Type"));
 				res.add(dto);
 			}
 		}catch (Exception e) {
@@ -191,6 +192,7 @@ public class MatchingDAO {
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
+				dto.setSV_Type(rs.getString("SV_Type"));
 				res.add(dto);
 			}
 		}catch (Exception e) {
@@ -202,13 +204,11 @@ public class MatchingDAO {
 		return res;
 	}
 	
-	public ArrayList<MatchingDTO> afterWork(String id,int req_state) {
+	public ArrayList<MatchingDTO> workList2() {
 		ArrayList<MatchingDTO> res = new ArrayList<MatchingDTO>();
-		sql = "select * from matching where driver_ID = ? and req_state = ?";
+		sql = "select * from matching where driver_ID = '' and req_state = 0 or driver_ID is null and req_state = 0";
 		try {
 			ptmt = con.prepareStatement(sql);
-			ptmt.setString(1, id);
-			ptmt.setInt(2, req_state);
 			rs = ptmt.executeQuery();
 			while(rs.next()) {
 				MatchingDTO dto = new MatchingDTO();
@@ -228,6 +228,7 @@ public class MatchingDAO {
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
+				dto.setSV_Type(rs.getString("SV_Type"));
 				res.add(dto);
 			}
 		}catch (Exception e) {
@@ -274,6 +275,7 @@ public class MatchingDAO {
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
+				dto.setSV_Type(rs.getString("SV_Type"));
 				res.add(dto);
 			}
 		}catch (Exception e) {
@@ -284,8 +286,6 @@ public class MatchingDAO {
 		
 		return res;
 	}
-	
-	
 	
 	public int update(MatchingDTO dto){
 		sql = "update matching set req_state = ?, driver_ID = ? where res_num = ? ";
@@ -376,7 +376,7 @@ public class MatchingDAO {
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
-				dto.setSV_Type(rs.getNString("SV_Type"));
+				dto.setSV_Type(rs.getString("SV_Type"));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

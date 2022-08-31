@@ -43,8 +43,8 @@ public class UserDAO {
 	
 	public UserDTO oneUser(String id) {
 		UserDTO dto = null;
-		sql = "select * from user where id = ?";
 		try {
+			sql = "select * from user where id = ?";
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, id);
 			rs = ptmt.executeQuery();

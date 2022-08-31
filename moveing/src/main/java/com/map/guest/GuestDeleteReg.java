@@ -25,7 +25,7 @@ public class GuestDeleteReg implements GuestService {
 			if(!dto2.getPw().equals(dto.getPw())) {
 				request.setAttribute("msg", "비밀번호가 틀립니다.");
 				request.setAttribute("mainUrl", "guest/alert.jsp");
-				request.setAttribute("url", "/guest/Out");
+				request.setAttribute("url", "/guest/GuestInformation");
 				request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
 				
 			}else if(dto2.getPw().equals(dto.getPw())){

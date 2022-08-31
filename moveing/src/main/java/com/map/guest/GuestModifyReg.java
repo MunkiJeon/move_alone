@@ -29,16 +29,7 @@ public class GuestModifyReg implements GuestService {
 			request.setAttribute("url", "/guest/GuestInformation");
 			request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
 			
-			
-			
-			
-			
-		
-			
 			request.setAttribute("dto", dto);
-			
-			
-			
 			
 		} catch (Exception e) {
 			

@@ -17,7 +17,7 @@ public class GuestHistory implements GuestService {
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-		ArrayList<MatchingDTO> dto2 = new MatchingDAO().oneUserForGuest(id,2);
+		ArrayList<MatchingDTO> dto2 = new MatchingDAO().oneUserForGuest(id);
 		
 		request.setAttribute("dto2", dto2);
 	}

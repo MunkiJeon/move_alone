@@ -36,12 +36,13 @@ tr, td {
 			<td>도착지 주소</td>
 			<td>도착지 옵션</td>
 			<!-- <td>가구 목록</td>
-			<td>가전 목록</td>
-			<td>기타 목록</td> -->
-			<td>쇼핑리스트</td>
+			<td>가전 목록</td>-->
+			<!-- <td>기타 목록</td> --> 
+		
 			<td>요청사항</td>
 			<td>예약날짜</td>
 			<td>총가격</td>
+			<td>현재 상태</td>
 		</tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
 	<c:if test="${dto.state!=9}"><!-- 임시로 전체 나오게 하려고 9 넣음 -->
@@ -56,18 +57,15 @@ tr, td {
             <td>${dto.start_OP }</td>
             <td>${dto.end_Point }</td>
             <td>${dto.end_OP }</td>
-            <%-- <td>${dto.Furniture_Det }</td>
-            <td>${dto.Home_App_Det }</td>
-            <td>${dto.Other_Det }</td>
-            <td>${dto.shopping_list }</td>
-            <td>${dto.request }</td> --%>
-	       	<%-- <td class="previewbtn1" data-value="${dto.Furniture_Det }">보기</td>
-            <td class="previewbtn1" data-value="${dto.Home_App_Det }">보기</td>
-            <td class="previewbtn1" data-value="${dto.Other_Det }">보기</td>
-            <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
-            <td class="previewbtn1" data-value="${dto.request }">보기</td> --%>
+
+	   <%--     	<td class="previewbtn1" data-value="${dto.Furniture_Det }">보기</td>
+            <td class="previewbtn1" data-value="${dto.Home_App_Det }">보기</td>  --%>
+            <%-- <td class="previewbtn1" data-value="${dto.Other_Det }">보기</td> --%>
+           	<td class="previewbtn1" data-value="${dto.request }">보기</td>
+           	
             <td>${dto.req_date }</td>
-            <td>${dto.price }</td>     
+            <td>${dto.price }</td> 
+            <td>${dto.state }</td>     
         </tr>
       </c:if>
 </c:forEach>

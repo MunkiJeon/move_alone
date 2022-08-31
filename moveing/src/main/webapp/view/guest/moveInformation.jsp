@@ -42,8 +42,7 @@ $(function () {
 							<table>
 								<tr>
 									<td>이름</td>
-								</tr>
-								
+								</tr>	
 								<tr>
 									<td><input type="text" value="${dtoa2.name }"></td>
 								</tr>
@@ -80,14 +79,13 @@ $(function () {
 				</tr>
 				
 				<tr>
-				<td >이사일: ${dtoo.req_date}</td>
+				<td>이사일: ${dtoo.req_date}</td>
 				<td></td>
 				<td>예약번호: ${dtoo.res_num }</td>
 				<td></td>
 				<td></td>
 				
 				<tr><td colspan="5" style="border-bottom: 2px solid black;"></td></tr>
-				
 				
 					<tr>
 						<td>예약날짜: ${dtoo.reservat_date }</td>
@@ -96,27 +94,29 @@ $(function () {
 						
 						<td>도착지: ${dtoo.end_point }</td>
 						
-						<td>박스: ${dtoo.shopping_list }</td>
+						<td>요청사항: ${dtoo.requests }</td>
 					</tr>
 					<tr>
-					<td>종류: ${dtoo.luggage_list }</td>
-					<td>출발지 상세<ul><li>엘리베이터: ${ele}</li>
-					<li>주차장: ${parking}</li>
-					<li>층수: ${floors}</li>
-					<li>방개수: ${rooms}</li>
-					</ul></td>
-					<td>도착지 상세<ul><li>엘리베이터: ${ele2}</li>
-					<li>주차장: ${parking2}</li>
-					<li>층수: ${floors2}</li>
-					<li>방개수: ${rooms2}</li>
-					</ul></td>
+						<td>짐목록: ${dtoo.luggage_list }</td>
+						<td>[ 출발지 상세 ]
+							<ul>
+								<li>엘리베이터: ${ele}</li>
+								<li>주차장: ${parking}</li>
+								<li>층수: ${floors}</li>
+								<li>방개수: ${rooms}</li>
+							</ul>
+						</td>
+						<td>[ 도착지 상세 ]
+							<ul>
+								<li>엘리베이터: ${ele2}</li>
+								<li>주차장: ${parking2}</li>
+								<li>층수: ${floors2}</li>
+								<li>방개수: ${rooms2}</li>
+							</ul>
+						</td>
 					</tr>
 					
 					<tr><td colspan="5" style="border-bottom: 2px solid black;"></td></tr>
-					
-					<tr><td>요청사항: ${dtoo.requests }</td>
-					
-					</tr>
 					
 					</c:forEach>
 			</table>

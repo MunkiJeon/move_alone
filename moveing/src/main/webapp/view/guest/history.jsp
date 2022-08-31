@@ -41,35 +41,51 @@ $(function(){
 								<td>이사날짜</td>
 								<td>출발지</td>
 								<td>도착지</td>
-								<td>목록</td>
-								<td>포장박스</td>
+								<td>짐목록</td>
 								<td>비용</td>
+								<td>현재 상태</td>
 							</tr>
 							<tr><td colspan="9" style="border-bottom: 2px solid black;"></td></tr>
 							<c:forEach items="${dto2 }" var="dtoa">
-							<tr>
-								<td>${dtoa.user_ID }</td>
-								<td>${dtoa.driver_ID }</td>
-								<td>${dtoa.SV_Type }</td>
-								<td>${dtoa.reservat_date }</td>
-								<td>${dtoa.start_point }</td>
-								<td>${dtoa.end_point }</td>
-								<td>${dtoa.luggage_list }</td>
-								<td>${dtoa.shopping_list }</td>
-								<td>${dtoa.cost }</td>
-							</tr>
-							<tr><td><c:if test="${dtoa.req_state==0 }">
-								매칭중
+							<c:if test="${dtoa.req_state!=2 }">
+								<tr>
+									<td>${dtoa.user_ID }</td>
+									<td>${dtoa.driver_ID }</td>
+									<td>${dtoa.SV_Type }</td>
+									<td>${dtoa.reservat_date }</td>
+									<td>${dtoa.start_point }</td>
+									<td>${dtoa.end_point }</td>
+									<td>${dtoa.luggage_list }</td>
+									<td>${dtoa.cost } 원</td>
+									<td>
+									<c:if test="${dtoa.req_state==0 }">
+										매칭중
+									</c:if>
+									<c:if test="${dtoa.req_state==1 }">
+										매칭완료
+									</c:if>
+									</td>
+								</tr>
 							</c:if>
-							<c:if test="${dtoa.req_state==1 }">
-								매칭완료
-							</c:if>
+							<tr><td colspan="9" style="border-bottom: 2px solid black;"></td></tr>
 							<c:if test="${dtoa.req_state==2 }">
-								이사완료
-							</c:if></td></tr>
+								<tr>
+									<td>${dtoa.user_ID }</td>
+									<td>${dtoa.driver_ID }</td>
+									<td>${dtoa.SV_Type }</td>
+									<td>${dtoa.reservat_date }</td>
+									<td>${dtoa.start_point }</td>
+									<td>${dtoa.end_point }</td>
+									<td>${dtoa.luggage_list }</td>
+									<td>${dtoa.cost } 원</td>
+									<td>
+									<c:if test="${dtoa.req_state==2 }">
+										매칭완료
+									</c:if>
+									</td>
+								</tr>
+							</c:if>
 							</c:forEach>
-							
-							
 						</table>
 					</td>
 				</tr>

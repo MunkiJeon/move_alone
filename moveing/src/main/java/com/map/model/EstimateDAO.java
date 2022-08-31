@@ -154,12 +154,14 @@ public class EstimateDAO {
 				dto.setFurniture_Det(rs.getString("Furniture_Det"));
 				dto.setHome_App_Det(rs.getString("Home_App_Det"));
 				dto.setOther_Det(rs.getString("Other_Det"));
-				dto.setShopping_list(rs.getString("shopping_list"));
 				dto.setRequest(rs.getString("request"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setPrice(rs.getInt("price"));
+				dto.setState(rs.getInt("state"));
+				
 				res.add(dto);
 			}
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -300,7 +302,7 @@ public class EstimateDAO {
 									SV_price = rs.getInt("cost");
 								}else if(b==1 ||b==3) {
 									elevator_price +=rs.getInt("cost");
-								}else if(b==2 ||b==3) {
+								}else if(b==2 ||b==4) {
 									parking_price +=rs.getInt("cost");
 								}
 								// price = price + rs.getInt("cost");

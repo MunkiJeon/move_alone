@@ -26,11 +26,21 @@ public class SignUpReg implements LoginService {
         String pname = request.getParameter("pname");
         String number = request.getParameter("number");
         String mail =request.getParameter("mail");
+        String res =request.getParameter("res");
         
         
         
-        System.out.println("testtest");
-        if(pid!=null&&pw!=null&&pname!=null&&number!=null&&mail!=null) {
+        System.out.println("SignUpReg 실행: "
+        +"id->"+pid
+        +"pw->"+pw
+        +"pname->"+pname
+        +"number->"+number
+        +"mail->"+mail
+        +"res->"+res);
+        
+        if(pid!=null&&pw!=null&&pname!=null&&number!=null&&mail!=null&&
+        !pid.equals("")&&!pw.equals("")&&!pname.equals("")&&!number.equals("")&&!mail.equals("")&&res.equals("Suitable")) {
+
         	UserDTO dto = new UserDTO();
         	dto.setId(pid);
         	dto.setPw(pw);

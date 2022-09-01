@@ -50,7 +50,7 @@
                 <div class="accordion-body">
                     <a class="accordionList" href="<c:url  value='/manager/'/>Calculate">정산 조회</a>
                     <a class="accordionList" href="<c:url  value='/manager/'/>Calculate?res=매출">매출 조회</a>
-                    <a class="accordionList" href="<c:url  value='/manager/'/>Calculate?res=매입">매입 조회</a>
+                    <%-- <a class="accordionList" href="<c:url  value='/manager/'/>Calculate?res=매입">매입 조회</a> --%>
                 </div>
             </div>
         </div>

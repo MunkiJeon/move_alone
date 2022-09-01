@@ -25,7 +25,8 @@ public class IdCheckProc implements AjaxService {
 			request.setCharacterEncoding("UTF-8");
 			String id = request.getParameter("id");
 			System.out.println(id+"-----------IdCheckProc-------------");
-			UserDAO mdao = UserDAO.getInstance();
+			UserDAO mdao = new UserDAO();
+
 			UserDTO dto = mdao.oneUser(id);
 			JSONObject data = new JSONObject();
 			String chk = "";

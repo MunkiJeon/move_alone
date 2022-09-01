@@ -41,12 +41,31 @@ public class UserDAO {
 		
 	}
 	
+	public int findUser(String id) {
+		int res=0;
+
+		try {
+			sql="SELECT COUNT(*) as cnt FROM user WHERE id =?";
+			ptmt = con.prepareStatement(sql);
+			ptmt.setString(1, id);
+			rs = ptmt.executeQuery();
+			
+			rs.next();
+			res=rs.getRow();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return res; 
+	}
+	
 	public UserDTO oneUser(String id) {
 		UserDTO dto = null;
+		System.out.println("oneUser-->"+id);
 		try {
 			sql = "select * from user where id = ?";
 			ptmt = con.prepareStatement(sql);
 			ptmt.setString(1, id);
+			System.out.println(ptmt);
 			rs = ptmt.executeQuery();
 		if(rs.next()) {
 				dto = new UserDTO();
@@ -96,7 +115,7 @@ public class UserDAO {
 		
 		return dto;
 	}
-	//---------------------------------------------찬희
+
 	public ArrayList<UserDTO> allStaff(String id) {
 		ArrayList<UserDTO> res = new ArrayList<UserDTO>();
 		sql = "select * from user where id = ?";

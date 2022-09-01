@@ -19,9 +19,7 @@ public class GuestDeleteReg implements GuestService {
 			dto.setId(((String)session.getAttribute("id")).trim());
 			dto.setPw(request.getParameter("pw2"));
 			dto2=new UserDAO().oneUser(id);
-			
-			
-			
+
 			if(!dto2.getPw().equals(dto.getPw())) {
 				request.setAttribute("msg", "비밀번호가 틀립니다.");
 				request.setAttribute("mainUrl", "guest/alert.jsp");
@@ -35,13 +33,6 @@ public class GuestDeleteReg implements GuestService {
 				request.setAttribute("moveUrl", "http://localhost:8080/moveing"+request.getAttribute("url"));
 				int cnt = new UserDAO().delete(dto);
 			}
-			
-			//System.out.println(cnt);
-			//System.out.println((String)session.getAttribute("id"));
-			
-			
-			
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

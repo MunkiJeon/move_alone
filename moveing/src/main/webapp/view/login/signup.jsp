@@ -93,7 +93,7 @@ input{
 						
 						console.log(responseData.chk =='POSSIBLE');
 						console.log(responseData.chk);
-						console.log('POSSIBLE');
+
 						if(responseData.chk.trim() == 'POSSIBLE'){ 					
 							$('#id_message').html("<font color=blue>사용 가능합니다.</font>");
 							$('#id_message').show(); 
@@ -107,117 +107,125 @@ input{
 		});
 
 		
-		$('input[name="pid"]').keydown(function(){ //키보드가 한번이라도 눌리면 발생하는 이벤트 처리
+/* 		$('input[name="pid"]').keydown(function(){ //키보드가 한번이라도 눌리면 발생하는 이벤트 처리
 			$('#id_message').css('display', 'none'); // 키가 눌렸을 때 안보이게.
 			isChanged = true;
 			ues=""; // 새로운 데이터의 입력이 들어오면 상태 초기화
-		});
+		}); */
 		
 	});//ready
 	
 	function gotoRegisterProc(){
+		var reg = /^[a-zA-Z0-9]{3,10}$/;
+		var tempId = $('input[name="pid"]').val();
+		var tempPw = $('input[name="pw"]').val();
+		var tempName = $('input[name="pname"]').val();
+		var reg2 = /^[가-힣]*$/;
+		var tempTel = $('input[name="number"]').val();
+		var regNum = /[^0-9]/;
 		
 		if($('input[name="pid"]').val() == ""){
 			alert("아이디를 입력하세요");
 			$('input[name="pid"]').focus();
-			return;
-		}
-		
-		if($('input[name="pw"]').val() == ""){
+			$('input[name="res"]').val("unsuitable");
+		}else if($('input[name="pw"]').val() == ""){
 			alert("비밀번호를 입력하세요");	
 			$('input[name="pw"]').focus();
-			return;
-		}
-		
-		if($('input[name="re_password"]').val() == ""){
+			$('input[name="res"]').val("unsuitable");
+		}else if($('input[name="re_password"]').val() == ""){
 			alert("비밀번호 확인을 입력하세요");	
 			$('input[name="re_password"]').focus();
-			return;
-		}
-		
-		if($('input[name="pw"]').val() != $('input[name="re_password"]').val()){
-			alert("비밀번호가 일치하지 않습니다.");		
-			return;
-		} 
-		
-		if($('input[name="pname"]').val() == ""){
+			$('input[name="res"]').val("unsuitable");
+		}else if($('input[name="pw"]').val() != $('input[name="re_password"]').val()){
+			alert("비밀번호가 일치하지 않습니다.");
+			$('input[name="res"]').val("unsuitable");
+		}else if($('input[name="pname"]').val() == ""){
 			alert("이름을 입력하세요");		
 			$('input[name="pname"]').focus();
-			return;
-		}
-		
-		if($('input[name="number"]').val() == ""){
+			$('input[name="res"]').val("unsuitable");
+		}else if($('input[name="number"]').val() == ""){
 			alert("전화번호를 입력하세요");		
 			$('input[name="number"]').focus();
-			return;
-		}
-		
-		if($('input[name="mail"]').val() == ""){
+			$('input[name="res"]').val("unsuitable");
+		}else if(tempTel.search(regNum) == -1){//--------------------
+			alert("숫자로만 입력하세요");		
+			$('input[name="number"]').focus();
+			$('input[name="res"]').val("unsuitable");
+		}else if($('input[name="mail"]').val() == ""){
 			alert("이메일을 입력하세요");		
 			$('input[name="mail"]').focus();
-			return;
-		}
-		
-		
-		if(idUsable == ""){
+			$('input[name="res"]').val("unsuitable");
+		}else if(idUsable == ""){
 			alert("아이디 중복체크를 수행해주세요");
-			return;
-		}
-		
-		if(idUsable == "IMPOSSIBLE"){
+			$('input[name="pid"]').focus();
+			$('input[name="res"]').val("unsuitable");
+		}else if(idUsable == "IMPOSSIBLE"){
 			alert("아이디 중복여부를 확인하세요");
-			return;
+			$('input[name="pid"]').focus();
+			$('input[name="res"]').val("unsuitable");
+		}else if(tempId.search(reg) == -1){
+			alert("아이디는 3~10자의 영문, 숫자만 가능합니다");
+			$('input[name="pid"]').focus();
+			$('input[name="res"]').val("unsuitable");
+		}else if(tempPw.search(reg) == -1){
+			alert("비밀번호는 3~10자의 영문, 숫자만 가능합니다");
+			$('input[name="pw"]').focus();
+			$('input[name="res"]').val("unsuitable");
+		}else if(tempName.search(reg2) == -1){
+			alert("이름은 한글 입력만 가능합니다.");
+			$('input[name="pname"]').focus();
+			$('input[name="res"]').val("unsuitable");
+		}else{
+			$('input[name="res"]').val("Suitable");
 		}
-		
-		var reg = /^[a-zA-Z0-9]{3,10}$/;
+		console.log("회원가입 결과 :"+$('input[name="res"]').val());
+		if($('input[name="res"]').val()=="Suitable"){//Suitable unsuitable	
+			document.f.submit();
+		}
+	}
+	var reg = /^[a-zA-Z0-9]{3,10}$/;
+	
+	function idCheck(obj) {
 		
 		var tempId = $('input[name="pid"]').val();
 		if(tempId.search(reg) == -1){
-			alert("아이디는 3~10자의 영문, 숫자만 가능합니다");
-			return;
+			$("#id_message").html("<font color=red>아이디는 3~10자의 영문, 숫자만 가능합니다</font>");	
+			$('#id_message').show(); 
+		}else{
+			$("#id_message").html("");
 		}
-		
-		var tempPw = $('input[name="pw"]').val();
-		if(tempPw.search(reg) == -1){
-			alert("비밀번호는 3~10자의 영문, 숫자만 가능합니다");
-			return;
-		} 
-		
-		var reg2 = /^[가-힣]*$/;
-		
-		var tempName = $('input[name="pname"]').val();
-		if(tempName.search(reg2) == -1){
-			alert("이름은 한글 입력만 가능합니다.");
-			return;
-		}
-		
-	
-		
-		document.f.submit();
 	}
 	
-/* 	function mail_change(){
-		if(document.join.mail3.options[document.join.mail3.selectedIndex].value == '0'){
-			document.join.mail2.disabled = true;
-			document.join.mail2.value = "";
-			}
-
-		if(document.join.mail3.options[document.join.mail3.selectedIndex].value == '9'){
-			 document.join.mail2.disabled = false;
-			 document.join.mail2.value = "";
-			 document.join.mail2.focus();
-
-		} else{
-
-		 document.join.mail2.disabled = true;
-		 document.join.mail2.value = document.join.mail3.options[document.join.mail3.selectedIndex].value;
-
+	function pwCheck(obj) {
+		var tempPw = $('input[name="pw"]').val();
+		if(tempPw.search(reg) == -1){
+			$("#pw_CHmessage").html("<font color=red>비밀번호는 3~10자의 영문, 숫자만 가능합니다</font>");	
+		}else{
+			$("#pw_CHmessage").html("");
 		}
-	} */
+	}
+
+	function pwComparison(obj) {
+		if($('input[name="pw"]').val()==obj.value){
+			$("#pw_COmessage").html("<font color=green>비밀번호가 일치 합니다.</font>");	
+		}else{
+			$("#pw_COmessage").html("<font color=red>비밀번호가 같지 않습니다.</font>");	
+		}
+	}
 	
 	 function addHypen(obj) {
+		 console.log(obj.value);
+		 var tempTel = $('input[name="number"]').val();
+		var regNum = /^[0-9]/;
+		 console.log("---->"+tempTel.search(regNum))
 	    var number = obj.value.replace(/[^0-9]/g, "");
 	    var phone = "";
+	    
+	    if(tempTel.search(regNum)==-1){
+	    	$("#tel_message").html("<font color=red>숫자만 입력해주세요</font>");
+	    }else{
+	    	$("#tel_message").html("");
+	    }
 
 	    if(number.length < 4) {
 	        return number;
@@ -255,64 +263,41 @@ input{
 		
 		<tr>
 			<td><b>아이디</b></td>
-			<td><input type="text" name="pid" style="width: 150px" maxlength="10" 
-			placeholder="3~10자의 영문, 숫자"> 
+			<td><input type="text" name="pid" style="width: 150px" maxlength="10"  onKeyup = "idCheck(this);" placeholder="3~10자의 영문, 숫자"> 
 			<input type="button" id="id_check" value="중복체크">
-				<span id="id_message" style="font-size: 13px"></span></td>
+			</td>
 		</tr>
+		<tr><td colspan="3" align="center"><span id="id_message" style="font-size: 10px"></span></td></tr>
 		
 		<tr>
 			<td><b>비밀번호</b></td>
-			<td><input type="password" name="pw" maxlength="8"
-				style="width: 150px" placeholder="3~10자의 영문, 숫자"></td>
+			<td><input type="password" name="pw" maxlength="10" onKeyup = "pwCheck(this);" style="width: 150px" placeholder="3~10자의 영문, 숫자"></td>
 		</tr>
+		<tr><td colspan="3" align="center"><span id="pw_CHmessage" style="font-size: 10px"></span></td></tr>
 	 	<tr>
 			<td><b>비밀번호 확인</b></td>
-			<td><input type="password" name="re_password" maxlength="8"
-				style="width: 150px"></td>
-		</tr> 
+			<td><input type="password" name="re_password" maxlength="10" onKeyup = "pwComparison(this);" style="width: 150px"></td>
+		</tr>
+		<tr><td colspan="3" align="center"><span id="pw_COmessage" style="font-size: 10px"></span></td></tr>
 		<tr>
 			<td><b>성명</b></td>
-			<td><input type="text" name="pname" style="width: 150px" placeholder="한글 입력만 가능"></td>
+			<td><input type="text" name="pname" style="width: 150px" placeholder="한글 입력만 가능" ></td>
 		</tr>
 		<tr>
-			<td valign="top"><b>전화번호</b></td>
-			<td><input type="text" name="number" placeholder="번호를 ' - ' 없이 입력" onKeyup = "addHypen(this);"
-				style="width: 150px"></td>
+			<td><b>전화번호</b></td>
+			<td><input type="text" name="number" placeholder="번호를 ' - ' 없이 입력" onKeyup = "addHypen(this);" style="width: 150px"></td>
 		</tr>
+		<tr><td colspan="3" align="center"><span id="tel_message" style="font-size: 10px"></span></td></tr>
 		<tr>
 			<td><b>이메일</b></td>
-			<td><input type="text" name="mail" style="width: 150px"/> </td>
-			</tr>
+			<td><input type="text" name="mail" style="width: 150px"/></td>
+		</tr>
 			
-			<tr>
-			<td colspan="8"><br> <input type="submit" value="회원가입"
-				class="custom-btn" onClick="gotoRegisterProc()"></td>
+		<tr>
+			<td><input type="hidden" name="res" value="unsuitable"></td>
+			<td colspan="8"><br><input type="button" class="custom-btn" value="회원가입" onClick="gotoRegisterProc()"/></td>
 		</tr>
 
 	</table>
 	</div>
 </form>
-	<!-- 	<form name="join">   
-		<div id="outer">   
-		<table>
-		<tr>
-			<td><b>이메일</b></td>
-			<td><input type="text" name="mail" style="width: 100px"/> @ </td>
-			<td><input type="text" name="mail2" value="" disabled style="width: 100px"></td>
-			<td><select name="mail3" onchange="mail_change()">
-			   	<option value="0" >선택하세요</option>
-			   	<option value="9">직접입력</option>
-    			<option value="naver.com">naver.com</option>
-   				<option value="nate.com">nate.com</option>    
-   				</select>
-			</td>
-		</tr>
-
-		<tr>
-			<td colspan="8"><br> <input type="submit" value="회원가입"
-				class="custom-btn" onClick="gotoRegisterProc()"></td>
-		</tr>
-	</table>
-	</div>
-</form> -->

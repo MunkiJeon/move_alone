@@ -11,6 +11,7 @@
  
  .mar{
 	margin:10% auto;
+	width:80%;
 }
     </style>
 <script type="text/javascript" src="../ggg/jquery-3.6.0.js"></script>
@@ -34,6 +35,10 @@ $(function () {
 })
 </script>
 <div> <jsp:include page="../inc/guest/side.jsp"/> </div>
+<div style="margin:10% auto;">
+<h2>매칭정보</h2>
+<div style="border-bottom: 2px solid black; width:80%;"></div>
+
 <c:forEach items="${dto3 }" var="dtoa2">
 						<div class="information">
 							<div style="border: 1px solid black;"><img class="imgSize" src="<c:url value='/resource/image/${dtoa3.pic}'/>" alt=""></div>
@@ -120,3 +125,4 @@ $(function () {
 					
 					</c:forEach>
 			</table>
+			</div>

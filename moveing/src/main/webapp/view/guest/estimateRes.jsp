@@ -35,7 +35,7 @@ tr, td {
 			<td>아이디</td>
 			<td>${estimate_d.get("id") } </td>
 		</tr>
-<%-- 		<tr align="center">	
+<%-- 	<tr align="center">	
 			<td>이름</td>
 			<td>${mainData.name }</td>
 		</tr> --%>
@@ -65,15 +65,11 @@ tr, td {
 		</tr>
 		<tr align="center">
 			<td>짐목록</td>
-			<td>${estimate_d.get("luggage_list") } </td><!--예정: 누르면 짐목록 팝업 처리  -->
+			<td class="previewbtn1" data-value="${estimate_d.get('luggage_list') }"> 보기</td><!--예정: 누르면 짐목록 팝업 처리  -->
 		</tr>
-<%-- 		<tr align="center">
-			<td>쇼핑리스트</td>
-			<td>${estimate_d.get("shopping_list") } </td>
-		</tr> --%>
 		<tr align="center">
 			<td>요청사항</td>
-			<td>${estimate_d.get("request") } </td>
+			<td class="previewbtn1" data-value="${estimate_d.get('request') }">보기</td>
 		</tr>
 		<tr align="center">
 			<td>예약날짜</td>

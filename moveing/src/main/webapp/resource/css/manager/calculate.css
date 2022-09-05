@@ -14,4 +14,4 @@
 .managerWrap .result table td{border: 1px solid #eee;padding:10px;}
 .managerWrap .resultMoney {display: flex;justify-content: space-between;border: 0;padding:20px;}
 .managerWrap .sales {padding:30px;width: 100%;}
-.managerWrap .sales td {padding: 30px;}
+.managerWrap .sales td {padding: 10px;}

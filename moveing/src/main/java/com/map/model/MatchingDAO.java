@@ -74,7 +74,6 @@ public class MatchingDAO {
 				dto.setEnd_point(rs.getString("end_point"));
 				dto.setEnd_op(rs.getString("end_op"));
 				dto.setLuggage_list(rs.getString("luggage_list"));
-				dto.setShopping_list(rs.getString("shopping_list"));
 				dto.setRequests(rs.getString("requests"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
@@ -111,7 +110,7 @@ public class MatchingDAO {
 				dto.setEnd_point(rs.getString("end_point"));
 				dto.setEnd_op(rs.getString("end_op"));
 				dto.setLuggage_list(rs.getString("luggage_list"));
-				dto.setShopping_list(rs.getString("shopping_list"));
+				
 				dto.setRequests(rs.getString("requests"));
 				dto.setReq_date(rs.getDate("req_date"));
 				dto.setCost(rs.getInt("cost"));
@@ -186,7 +185,7 @@ public class MatchingDAO {
 				dto.setEnd_point(rs.getString("end_point"));
 				dto.setEnd_op(rs.getString("end_op"));
 				dto.setLuggage_list(rs.getString("luggage_list"));
-				dto.setShopping_list(rs.getString("shopping_list"));
+			
 				dto.setRequests(rs.getString("requests"));
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
@@ -222,7 +221,7 @@ public class MatchingDAO {
 				dto.setEnd_point(rs.getString("end_point"));
 				dto.setEnd_op(rs.getString("end_op"));
 				dto.setLuggage_list(rs.getString("luggage_list"));
-				dto.setShopping_list(rs.getString("shopping_list"));
+			
 				dto.setRequests(rs.getString("requests"));
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
@@ -269,7 +268,7 @@ public class MatchingDAO {
 				dto.setEnd_point(rs.getString("end_point"));
 				dto.setEnd_op(rs.getString("end_op"));
 				dto.setLuggage_list(rs.getString("luggage_list"));
-				dto.setShopping_list(rs.getString("shopping_list"));
+				
 				dto.setRequests(rs.getString("requests"));
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));
@@ -370,7 +369,7 @@ public class MatchingDAO {
 				dto.setEnd_point(rs.getString("end_point"));
 				dto.setEnd_op(rs.getString("end_op"));
 				dto.setLuggage_list(rs.getString("luggage_list"));
-				dto.setShopping_list(rs.getString("shopping_list"));
+				
 				dto.setRequests(rs.getString("requests"));
 				dto.setReq_state(rs.getInt("req_state"));
 				dto.setReq_date(rs.getDate("req_date"));

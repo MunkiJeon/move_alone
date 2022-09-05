@@ -1,36 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+.chk li{
+margin: 0px auto;
+font-size: 20px;
+text-align: center;
+}
+</style>
 <link rel="stylesheet" href="<c:url value='/resource'/>/css/manager/calculate.css">
 <div class="managerWrap">
-	<table class="sales">
+	<div><h2>정산 조회</h2></div>
+	<table class="sales" style="text-align:center;">
 		<tr>
-			<!-- <td>매입</td>
-			<td>매출</td> -->
-			<td>총이익</td>
+			<td colspan="2"><h2>총이익</h2></td>
+			<td colspan="2" class="salesPl">${res }원</td>
 		</tr>
 		<tr>
-			<%-- <td class="salesMa">${ma }</td> --%>
-			<td class="salesPl">${pl }</td>
-			<%-- <td class="salesRes">${pl-ma }</td> --%>
+			<td width="100px"><h2>일반 이사</h2></td>
+			<td width="100px" class="salesMa">${ma }원</td>
+			<td width="100px" ><h2>포장 이사</h2></td>
+			<td width="100px" class="salesRes">${pl }원</td> 
 		</tr>
 	</table>
 	    <div class="inquire">
             <h3>조회하기</h3>
-            <ul>
-            	<li><label><input class="type" type="radio" name="type" value="포장이사"> 포장이사</label></li>
-            	<li><label><input class="type" type="radio" name="type" value="일반이사"> 일반이사</label></li>
-            </ul>
             <ul class="chk">
                 <li class="chkItem">
                     정산 예정일
                 </li>
-                <li class="chkItem">
-                    <input type="date" name="start" id="start">
-                </li>
-                <li class="chkItem">
-                    <input type="date" name="end" id="end">
-                </li>
+                <li class="chkItem"><input type="date" name="start" id="start"></li>
+                <li class="chkItem"><input type="date" name="end" id="end"></li>
+            	<li><label><input class="type" type="radio" name="type" value="포장이사"> 포장이사</label></li>
+            	<li><label><input class="type" type="radio" name="type" value="일반이사"> 일반이사</label></li>
             </ul>
             <div class="btnBox">
                 <button class="submit">검색</button>

@@ -29,6 +29,47 @@ public class CalculateDAO {
 		
 	}
 	
+	public ArrayList<MoneyDTO> Saleslist() {
+		ArrayList<MoneyDTO> list = new ArrayList<MoneyDTO>();
+		try {
+			sql ="select * from money WHERE state = 1";
+			ptmt = con.prepareStatement(sql);
+			rs = ptmt.executeQuery();
+			while(rs.next()) {
+				MoneyDTO dto = new MoneyDTO();
+				
+				dto.setNo(rs.getInt("no"));
+				dto.setRes_num(rs.getInt("res_num"));
+				dto.setId(rs.getString("id"));
+				dto.setSel_date(rs.getDate("sel_date"));
+				dto.setReq_date(rs.getDate("req_date"));
+				dto.setStart_Point(rs.getString("start_Point"));
+				dto.setEnd_Point(rs.getString("end_Point"));
+				dto.setKm(rs.getDouble("km"));
+				dto.setKm_price(rs.getInt("km_price"));
+				dto.setSV_Type(rs.getString("SV_Type"));
+				dto.setSV_price(rs.getInt("SV_price"));
+				dto.setElevator(rs.getString("elevator"));
+				dto.setElevator_price(rs.getInt("elevator_price"));
+				dto.setParking(rs.getString("parking"));
+				dto.setParking_price(rs.getInt("parking_price"));
+				dto.setLuggage_list(rs.getString("luggage_list"));
+				dto.setLuggage_price(rs.getInt("luggage_price"));
+				dto.setState(rs.getInt("state"));
+				dto.setPrice(rs.getInt("price"));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return list;
+	}
+	
 	public ArrayList<CalculateDTO> list() {
 		ArrayList<CalculateDTO> list = new ArrayList<CalculateDTO>();
 		sql = "select * from calculate";

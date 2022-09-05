@@ -23,7 +23,7 @@
  	
     top: 50%;
     width: 100px;
-    height: 110px;
+    height: 140px;
     background: rgb(63 82 245);
  }
  .box2{
@@ -86,7 +86,7 @@ $(function () {
 	<div class="box">
 		<label class="menuI2" id ="w1"><a href="<c:url value='/guest/'/>GuestInformation">내 정보</a></label>
 		<label class="menuI2" id ="w2"><a href="<c:url value='/guest/'/>GuestMoveInfo">매칭 정보</a></label>
-		<label class="menuI2" id ="w3"><a href="<c:url value='/guest/'/>GuestHistory">이사 내역</a></label> 
+		<label class="menuI2" id ="w3"><a href="<c:url value='/guest/'/>GuestHistory">결제 내역</a></label> 
 	</div>
 	
 	<label for="bo"class="box2">

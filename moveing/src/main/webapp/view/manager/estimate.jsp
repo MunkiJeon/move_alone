@@ -26,23 +26,23 @@ tr, td {
 		
 		<tr align="center">
 			<td><input type="checkbox" id="allCheck"></td>
-			<td>예약번호</td>
+			<td>예약<br>번호</td>
 			<td>아이디</td>
 			<td>이름</td>
-			<td>배송 종류</td>
-			<td>예약날짜</td>
-			<td>출발지 주소</td>
-			<td>출발지 옵션</td>
-			<td>도착지 주소</td>
-			<td>도착지 옵션</td>
+			<td>배송<br>종류</td>
+			<td>예약<br>날짜</td>
+			<td>출발지<br>주소</td>
+			<td>출발지<br>옵션</td>
+			<td>도착지<br>주소</td>
+			<td>도착지<br>옵션</td>
 			<!-- <td>가구 목록</td>
 			<td>가전 목록</td>-->
 			<!-- <td>기타 목록</td> --> 
 		
-			<td>요청사항</td>
-			<td>예약날짜</td>
+			<td>요청<br>사항</td>
+			<td>예약<br>날짜</td>
 			<td>총가격</td>
-			<td>현재 상태</td>
+			<td>진행<br>상태</td>
 		</tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
 	<c:if test="${dto.state!=9}"><!-- 임시로 전체 나오게 하려고 9 넣음 -->

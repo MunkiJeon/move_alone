@@ -65,6 +65,7 @@ public class EstimateDAO {
 				res.put("price", "" + rs.getInt("price"));
 
 			}
+			System.out.println(res.get("luggage_list")+"------짐목록 이건데");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,6 +146,7 @@ public class EstimateDAO {
 				dto = new EstimateDTO();
 				dto.setRes_num(rs.getInt("res_num"));
 				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
 				dto.setSV_Type(rs.getString("SV_Type"));
 				dto.setSel_date(rs.getDate("sel_date"));
 				dto.setStart_Point(rs.getString("start_Point"));
@@ -223,6 +225,7 @@ public class EstimateDAO {
 						+ rs.getString("Home_App_Det") + ","
 						+ rs.getString("Other_Det");
 			}
+			
 			
 			sql = "INSERT INTO matching(res_num ,user_ID, SV_Type ,reservat_date, start_point, start_op, end_point, end_op, luggage_list, requests, cost)"
 					+ "select res_num, id, SV_Type, sel_date, start_Point, start_OP, end_Point, end_OP,'" + luggage_list
@@ -315,19 +318,6 @@ public class EstimateDAO {
 					price += Double.parseDouble(arr[7]) * 1000;
 					System.out.println("거리값:" + price);
 					
-					sql = "INSERT INTO money (res_num, id, sel_date, start_Point, end_Point, km, km_price, "
-							+ "SV_Type, SV_price, elevator, elevator_price, parking, parking_price, state, price) "
-							+ "VALUES (?,?,?,?,?,?,?, ?,?,?,?,?,?,0,?)";
-					ptmt = con.prepareStatement(sql);
-					ptmt.setInt(1, res_num);								ptmt.setString(8, arr[0]);
-					ptmt.setString(2, user_id);								ptmt.setInt(9, SV_price);
-					ptmt.setString(3, arr[1]);								ptmt.setString(10, stop[0]+","+enop[0]);
-					ptmt.setString(4, arr[3]);								ptmt.setInt(11, elevator_price);
-					ptmt.setString(5, arr[5]);								ptmt.setString(12, stop[1]+","+enop[1]);
-					ptmt.setString(6, arr[7]);								ptmt.setInt(13, parking_price);
-					ptmt.setDouble(7, (Double.parseDouble(arr[7]) * 1000));	ptmt.setInt(14, price);
-					rs = ptmt.executeQuery();
-					
 					sql = "update estimate set "
 							+ "SV_Type =?, sel_date =?, Start_point =?, Start_OP =?, End_point =?, End_OP =?, price=? "
 							+ "where id =? and state =0 and res_num =" + res_num ;
@@ -342,6 +332,19 @@ public class EstimateDAO {
 
 					ptmt.setString(8, user_id);
 
+					rs = ptmt.executeQuery();
+					
+					sql = "INSERT INTO money (res_num, id, sel_date, start_Point, end_Point, km, km_price, "
+							+ "SV_Type, SV_price, elevator, elevator_price, parking, parking_price, state, price) "
+							+ "VALUES (?,?,?,?,?,?,?, ?,?,?,?,?,?,0,?)";
+					ptmt = con.prepareStatement(sql);
+					ptmt.setInt(1, res_num);								ptmt.setString(8, arr[0]);
+					ptmt.setString(2, user_id);								ptmt.setInt(9, SV_price);
+					ptmt.setString(3, arr[1]);								ptmt.setString(10, stop[0]+","+enop[0]);
+					ptmt.setString(4, arr[3]);								ptmt.setInt(11, elevator_price);
+					ptmt.setString(5, arr[5]);								ptmt.setString(12, stop[1]+","+enop[1]);
+					ptmt.setString(6, arr[7]);								ptmt.setInt(13, parking_price);
+					ptmt.setDouble(7, (Double.parseDouble(arr[7]) * 1000));	ptmt.setInt(14, price);
 					rs = ptmt.executeQuery();
 
 					System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" + sel_date);
@@ -374,23 +377,11 @@ public class EstimateDAO {
 					ptmt.setString(1, user_id);
 					rs = ptmt.executeQuery();
 					while (rs.next()) {
-						luggage_list = 
-								  rs.getString("Furniture_Det") + "," 
-								+ rs.getString("Home_App_Det") + ","
-								+ rs.getString("Other_Det");
+						luggage_list =  rs.getString("Furniture_Det") + "," + rs.getString("Home_App_Det") + "," + rs.getString("Other_Det");
 						price	= rs.getInt("price");
 					}
-					
+					System.out.println("luggage_list"+luggage_list);
 					price += luggage_price;
-					
-					sql = "update money set luggage_list =?, luggage_price=?, price =? "
-							+ "where id =? and state =0 and "+ res_num; 
-					ptmt = con.prepareStatement(sql);
-					ptmt.setString(1, luggage_list);
-					ptmt.setInt(2, luggage_price);
-					ptmt.setInt(3, price);
-					ptmt.setString(4, user_id);
-					rs = ptmt.executeQuery();
 					
 					sql = "update estimate set " + "Furniture_Det =?, Home_App_Det =?, Other_Det =?, request =?,  price =? "
 							+ "where id =? and state =0 and res_num ="+ res_num;
@@ -402,6 +393,15 @@ public class EstimateDAO {
 					ptmt.setInt(5, price);
 
 					ptmt.setString(6, user_id);
+					rs = ptmt.executeQuery();
+					
+					sql = "update money set luggage_list =?, luggage_price=?, price =? "
+							+ "where id =? and state =0 and "+ res_num; 
+					ptmt = con.prepareStatement(sql);
+					ptmt.setString(1, luggage_list);
+					ptmt.setInt(2, luggage_price);
+					ptmt.setInt(3, price);
+					ptmt.setString(4, user_id);
 					rs = ptmt.executeQuery();
 
 					System.out.println("개인 데이터 넣음" + pagenum + "// ID:" + user_id + "// date:" + sel_date);

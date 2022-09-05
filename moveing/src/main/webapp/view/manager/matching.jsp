@@ -13,7 +13,7 @@ tr, td {
 
 <form action="/moveing/manager/Matching" id="form" name="form" method="post">
 <div class="managerWrap">
-	<table border="" width="100%">
+	<table border="">
 		<tr>
 			<td colspan="16" align="center">
 
@@ -33,18 +33,18 @@ tr, td {
 		</tr>
 		<tr align="center">
 			<td><input class="dataChk" type="checkbox" id="allCheck"></td>
-			<td>예약번호</td>
-			<td>고객아이디</td>
-			<td>기사아이디</td>
-			<td>이사 날짜</td>
-			<td>출발지 주소</td>
-			<td>출발지 옵션</td>
-			<td>도착주소</td>
-			<td>도착지 옵션</td>
+			<td>예약<br>번호</td>
+			<td>고객<br>아이디</td>
+			<td>기사<br>아이디</td>
+			<td>이사<br>날짜</td>
+			<td>출발지<br>주소</td>
+			<td>출발지<br>옵션</td>
+			<td>도착<br>주소</td>
+			<td>도착지<br>옵션</td>
 			<td>짐목록</td>
-			<td>쇼핑리스트</td>
-			<td>요청사항</td>
-			<td>예약날짜</td>
+
+			<td>요청<br>사항</td>
+			<td>예약<br>날짜</td>
 			<td>총가격</td>
 		</tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
@@ -60,32 +60,31 @@ tr, td {
             <td>${dto.end_point }</td>
             <td>${dto.end_op }</td>
             <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td>
-            <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
             <td class="previewbtn1" data-value="${dto.requests }">보기</td>
             <td>${dto.req_date }</td>
-            <td>${dto.cost }</td>
+            <td>${dto.cost }원</td>
            <!--  <td><a href="">보기</a></td> -->
         </tr>
       </c:if>
 </c:forEach> 
 		<tr>
 			<td colspan="16" align="center" style="font-size: 30px;"
-				bgcolor="blue">현재 매칭완료</td>
+				bgcolor="deepskyblue">현재 매칭완료</td>
 		</tr>
 		<tr align="center">
 			<td><input type="checkbox" id="allCheck"></td>
-			<td>예약번호</td>
-			<td>고객아이디</td>
-			<td>기사아이디</td>
-			<td>이사 날짜</td>
-			<td>출발지 주소</td>
-			<td>출발지 옵션</td>
-			<td>도착주소</td>
-			<td>도착지 옵션</td>
+			<td>예약<br>번호</td>
+			<td>고객<br>아이디</td>
+			<td>기사<br>아이디</td>
+			<td>이사<br>날짜</td>
+			<td>출발지<br>주소</td>
+			<td>출발지<br>옵션</td>
+			<td>도착<br>주소</td>
+			<td>도착지<br>옵션</td>
 			<td>짐목록</td>
-			<td>쇼핑리스트</td>
-			<td>요청사항</td>
-			<td>예약날짜</td>
+
+			<td>요청<br>사항</td>
+			<td>예약<br>날짜</td>
 			<td>총가격</td>
 		</tr>
 <c:forEach items="${mainData }" var="dto" varStatus="no">
@@ -101,10 +100,9 @@ tr, td {
             <td>${dto.end_point }</td>
             <td>${dto.end_op }</td>
             <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td>
-            <td class="previewbtn1" data-value="${dto.shopping_list }">보기</td>
             <td class="previewbtn1" data-value="${dto.requests }">보기</td>
             <td>${dto.req_date }</td>
-            <td>${dto.cost }</td>
+            <td>${dto.cost }원</td>
             <!-- <td><a href="">보기</a></td> -->
         </tr>
       </c:if>

@@ -11,18 +11,18 @@
     </article>
 </section>
 <section class="mainCnt">
-    현재까지의 오늘의 집은
+    현재까지의 나홀로 이사는
     <article>
         <p>이사 요청 수</p>
-        <p><span></span>건</p>
+        <p><span>1, 619, 737</span>건</p>
     </article>
     <article>
-        <p>이사 요청 수</p>
-        <p><span></span>건</p>
+        <p>제공 견적 수</p>
+        <p><span>6, 965, 393</span>건</p>
     </article>
     <article>
-        <p>이사 요청 수</p>
-        <p><span></span>건</p>
+        <p>고객 리뷰 수</p>
+        <p><span>133, 952</span>건</p>
     </article>
 </section>
 <section class="mainProcess">

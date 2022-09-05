@@ -1,9 +1,9 @@
 @charset "UTF-8";
  *{padding: 0;margin: 0;box-sizing: border-box;}
  ul,li{list-style: none;}
- a{color:#333;text-decoration: none;}
- .sideWrap{width: 300px;height: calc( 100% - 60px );background: blue;position: fixed;top:80px;left: 0;}
- .header{margin:0;}
- .logo{height: 80px;line-height: 80px;font-size: 22px;margin: 0;}
+ a{padding: 5px;margin: 0 auto; text-decoration: none;}
+ .sideWrap{width: 180px;height: calc( 100% - 60px );background: blue;position: fixed;top:75px;left: 0;}
+ .header{margin:0; background: rgb(34, 44, 61, 0.9);height: 75px;line-height: 75px;}
+ .logo{height: 35%; line-height: 300%; font-size: 22px;color: white;padding: 5px;margin: 0 auto; text-decoration: none; }
  .accordionList{display: block;width: 100%;height: 60px;padding: 1.25rem 0;}
- .managerWrap{margin-left: 300px;}
+ .managerWrap{margin-left: 180px;}

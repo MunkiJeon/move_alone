@@ -6,4 +6,4 @@
 .managerWrap .talk .state{display: flex;justify-content: space-around;padding:30px;}
 .managerWrap .talk .line{height: 10px;background: #eee;}
 .managerWrap .talk .talkWrap .userlist{overflow: auto;padding:30px;}
-.managerWrap .talk .talkWrap td{padding: 10px;}
+.managerWrap .talk .talkWrap td{padding: 10px; margin: 0 auto;}

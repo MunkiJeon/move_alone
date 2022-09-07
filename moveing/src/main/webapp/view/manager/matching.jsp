@@ -106,6 +106,46 @@ tr, td {
             <!-- <td><a href="">보기</a></td> -->
         </tr>
       </c:if>
+</c:forEach>
+	<tr>
+			<td colspan="16" align="center" style="font-size: 30px;"
+				bgcolor="purple">현재 이사완료</td>
+		</tr>
+		<tr align="center">
+			<td><input type="checkbox" id="allCheck"></td>
+			<td>예약<br>번호</td>
+			<td>고객<br>아이디</td>
+			<td>기사<br>아이디</td>
+			<td>이사<br>날짜</td>
+			<td>출발지<br>주소</td>
+			<td>출발지<br>옵션</td>
+			<td>도착<br>주소</td>
+			<td>도착지<br>옵션</td>
+			<td>짐목록</td>
+
+			<td>요청<br>사항</td>
+			<td>예약<br>날짜</td>
+			<td>총가격</td>
+		</tr>
+<c:forEach items="${mainData }" var="dto" varStatus="no">
+	<c:if test="${dto.req_state==2}">
+        <tr align="center"> <!-- 모양  -->
+            <td><input type="checkbox" id="allCheck"></td>
+            <td>${dto.res_num }</td>
+            <td>${dto.user_ID }</td>
+            <td>${dto.driver_ID }</td>
+            <td>${dto.reservat_date }</td>
+            <td>${dto.start_point }</td>
+            <td>${dto.start_op }</td>
+            <td>${dto.end_point }</td>
+            <td>${dto.end_op }</td>
+            <td class="previewbtn1" data-value="${dto.luggage_list }">보기</td>
+            <td class="previewbtn1" data-value="${dto.requests }">보기</td>
+            <td>${dto.req_date }</td>
+            <td>${dto.cost }원</td>
+            <!-- <td><a href="">보기</a></td> -->
+        </tr>
+      </c:if>
 </c:forEach> 
 	</table>
 </div>

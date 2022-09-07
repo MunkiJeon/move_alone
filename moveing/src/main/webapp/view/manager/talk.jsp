@@ -12,7 +12,7 @@
         <table class="talkWrap">
         
         	<tr>
-        		<td>고객 아이디</td>
+        		<td>아이디</td>
         		<td>문의</td>
         		<td>답변</td>
         		<td>상태</td>
@@ -39,7 +39,7 @@ $(function(){
 				console.log(data)
 				let str = `<tr>
 					<td>no</td>
-	        		<td>고객 아이디</td>
+	        		<td>아이디</td>
 	        		<td>문의</td>
 	        		<td>답변</td>
 	        		<td>상태</td>

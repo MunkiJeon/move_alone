@@ -35,10 +35,10 @@ tr, td {
 			<td>아이디</td>
 			<td>${estimate_d.get("id") } </td>
 		</tr>
-<%-- 	<tr align="center">	
+	 	<tr align="center">	
 			<td>이름</td>
 			<td>${mainData.name }</td>
-		</tr> --%>
+		</tr>
 		<tr align="center">
 			<td>배송 종류</td>
 			<td>${estimate_d.get("SV_Type") } </td>

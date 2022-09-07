@@ -141,14 +141,6 @@ input, select {
 				<td><a href="<c:url value='/login/FindId'/>">ID 찾기</a></td>
 				<td><a href="<c:url value='/login/FindPw'/>">PW 찾기</a></td>
 			</tr>
-
-
-
-
-
-
-
 		</table>
-
 	</div>
 </form>

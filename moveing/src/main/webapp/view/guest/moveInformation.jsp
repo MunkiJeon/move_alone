@@ -84,7 +84,7 @@ $(function () {
 				</tr>
 				
 				<tr>
-				<td>이사일: ${dtoo.req_date}</td>
+				<td>이사일: ${dtoo.reservat_date}</td>
 				<td></td>
 				<td>예약번호: ${dtoo.res_num }</td>
 				<td></td>
@@ -93,7 +93,7 @@ $(function () {
 				<tr><td colspan="5" style="border-bottom: 2px solid black;"></td></tr>
 				
 					<tr>
-						<td>예약날짜: ${dtoo.reservat_date }</td>
+						<td>예약날짜: ${dtoo.req_date }</td>
 			
 						<td>출발지: ${dtoo.start_point }</td>
 						
